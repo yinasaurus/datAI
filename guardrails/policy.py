@@ -27,6 +27,7 @@ _FORBIDDEN = re.compile(
     r")\b",
     re.IGNORECASE,
 )
+_CATALOG_TABLES = frozenset({"sqlite_master", "sqlite_temp_master", "sqlite_schema"})
 _CATALOG = re.compile(r"\b(sqlite_master|sqlite_temp_master|sqlite_schema)\b", re.IGNORECASE)
 _DENIED_FUNCTIONS = frozenset({"load_extension", "readfile", "writefile", "edit", "fts3_tokenizer"})
 _WRITE_ACTIONS = frozenset(
@@ -72,6 +73,7 @@ class GuardrailPolicy:
     allowed_tables: frozenset[str]
     allowed_columns: frozenset[str]
     blocked_columns: frozenset[str]
+    database_objects: frozenset[str] = frozenset()
     max_rows: int = 500
     timeout_seconds: float = 5.0
     enforce: bool = True
@@ -114,11 +116,14 @@ def load_policy() -> GuardrailPolicy:
         allowed_tables=frozenset(allowed_tables),
         allowed_columns=frozenset(allowed_columns),
         blocked_columns=blocked,
+        database_objects=_database_objects(),
     )
 
 
 def check_query(sql: str, policy: GuardrailPolicy | None = None) -> str:
     """Reject anything that is not one allow-listed SELECT. Return the cleaned SQL."""
+    if policy is None:
+        policy = POLICY
     statement, probe = extract_select(sql)
     if not policy.enforce:
         return statement
@@ -127,14 +132,18 @@ def check_query(sql: str, policy: GuardrailPolicy | None = None) -> str:
     return statement
 
 
-def execute_read_query(sql: str, policy: GuardrailPolicy = POLICY) -> GuardedResult:
+def execute_read_query(sql: str, policy: GuardrailPolicy | None = None) -> GuardedResult:
     """Check a query, then run it with the authorizer, row cap, and timeout."""
+    if policy is None:
+        policy = POLICY
     statement = check_query(sql, policy)
     return fetch_rows(statement, policy)
 
 
-def fetch_rows(statement: str, policy: GuardrailPolicy = POLICY) -> GuardedResult:
+def fetch_rows(statement: str, policy: GuardrailPolicy | None = None) -> GuardedResult:
     """Run a statement that already passed ``check_query``."""
+    if policy is None:
+        policy = POLICY
     limited = f"SELECT * FROM ({statement}) AS _mcp_limited LIMIT {policy.max_rows + 1}"
     conn = _connect()
     try:
@@ -163,24 +172,30 @@ def fetch_rows(statement: str, policy: GuardrailPolicy = POLICY) -> GuardedResul
     )
 
 
-def filter_visible(names: list[str], policy: GuardrailPolicy = POLICY) -> list[str]:
+def filter_visible(names: list[str], policy: GuardrailPolicy | None = None) -> list[str]:
     """Keep catalog names that are on the table allow-list."""
+    if policy is None:
+        policy = POLICY
     if not policy.enforce:
         return list(names)
     allowed = policy.allowed_tables
     return [name for name in names if name.lower() in allowed]
 
 
-def ensure_visible(name: str, policy: GuardrailPolicy = POLICY) -> None:
+def ensure_visible(name: str, policy: GuardrailPolicy | None = None) -> None:
     """Raise if a table or view is not on the allow-list."""
+    if policy is None:
+        policy = POLICY
     if not policy.enforce:
         return
     if not isinstance(name, str) or name.lower() not in policy.allowed_tables:
         raise GuardrailViolation(f"Table {name!r} is not available.")
 
 
-def visible_column_names(table: str, names: list[str], policy: GuardrailPolicy = POLICY) -> list[str]:
+def visible_column_names(table: str, names: list[str], policy: GuardrailPolicy | None = None) -> list[str]:
     """Drop sensitive columns from a describe_table result."""
+    if policy is None:
+        policy = POLICY
     if not policy.enforce:
         return list(names)
     hidden = _blocked_names_for(table, policy)
@@ -262,8 +277,16 @@ def _authorizer(policy: GuardrailPolicy):
         if action != sqlite3.SQLITE_READ:
             return sqlite3.SQLITE_OK
         table = (arg1 or "").lower()
-        if table not in allowed_tables:
+        if not table:
+            return sqlite3.SQLITE_OK
+        if table in _CATALOG_TABLES:
             return sqlite3.SQLITE_DENY
+        if table not in allowed_tables:
+            # A name that is not a real schema object is a CTE or subquery alias.
+            # Objects that exist but are off the allow-list stay denied.
+            if table in policy.database_objects:
+                return sqlite3.SQLITE_DENY
+            return sqlite3.SQLITE_OK
         column = (arg2 or "").lower()
         if not column:
             return sqlite3.SQLITE_OK
@@ -278,6 +301,24 @@ def _authorizer(policy: GuardrailPolicy):
 def _blocked_names_for(table: str, policy: GuardrailPolicy) -> set[str]:
     prefix = table.lower() + "."
     return {qualified.split(".", 1)[1] for qualified in policy.blocked_columns if qualified.startswith(prefix)}
+
+
+def _database_objects() -> frozenset[str]:
+    """Names that exist in the database, so a CTE is not mistaken for one of them."""
+    if not DB_PATH.is_file():
+        return frozenset()
+    conn = _connect()
+    try:
+        rows = conn.execute(
+            """
+            SELECT name
+            FROM sqlite_master
+            WHERE type IN ('table', 'view')
+            """
+        ).fetchall()
+    finally:
+        conn.close()
+    return frozenset(row["name"].lower() for row in rows)
 
 
 def _connect() -> sqlite3.Connection:
@@ -418,3 +459,6 @@ def _scan(sql: str) -> tuple[str, str]:
         masked.append(char)
         index += 1
     return "".join(cleaned), "".join(masked)
+
+
+POLICY = load_policy()

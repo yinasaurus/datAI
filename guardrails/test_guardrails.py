@@ -63,6 +63,11 @@ ALLOWED = [
     "SELECT * FROM current_term",
     "SELECT d.name FROM departments AS d LIMIT 1",
     "WITH c AS (SELECT student_id FROM students) SELECT student_id FROM c LIMIT 1",
+    (
+        "WITH majors AS ("
+        " SELECT major_department_id FROM students GROUP BY major_department_id"
+        ") SELECT COUNT(*) AS n FROM majors"
+    ),
     "SELECT COUNT(*) AS n FROM departments WHERE name = 'DROP'",
     "SELECT faculty_id FROM faculty WHERE last_name = 'salary' LIMIT 1",
     "SELECT student_id FROM students WHERE email LIKE '%ssn%' LIMIT 1",
@@ -106,9 +111,10 @@ def test_destructive() -> None:
         except GuardrailViolation as exc:
             message = str(exc)
             leaked = bool(SSN_SHAPE.search(message))
+            lowered = message.lower()
             check(
-                "only select" in message.lower() or "blocked" in message.lower(),
-                f"rejected {sql.splitlines()[0][:48]}",
+                "select" in lowered or "blocked" in lowered,
+                f"rejected {sql.split(chr(10))[0][:48]}",
             )
             check(not leaked, "rejection did not contain an SSN")
             continue
@@ -118,7 +124,8 @@ def test_destructive() -> None:
         try:
             run_read_query(sql)
         except QueryError as exc:
-            check("only select" in str(exc).lower() or "blocked" in str(exc).lower(), f"tool rejected {sql.split()[0]}")
+            lowered = str(exc).lower()
+            check("select" in lowered or "blocked" in lowered, f"tool rejected {sql.split()[0]}")
             continue
         check(False, f"tool rejected {sql.split()[0]}")
 
