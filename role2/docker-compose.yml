@@ -1,5 +1,5 @@
-# Local PostgreSQL 16 so Role 2 can run a question before the Olist load exists.
-# Role 1 replaces db/init/01_sample.sql with the real schema and data.
+# Local PostgreSQL 16 for the Olist marketplace database.
+# db/init/01_schema.sql creates the tables on first start; db/load_olist.py loads the data.
 # The password is a local sample only. Do not reuse it anywhere else.
 
 services:

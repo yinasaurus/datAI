@@ -30,7 +30,7 @@ Role 1 replaces `interfaces/retriever.py`:
 retrieve(question: str, k: int) -> list[SchemaChunk]
 ```
 
-The stub returns a fixed sample schema and ignores the question. To feed the no-RAG baseline a written schema instead of a live column list, add `role2/data/full_schema.md`.
+This is now implemented in `schema_rag/` (see `schema_rag/README.md`). `role2/data/full_schema.md` feeds the no-RAG baseline; it is generated from the same schema docs as the RAG chunks.
 
 Role 3 replaces `interfaces/guardrails.py`:
 
@@ -71,13 +71,15 @@ copy .env.example .env
 
 Put the Gemini key in `.env`. Set `GEMINI_MODEL` there too. The Python code reads that variable and does not name a model itself. The example value is `gemini-3.8-flash`.
 
-Start the sample database (PostgreSQL 16, two tiny tables):
+Start the database (PostgreSQL 16) and load the data:
 
 ```text
 docker compose up -d
+python db/load_olist.py --download
+python db/generate_synthetic.py
 ```
 
-`DATABASE_URL` in `.env.example` already points at it. Role 1 replaces `db/init/01_sample.sql` with Olist and the four synthetic tables.
+`DATABASE_URL` in `.env.example` already points at it. `db/init/01_schema.sql` creates the 9 Olist tables and the 4 synthetic tables the first time the container starts. If you started the old two-table sample before, run `docker compose down -v` first so the new schema is created. `--download` fetches the Olist CSVs into `data/raw/` from Olist's own GitHub, so no Kaggle login is needed.
 
 ## Run the MCP server
 
@@ -123,7 +125,7 @@ They check that a SQL error is retried and that the loop stops at 3, that a zero
 | File | What it does |
 | --- | --- |
 | `interfaces/types.py` | The shared shapes: a schema chunk, a guardrail decision, the run flags, and the answer dict |
-| `interfaces/retriever.py` | Role 1's function. Stub returns sample chunks |
+| `interfaces/retriever.py` | Role 1's function. Ranks schema chunks with `schema_rag/` |
 | `interfaces/guardrails.py` | Role 3's function. Stub allows every statement |
 | `mcp_server/db.py` | Opens PostgreSQL and turns a failure into one readable sentence |
 | `mcp_server/tools.py` | The three tools. This is where the guardrail flag is applied |
@@ -138,4 +140,7 @@ They check that a SQL error is retried and that the loop stops at 3, that a zero
 | `agent/config.py` | Reads the flags from `.env` and lets a dict override them |
 | `agent/run.py` | Command-line wrapper around `answer_question` |
 | `docker-compose.yml` | PostgreSQL 16 for a test before the real data exists |
-| `db/init/01_sample.sql` | Two sample tables and a few rows |
+| `db/init/01_schema.sql` | Role 1. 9 Olist tables plus 4 synthetic tables, keys and indexes |
+| `db/load_olist.py` | Role 1. Loads and cleans the Olist CSVs |
+| `db/generate_synthetic.py` | Role 1. Fills the synthetic tables with fake data (seed 42) |
+| `schema_rag/` | Role 1. Schema docs, embedding index, retriever and recall@k check |
