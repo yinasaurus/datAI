@@ -8,3 +8,5 @@ rag/index/
 agent/logs/
 .env
 role2/logs/
+role2/data/raw/
+role2/schema_rag/index/

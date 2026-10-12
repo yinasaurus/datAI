@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import sys
 import unittest
+from unittest import mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,8 +57,15 @@ class ToolTests(unittest.TestCase):
         self.assertFalse(result["ok"])
         self.assertIn("revenue", result["error"] or "")
 
-    def test_retrieve_schema_uses_the_stub(self) -> None:
-        payload = retrieve_schema("How many orders are delivered?", k=2)
+    def test_retrieve_schema_wraps_the_retriever(self) -> None:
+        from interfaces.types import SchemaChunk
+
+        def fake_retrieve(question: str, k: int) -> list[SchemaChunk]:
+            del question
+            return [SchemaChunk(id="table:orders", text="Table orders", source="orders")] * k
+
+        with mock.patch("mcp_server.tools.retrieve", fake_retrieve):
+            payload = retrieve_schema("How many orders are delivered?", k=2)
         self.assertEqual(payload["error"], "")
         chunks = payload["chunks"]
         self.assertIsInstance(chunks, list)
