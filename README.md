@@ -77,3 +77,7 @@ No API key is required. The agent test uses a scripted model.
 ```
 
 The guardrail suite tries destructive SQL, requests for `ssn` and `salary`, and a prompt-injection string planted in a result cell.
+
+## IS469 Role 2 (Agent and MCP)
+
+The course project (Olist, PostgreSQL, Gemini) lives in `role2/`. Setup, the MCP server, a single question, and the evaluation flags are in `role2/README.md`. That folder does not use the Northline database above.

@@ -6,3 +6,5 @@ venv/
 .DS_Store
 rag/index/
 agent/logs/
+.env
+role2/logs/
