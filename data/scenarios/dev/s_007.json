@@ -1,0 +1,35 @@
+{
+  "id": "s_007",
+  "split": "dev",
+  "days": 2,
+  "n_friends": 3,
+  "conflict": "strong",
+  "budget": "loose",
+  "friends": {
+    "Amy": {
+      "likes": [
+        "temples"
+      ],
+      "hard_limits": [],
+      "budget": 203
+    },
+    "Ben": {
+      "likes": [
+        "nightlife"
+      ],
+      "hard_limits": [
+        "no_temples"
+      ],
+      "budget": 211
+    },
+    "Cara": {
+      "likes": [
+        "culture"
+      ],
+      "hard_limits": [
+        "no_nightlife"
+      ],
+      "budget": 227
+    }
+  }
+}

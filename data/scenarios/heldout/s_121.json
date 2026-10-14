@@ -1,0 +1,47 @@
+{
+  "id": "s_121",
+  "split": "heldout",
+  "days": 2,
+  "n_friends": 5,
+  "conflict": "mild",
+  "budget": "loose",
+  "friends": {
+    "Amy": {
+      "likes": [
+        "temples"
+      ],
+      "hard_limits": [],
+      "budget": 207
+    },
+    "Ben": {
+      "likes": [
+        "culture"
+      ],
+      "hard_limits": [
+        "no_temples"
+      ],
+      "budget": 229
+    },
+    "Cara": {
+      "likes": [
+        "outdoor"
+      ],
+      "hard_limits": [],
+      "budget": 204
+    },
+    "Dan": {
+      "likes": [
+        "markets"
+      ],
+      "hard_limits": [],
+      "budget": 240
+    },
+    "Eve": {
+      "likes": [
+        "food"
+      ],
+      "hard_limits": [],
+      "budget": 251
+    }
+  }
+}

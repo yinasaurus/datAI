@@ -1,0 +1,8 @@
+{
+  "tags": ["food", "hiking", "shopping", "temples", "nightlife", "culture", "outdoor", "markets"],
+  "hard_limits": {
+    "no_temples": {"type": "forbid_tag", "tag": "temples"},
+    "no_early_mornings": {"type": "earliest_start", "time": "10:00"},
+    "no_nightlife": {"type": "forbid_tag", "tag": "nightlife"}
+  }
+}

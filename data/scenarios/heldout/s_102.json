@@ -1,0 +1,26 @@
+{
+  "id": "s_102",
+  "split": "heldout",
+  "days": 2,
+  "n_friends": 2,
+  "conflict": "mild",
+  "budget": "tight",
+  "friends": {
+    "Amy": {
+      "likes": [
+        "temples"
+      ],
+      "hard_limits": [],
+      "budget": 72
+    },
+    "Ben": {
+      "likes": [
+        "shopping"
+      ],
+      "hard_limits": [
+        "no_temples"
+      ],
+      "budget": 63
+    }
+  }
+}

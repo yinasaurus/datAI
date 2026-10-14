@@ -1,0 +1,35 @@
+{
+  "id": "s_119",
+  "split": "heldout",
+  "days": 2,
+  "n_friends": 3,
+  "conflict": "strong",
+  "budget": "loose",
+  "friends": {
+    "Amy": {
+      "likes": [
+        "temples"
+      ],
+      "hard_limits": [],
+      "budget": 271
+    },
+    "Ben": {
+      "likes": [
+        "nightlife"
+      ],
+      "hard_limits": [
+        "no_temples"
+      ],
+      "budget": 228
+    },
+    "Cara": {
+      "likes": [
+        "outdoor"
+      ],
+      "hard_limits": [
+        "no_nightlife"
+      ],
+      "budget": 241
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "s_123",
+  "split": "heldout",
+  "days": 2,
+  "n_friends": 5,
+  "conflict": "strong",
+  "budget": "loose",
+  "friends": {
+    "Amy": {
+      "likes": [
+        "temples"
+      ],
+      "hard_limits": [],
+      "budget": 272
+    },
+    "Ben": {
+      "likes": [
+        "nightlife"
+      ],
+      "hard_limits": [
+        "no_temples"
+      ],
+      "budget": 240
+    },
+    "Cara": {
+      "likes": [
+        "outdoor"
+      ],
+      "hard_limits": [
+        "no_nightlife"
+      ],
+      "budget": 227
+    },
+    "Dan": {
+      "likes": [
+        "markets"
+      ],
+      "hard_limits": [],
+      "budget": 263
+    },
+    "Eve": {
+      "likes": [
+        "food"
+      ],
+      "hard_limits": [],
+      "budget": 250
+    }
+  }
+}

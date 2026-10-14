@@ -1,0 +1,28 @@
+{
+  "id": "s_004",
+  "split": "dev",
+  "days": 2,
+  "n_friends": 2,
+  "conflict": "strong",
+  "budget": "tight",
+  "friends": {
+    "Amy": {
+      "likes": [
+        "temples",
+        "hiking"
+      ],
+      "hard_limits": [],
+      "budget": 64
+    },
+    "Ben": {
+      "likes": [
+        "shopping"
+      ],
+      "hard_limits": [
+        "no_temples",
+        "no_early_mornings"
+      ],
+      "budget": 83
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "areas": ["centre", "north", "east", "south", "west"],
+  "minutes": {
+    "centre": {"north": 15, "east": 20, "south": 20, "west": 15},
+    "north": {"east": 25, "south": 30, "west": 25},
+    "east": {"south": 25, "west": 30},
+    "south": {"west": 20}
+  },
+  "same_area_minutes": 5
+}
