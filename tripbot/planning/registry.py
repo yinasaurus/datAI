@@ -30,7 +30,7 @@ def make_plan(
     *,
     client: Any = None,
 ) -> PlanResult:
-    """Run setup A, B, or C. A and B are implemented.
+    """Run setup A, B, or C.
 
     ``client`` replaces the Gemini client in tests. Callers that know the
     trip length should set ``config['days']`` before calling, because this
@@ -45,4 +45,8 @@ def make_plan(
         from tripbot.planning.setup_b import run_setup_b
 
         return run_setup_b(profiles, places, travel_times, config, client=client)
+    if name == "C":
+        from tripbot.planning.setup_c import run_setup_c
+
+        return run_setup_c(profiles, places, travel_times, config, client=client)
     raise ValueError(f"setup {setup} is not implemented")

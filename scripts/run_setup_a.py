@@ -1,4 +1,4 @@
-"""Run setup A or B on one scenario and print the plan plus the checker report."""
+"""Run setup A, B, or C on one scenario and print the plan plus the checker report."""
 
 from __future__ import annotations
 
@@ -20,10 +20,10 @@ from tripbot.schemas import load_places, load_scenario, load_travel_times
 
 
 def main(argv: list[str] | None = None) -> int:
-    """Load one scenario, call setup A or B, and print the plan and the report."""
+    """Load one scenario, call setup A, B, or C, and print the plan and the report."""
     load_dotenv(ROOT / ".env")
-    parser = argparse.ArgumentParser(description="Run setup A or B on one scenario")
-    parser.add_argument("--setup", default="A", choices=["A", "B", "a", "b"])
+    parser = argparse.ArgumentParser(description="Run setup A, B, or C on one scenario")
+    parser.add_argument("--setup", default="A", choices=["A", "B", "C", "a", "b", "c"])
     parser.add_argument(
         "--scenario",
         type=Path,
