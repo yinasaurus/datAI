@@ -1,4 +1,4 @@
-"""Run setup A on one scenario and print the plan plus the checker report."""
+"""Run setup A or B on one scenario and print the plan plus the checker report."""
 
 from __future__ import annotations
 
@@ -20,9 +20,10 @@ from tripbot.schemas import load_places, load_scenario, load_travel_times
 
 
 def main(argv: list[str] | None = None) -> int:
-    """Load one scenario, call setup A, and print the plan and the report."""
+    """Load one scenario, call setup A or B, and print the plan and the report."""
     load_dotenv(ROOT / ".env")
-    parser = argparse.ArgumentParser(description="Run setup A on one scenario")
+    parser = argparse.ArgumentParser(description="Run setup A or B on one scenario")
+    parser.add_argument("--setup", default="A", choices=["A", "B", "a", "b"])
     parser.add_argument(
         "--scenario",
         type=Path,
@@ -41,11 +42,13 @@ def main(argv: list[str] | None = None) -> int:
     places = load_places(ROOT / config["paths"]["places"])
     travel_times = load_travel_times(ROOT / config["paths"]["travel_times"])
     config["days"] = scenario.days
-    result = make_plan("A", scenario.friends, places, travel_times, config)
-    print(f"scenario {scenario.id} setup A")
+    setup = args.setup.upper()
+    result = make_plan(setup, scenario.friends, places, travel_times, config)
+    print(f"scenario {scenario.id} setup {setup}")
     print(
-        f"calls {result.llm_calls} tokens_in {result.tokens_in} "
-        f"tokens_out {result.tokens_out} seconds {result.seconds:.2f}"
+        f"attempts {result.attempts} calls {result.llm_calls} "
+        f"tokens_in {result.tokens_in} tokens_out {result.tokens_out} "
+        f"seconds {result.seconds:.2f}"
     )
     if result.plan is None:
         print("plan failed")

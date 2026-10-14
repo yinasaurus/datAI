@@ -135,8 +135,8 @@ def test_fenced_json_is_accepted(tmp_path: Path) -> None:
 def test_unknown_setup_is_rejected(tmp_path: Path) -> None:
     profiles, places, travel = _inputs()
     try:
-        make_plan("B", profiles, places, travel, _config(tmp_path), client=FakeClient("{}"))
+        make_plan("C", profiles, places, travel, _config(tmp_path), client=FakeClient("{}"))
     except ValueError as exc:
         assert "not implemented" in str(exc)
     else:
-        raise AssertionError("setup B should not run yet")
+        raise AssertionError("setup C should not run yet")

@@ -32,7 +32,7 @@ def run_setup_a(
         response_schema=PLAN_RESPONSE_SCHEMA,
     )
     try:
-        plan = Plan.model_validate(json.loads(_strip_fence(result.text)))
+        plan = parse_plan_text(result.text)
     except (json.JSONDecodeError, ValidationError, ValueError) as exc:
         return PlanResult(
             plan=None,
@@ -52,6 +52,11 @@ def run_setup_a(
         seconds=result.seconds,
         trace=[{"step": "setup_a", "cached": result.cached}],
     )
+
+
+def parse_plan_text(text: str) -> Plan:
+    """Parse model text into a Plan. Raises if the JSON or the schema is invalid."""
+    return Plan.model_validate(json.loads(_strip_fence(text)))
 
 
 def _strip_fence(text: str) -> str:
