@@ -1,0 +1,1 @@
+"""Group trip planner package."""

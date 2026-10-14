@@ -1,0 +1,21 @@
+model: REPLACE_WITH_EXACT_MODEL_NAME
+temperature: 0
+seed: 42
+cache: true
+setup: C
+max_revisions: 3
+negotiation_rounds: 2
+guardrails: "on"  # quoted: unquoted on/off is a boolean in YAML
+budget_cap: 3000
+bot_name: tripbot
+day_start: "07:00"
+day_end: "23:00"
+breaking_point_threshold: 0.5
+bootstrap_resamples: 1000
+runs: 3
+paths:
+  places: data/places.json
+  tags: data/tags.json
+  travel_times: data/travel_times.json
+  results: results/runs.jsonl
+  llm_log: logs/llm_calls.jsonl
