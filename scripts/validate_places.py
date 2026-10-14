@@ -25,7 +25,10 @@ def validate_places(
     *,
     require_verified: bool = False,
 ) -> list[str]:
-    """Return human-readable problems. An empty list means the file is valid."""
+    """Return human-readable problems. An empty list means the file is valid.
+
+    ``description`` may be omitted. The place model stores that as an empty string.
+    """
     try:
         catalog = TagCatalog.model_validate(read_json(tags_path))
         travel = TravelTimes.model_validate(read_json(travel_path))

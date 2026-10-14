@@ -21,6 +21,7 @@ from tripbot.planning.prompts import (
     mediator_prompt,
     negotiation_prompt,
     revision_prompt,
+    with_prompt_version,
 )
 from tripbot.planning.registry import PlanResult
 from tripbot.planning.setup_a import parse_plan_text
@@ -135,15 +136,17 @@ def _add(tokens_in: int, tokens_out: int, seconds: float, result: LLMResult) -> 
 
 def _record(trace: list[dict[str, Any]], *, step: str, result: LLMResult, **extra: Any) -> None:
     trace.append(
-        {
-            "step": step,
-            "attempt": len(trace) + 1,
-            "tokens_in": result.tokens_in,
-            "tokens_out": result.tokens_out,
-            "seconds": result.seconds,
-            "cached": result.cached,
-            **extra,
-        }
+        with_prompt_version(
+            {
+                "step": step,
+                "attempt": len(trace) + 1,
+                "tokens_in": result.tokens_in,
+                "tokens_out": result.tokens_out,
+                "seconds": result.seconds,
+                "cached": result.cached,
+                **extra,
+            }
+        )
     )
 
 

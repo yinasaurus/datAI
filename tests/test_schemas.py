@@ -35,6 +35,13 @@ def _place(**overrides: object) -> Place:
     return Place.model_validate(base)
 
 
+def test_place_description_defaults_to_empty() -> None:
+    place = _place()
+
+    assert place.description == ""
+    assert _place(description="A placeholder note.").description == "A placeholder note."
+
+
 def test_place_rejects_a_window_shorter_than_the_visit() -> None:
     with pytest.raises(ValidationError):
         _place(opens="10:00", closes="10:30", duration_min=60)

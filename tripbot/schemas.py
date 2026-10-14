@@ -77,6 +77,7 @@ class Place(BaseModel):
 
     id: str = Field(min_length=1)
     name: str = Field(min_length=1)
+    description: str = ""
     tags: list[str] = Field(min_length=1)
     cost: int = Field(ge=0)
     opens: str

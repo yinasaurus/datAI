@@ -18,6 +18,8 @@ import httpx
 from google import genai
 from google.genai import errors, types
 
+from tripbot.planning.prompts import PROMPT_VERSION
+
 RETRY_STATUS_CODES = {408, 429, 500, 502, 503, 504}
 MAX_ATTEMPTS = 4
 BACKOFF_SECONDS = 1.0
@@ -219,6 +221,7 @@ def _append_log(
     path = Path(config["paths"]["llm_log"])
     path.parent.mkdir(parents=True, exist_ok=True)
     row = {
+        "prompt_version": PROMPT_VERSION,
         "model": model,
         "temperature": temperature,
         "seed": seed,

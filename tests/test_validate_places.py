@@ -44,11 +44,28 @@ def test_shipped_places_are_placeholders() -> None:
     assert all(place.verified is False for place in places)
     assert all(place.source == "TODO" for place in places)
     assert all(place.name.startswith("PLACEHOLDER") for place in places)
+    assert all(place.description == "" for place in places)
     assert validate_places(
         ROOT / "data" / "places.json",
         ROOT / "data" / "tags.json",
         ROOT / "data" / "travel_times.json",
     ) == []
+
+
+def test_missing_description_still_passes(tmp_path: Path) -> None:
+    row = _row()
+    assert "description" not in row
+    path = _write_places(tmp_path / "places.json", [row])
+
+    assert (
+        validate_places(
+            path,
+            ROOT / "data" / "tags.json",
+            ROOT / "data" / "travel_times.json",
+        )
+        == []
+    )
+    assert load_places(path)[0].description == ""
 
 
 def test_unknown_tag_fails(tmp_path: Path) -> None:

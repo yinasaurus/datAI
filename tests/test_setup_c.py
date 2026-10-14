@@ -5,6 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
+from tripbot.planning.prompts import PROMPT_VERSION
 from tripbot.planning.registry import make_plan
 from tripbot.planning.setup_c import proposal_calls
 from tripbot.schemas import Place, Profile, TravelTimes
@@ -97,6 +98,32 @@ def test_three_friends_and_two_rounds_make_ten_calls(tmp_path: Path) -> None:
     assert result.trace[-1]["violations"] == []
     assert result.plan is not None
     assert result.plan.days[0].items[0].start == "10:00"
+
+
+def test_call_counts_for_three_and_five_friends(tmp_path: Path) -> None:
+    places, travel = _places()
+    names = ["Amy", "Ben", "Cara", "Dan", "Eve"]
+    lines = ["friends rounds calls"]
+    for n_friends in (3, 5):
+        profiles = {
+            name: Profile(likes=["food"], hard_limits=[], budget=100) for name in names[:n_friends]
+        }
+        for rounds in (0, 1, 2, 3):
+            expected = proposal_calls(n_friends, rounds)
+            client = FakeClient([GOOD] * expected)
+            result = make_plan(
+                "C",
+                profiles,
+                places,
+                travel,
+                _config(tmp_path, rounds=rounds, revisions=3),
+                client=client,
+            )
+            assert result.llm_calls == expected
+            assert len(client.calls) == expected
+            assert all(step["prompt_version"] == PROMPT_VERSION for step in result.trace)
+            lines.append(f"{n_friends:7d} {rounds:6d} {expected:5d}")
+    print("\n".join(lines))
 
 
 def test_round_zero_hides_other_profiles_and_later_rounds_show_proposals(tmp_path: Path) -> None:

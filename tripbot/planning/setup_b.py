@@ -14,6 +14,7 @@ from tripbot.planning.prompts import (
     SYSTEM_PROMPT,
     revision_prompt,
     setup_a_prompt,
+    with_prompt_version,
 )
 from tripbot.planning.registry import PlanResult
 from tripbot.planning.setup_a import parse_plan_text
@@ -62,15 +63,17 @@ def run_setup_b(
             config,
         )
         trace.append(
-            {
-                "step": "setup_b" if revision == 0 else "revision",
-                "attempt": revision + 1,
-                "tokens_in": result.tokens_in,
-                "tokens_out": result.tokens_out,
-                "seconds": result.seconds,
-                "cached": result.cached,
-                "violations": violations,
-            }
+            with_prompt_version(
+                {
+                    "step": "setup_b" if revision == 0 else "revision",
+                    "attempt": revision + 1,
+                    "tokens_in": result.tokens_in,
+                    "tokens_out": result.tokens_out,
+                    "seconds": result.seconds,
+                    "cached": result.cached,
+                    "violations": violations,
+                }
+            )
         )
         if plan is not None and not violations:
             break

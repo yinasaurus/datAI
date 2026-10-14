@@ -8,7 +8,12 @@ from typing import Any
 from pydantic import ValidationError
 
 from tripbot.llm import call_llm
-from tripbot.planning.prompts import PLAN_RESPONSE_SCHEMA, SYSTEM_PROMPT, setup_a_prompt
+from tripbot.planning.prompts import (
+    PLAN_RESPONSE_SCHEMA,
+    SYSTEM_PROMPT,
+    setup_a_prompt,
+    with_prompt_version,
+)
 from tripbot.planning.registry import PlanResult
 from tripbot.schemas import Place, Plan, Profile, TravelTimes
 
@@ -41,7 +46,16 @@ def run_setup_a(
             tokens_in=result.tokens_in,
             tokens_out=result.tokens_out,
             seconds=result.seconds,
-            trace=[{"step": "setup_a", "error": str(exc), "text": result.text[:500]}],
+            trace=[
+                with_prompt_version(
+                    {
+                        "step": "setup_a",
+                        "error": str(exc),
+                        "text": result.text[:500],
+                        "cached": result.cached,
+                    }
+                )
+            ],
         )
     return PlanResult(
         plan=plan,
@@ -50,7 +64,7 @@ def run_setup_a(
         tokens_in=result.tokens_in,
         tokens_out=result.tokens_out,
         seconds=result.seconds,
-        trace=[{"step": "setup_a", "cached": result.cached}],
+        trace=[with_prompt_version({"step": "setup_a", "cached": result.cached})],
     )
 
 

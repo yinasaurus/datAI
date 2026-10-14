@@ -103,3 +103,30 @@ def test_zero_revisions_matches_setup_a(tmp_path: Path) -> None:
     assert result.llm_calls == 1
     assert len(client.calls) == 1
     assert result.trace[0]["violations"][0]["type"] == "closed"
+
+
+def _call_view(call: dict[str, object]) -> dict[str, object]:
+    request = call["config"]
+    return {
+        "model": call["model"],
+        "contents": call["contents"],
+        "system_instruction": request.system_instruction,
+        "temperature": request.temperature,
+        "seed": request.seed,
+        "response_mime_type": request.response_mime_type,
+        "response_json_schema": request.response_json_schema,
+    }
+
+
+def test_zero_revisions_makes_the_same_model_call_as_setup_a(tmp_path: Path) -> None:
+    profiles, places, travel = _inputs()
+    config = _config(tmp_path, 0)
+    client_a = FakeClient([BAD_PLAN])
+    client_b = FakeClient([BAD_PLAN])
+
+    make_plan("A", profiles, places, travel, config, client=client_a)
+    make_plan("B", profiles, places, travel, config, client=client_b)
+
+    assert len(client_a.calls) == 1
+    assert len(client_b.calls) == 1
+    assert _call_view(client_a.calls[0]) == _call_view(client_b.calls[0])

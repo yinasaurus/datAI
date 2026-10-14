@@ -8,6 +8,7 @@ import pytest
 from google.genai.errors import ClientError
 
 from tripbot.llm import call_llm
+from tripbot.planning.prompts import PROMPT_VERSION
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -70,6 +71,7 @@ def test_call_reads_model_temperature_seed_and_json_mode(tmp_path: Path) -> None
     assert result.cached is False
     log = json.loads((tmp_path / "llm_calls.jsonl").read_text(encoding="utf-8"))
     assert log["model"] == "test-model"
+    assert log["prompt_version"] == PROMPT_VERSION
     assert log["attempts"] == 1
     assert log["error"] is None
 

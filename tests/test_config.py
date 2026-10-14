@@ -39,6 +39,27 @@ def test_shipped_config_loads() -> None:
     assert config["paths"]["llm_log"] == "logs/llm_calls.jsonl"
 
 
+def test_study_settings_can_be_overridden_from_the_command_line() -> None:
+    config = load_config(
+        ROOT / "config.yaml",
+        [
+            "max_revisions=0",
+            "negotiation_rounds=3",
+            "model=test-model",
+            "setup=B",
+            "guardrails=off",
+        ],
+    )
+
+    assert config["max_revisions"] == 0
+    assert isinstance(config["max_revisions"], int)
+    assert config["negotiation_rounds"] == 3
+    assert isinstance(config["negotiation_rounds"], int)
+    assert config["model"] == "test-model"
+    assert config["setup"] == "B"
+    assert config["guardrails"] == "off"
+
+
 def test_overrides_coerce_to_existing_types(tmp_path: Path) -> None:
     path = tmp_path / "config.yaml"
     path.write_text(_SAMPLE, encoding="utf-8")
