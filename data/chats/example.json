@@ -1,0 +1,14 @@
+[
+  {"sender": "Amy", "text": "I like food and temples. My budget is 120."},
+  {"sender": "Ben", "text": "I like hiking. My hard limit is no_temples. My budget is 80."},
+  {"sender": "Cara", "text": "I like shopping. My hard limit is no_early_mornings. My budget is 100."},
+  {"sender": "Amy", "text": "I am free in the afternoon."},
+  {"sender": "Ben", "text": "Same here."},
+  {"sender": "Cara", "text": "I also like culture."},
+  {"sender": "Amy", "text": "tripbot, please make a plan for the group."},
+  {"sender": "Ben", "text": "/profiles"},
+  {"sender": "Cara", "text": "Did everyone share a budget?"},
+  {"sender": "Amy", "text": "/plan"},
+  {"sender": "Ben", "text": "/itinerary"},
+  {"sender": "Amy", "text": "/confirm"}
+]

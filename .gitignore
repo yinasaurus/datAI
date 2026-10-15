@@ -6,3 +6,4 @@ __pycache__
 logs
 results
 .DS_Store
+data/bot_state.json
