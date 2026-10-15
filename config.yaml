@@ -1,4 +1,4 @@
-model: REPLACE_WITH_EXACT_MODEL_NAME
+model: gemini-3.8-flash
 temperature: 0
 seed: 42
 cache: true
