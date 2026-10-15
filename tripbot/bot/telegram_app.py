@@ -39,7 +39,20 @@ async def deliver(
 
 def build_application(token: str, config: dict[str, Any]) -> Application:
     """Register a single text handler. Commands are text and go through the same path."""
-    application = Application.builder().token(token).build()
+    # api.telegram.org can take longer than the library's 5 second default.
+    application = (
+        Application.builder()
+        .token(token)
+        .connect_timeout(30.0)
+        .read_timeout(30.0)
+        .write_timeout(30.0)
+        .pool_timeout(5.0)
+        .get_updates_connect_timeout(30.0)
+        .get_updates_read_timeout(30.0)
+        .get_updates_write_timeout(30.0)
+        .get_updates_pool_timeout(5.0)
+        .build()
+    )
 
     async def on_text(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         incoming = update.effective_message
@@ -63,7 +76,10 @@ def main() -> None:
         raise SystemExit(1)
     config = load_config(ROOT / "config.yaml", [])
     load_state(config)
-    build_application(token, config).run_polling(allowed_updates=["message"])
+    build_application(token, config).run_polling(
+        allowed_updates=["message"],
+        bootstrap_retries=3,
+    )
 
 
 def _sender(user: Any) -> str:
