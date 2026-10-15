@@ -9,7 +9,12 @@ from pathlib import Path
 from typing import Any
 
 from dotenv import load_dotenv
-from telegram import Update
+from telegram import (
+    BotCommand,
+    BotCommandScopeAllGroupChats,
+    BotCommandScopeAllPrivateChats,
+    Update,
+)
 from telegram.ext import Application, ContextTypes, MessageHandler, filters
 
 from tripbot.bot.core import handle_message, load_state, split_reply
@@ -17,6 +22,13 @@ from tripbot.config import load_config
 
 logger = logging.getLogger(__name__)
 ROOT = Path(__file__).resolve().parents[2]
+
+_COMMANDS = [
+    BotCommand("plan", "Make a plan from what the group said"),
+    BotCommand("itinerary", "Make a plan from what the group said"),
+    BotCommand("profiles", "Show the likes and budgets saved so far"),
+    BotCommand("confirm", "Book the latest plan"),
+]
 
 
 async def deliver(
@@ -51,6 +63,7 @@ def build_application(token: str, config: dict[str, Any]) -> Application:
         .get_updates_read_timeout(30.0)
         .get_updates_write_timeout(30.0)
         .get_updates_pool_timeout(5.0)
+        .post_init(_register_commands)
         .build()
     )
 
@@ -80,6 +93,12 @@ def main() -> None:
         allowed_updates=["message"],
         bootstrap_retries=3,
     )
+
+
+async def _register_commands(application: Application) -> None:
+    """Publish the slash menu for groups and private chats."""
+    await application.bot.set_my_commands(_COMMANDS, scope=BotCommandScopeAllGroupChats())
+    await application.bot.set_my_commands(_COMMANDS, scope=BotCommandScopeAllPrivateChats())
 
 
 def _sender(user: Any) -> str:
