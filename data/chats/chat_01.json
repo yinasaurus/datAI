@@ -1,0 +1,58 @@
+{
+  "id": "chat_01",
+  "description": "2 friends, mild clash: one loves shrines, the other refuses them. Budgets stated once.",
+  "messages": [
+    {
+      "sender": "Amy",
+      "text": "okay kyoto in nov is confirmed!! 2 days right"
+    },
+    {
+      "sender": "Ben",
+      "text": "yep. flights booked already"
+    },
+    {
+      "sender": "Amy",
+      "text": "i NEED to see the old shrines and temples, that's like the whole point of kyoto for me"
+    },
+    {
+      "sender": "Ben",
+      "text": "honestly i've seen enough temples in my life, please count me out of those"
+    },
+    {
+      "sender": "Ben",
+      "text": "i'm here for the food. ramen, tofu, whatever, feed me"
+    },
+    {
+      "sender": "Amy",
+      "text": "lol fair. i can spend about 150 sgd on activities and meals"
+    },
+    {
+      "sender": "Ben",
+      "text": "100 for me, i'm broke after the flights"
+    },
+    {
+      "sender": "Amy",
+      "text": "tripbot, can you plan our 2 days?"
+    }
+  ],
+  "truth": {
+    "profiles": {
+      "Amy": {
+        "likes": [
+          "temples"
+        ],
+        "hard_limits": [],
+        "budget": 150
+      },
+      "Ben": {
+        "likes": [
+          "food"
+        ],
+        "hard_limits": [
+          "no_temples"
+        ],
+        "budget": 100
+      }
+    }
+  }
+}

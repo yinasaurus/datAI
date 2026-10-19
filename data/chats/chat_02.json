@@ -1,0 +1,77 @@
+{
+  "id": "chat_02",
+  "description": "3 friends with small talk and one changed budget. Dan lowers his budget later.",
+  "messages": [
+    {
+      "sender": "Cara",
+      "text": "guys did anyone see the weather for kyoto next week"
+    },
+    {
+      "sender": "Dan",
+      "text": "around 15 degrees, nice for walking"
+    },
+    {
+      "sender": "Dan",
+      "text": "i wanna do a proper hike up a mountain trail, the long one with all the gates"
+    },
+    {
+      "sender": "Eve",
+      "text": "i just want a good night out, drinks and a show"
+    },
+    {
+      "sender": "Cara",
+      "text": "shopping for me. also please nothing before 10am, i am not a morning person"
+    },
+    {
+      "sender": "Dan",
+      "text": "budget wise i can do 200"
+    },
+    {
+      "sender": "Eve",
+      "text": "120 for me"
+    },
+    {
+      "sender": "Cara",
+      "text": "150"
+    },
+    {
+      "sender": "Dan",
+      "text": "wait sorry my card bill came in, make that 130 not 200"
+    },
+    {
+      "sender": "Eve",
+      "text": "rip dan"
+    },
+    {
+      "sender": "Cara",
+      "text": "/plan"
+    }
+  ],
+  "truth": {
+    "profiles": {
+      "Cara": {
+        "likes": [
+          "shopping"
+        ],
+        "hard_limits": [
+          "no_early_mornings"
+        ],
+        "budget": 150
+      },
+      "Dan": {
+        "likes": [
+          "hiking"
+        ],
+        "hard_limits": [],
+        "budget": 130
+      },
+      "Eve": {
+        "likes": [
+          "nightlife"
+        ],
+        "hard_limits": [],
+        "budget": 120
+      }
+    }
+  }
+}
