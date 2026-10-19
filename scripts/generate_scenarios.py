@@ -25,18 +25,21 @@ if str(ROOT) not in sys.path:
 from tripbot.config import load_config
 from tripbot.schemas import Place, Profile, Scenario, TagCatalog, parse_hhmm, place_fits
 
-# Placeholder per-person totals for the whole trip, in the same units as place
-# costs. Replace both ends before treating budget as a real study factor.
-# With the placeholder places, two days of the cheapest allowed visit cost 20,
-# so every friend budget must stay at or above 20 or the scenario is unsolvable.
+# Per-person totals for the whole two-day trip, in SGD like place costs.
+# Tight covers about one paid visit a day plus free sights, so the costly
+# places (Gion Corner 45, Hozugawa boat 49, Junsei 31) force trade-offs.
+# Loose covers a full paid day each day. Without temples the cheapest
+# two-day plan costs 8, so every tight budget stays solvable.
 BUDGET_RANGES: dict[str, tuple[int, int]] = {
-    "tight": (60, 90),
-    "loose": (200, 280),
+    "tight": (30, 50),
+    "loose": (120, 180),
 }
 
 TRIP_DAYS = 2
 FRIEND_NAMES = ["Amy", "Ben", "Cara", "Dan", "Eve"]
-SAFE_TAGS = ["food", "shopping", "culture", "outdoor", "markets"]
+# No verified Kyoto place carries "markets" (Nishiki Market has no official
+# hours), so no friend is generated with that like.
+SAFE_TAGS = ["food", "shopping", "culture", "outdoor"]
 N_FRIENDS = (2, 3, 5)
 CONFLICTS = ("mild", "strong")
 BUDGET_LEVELS = ("loose", "tight")
@@ -139,14 +142,16 @@ def _friends(
         budget=budgets[1],
     )
     if conflict == "strong" and n_friends == 2:
+        # Real Kyoto hiking spots stay open past 10:00, so an early-morning
+        # limit no longer blocks hiking. The second clash is nightlife instead.
         profiles[names[0]] = Profile(
-            likes=["temples", "hiking"],
+            likes=["temples", "nightlife"],
             hard_limits=[],
             budget=budgets[0],
         )
         profiles[names[1]] = Profile(
             likes=[safe[1]],
-            hard_limits=["no_temples", "no_early_mornings"],
+            hard_limits=["no_temples", "no_nightlife", "no_early_mornings"],
             budget=budgets[1],
         )
     elif conflict == "strong":

@@ -31,7 +31,7 @@ def _row(**overrides: object) -> dict[str, object]:
     return base
 
 
-def test_shipped_places_are_placeholders() -> None:
+def test_shipped_places_are_real_and_verified() -> None:
     places = load_places(ROOT / "data" / "places.json")
     catalog = load_tag_catalog(ROOT / "data" / "tags.json")
     travel = load_travel_times(ROOT / "data" / "travel_times.json")
@@ -41,14 +41,15 @@ def test_shipped_places_are_placeholders() -> None:
     assert set(catalog.hard_limits) == {"no_temples", "no_early_mornings", "no_nightlife"}
     assert travel.areas == ["centre", "north", "east", "south", "west"]
     assert {place.area for place in places} == set(travel.areas)
-    assert all(place.verified is False for place in places)
-    assert all(place.source == "TODO" for place in places)
-    assert all(place.name.startswith("PLACEHOLDER") for place in places)
+    assert all(place.verified is True for place in places)
+    assert all(place.source.startswith(("http://", "https://")) for place in places)
+    assert not any(place.name.startswith("PLACEHOLDER") for place in places)
     assert all(place.description == "" for place in places)
     assert validate_places(
         ROOT / "data" / "places.json",
         ROOT / "data" / "tags.json",
         ROOT / "data" / "travel_times.json",
+        require_verified=True,
     ) == []
 
 
@@ -110,6 +111,6 @@ def test_duplicate_id_and_unknown_area_fail(tmp_path: Path) -> None:
     assert "p01: unknown area island" in problems
 
 
-def test_shipped_places_fail_the_verified_flag() -> None:
-    assert main(["--require-verified"]) == 1
+def test_shipped_places_pass_the_verified_flag() -> None:
+    assert main(["--require-verified"]) == 0
     assert main([]) == 0
