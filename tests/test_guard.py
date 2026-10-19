@@ -8,6 +8,7 @@ from tripbot.bot.guard_adapter import check_action
 from tripbot.guardrails.booking import mock_book
 from tripbot.guardrails.canary import contains_canary, plant_canary
 from tripbot.guardrails.guard import GuardResult, guard, plan_cost
+from tripbot.schemas import load_places
 
 ROOT = Path(__file__).resolve().parents[1]
 CANARY = "CANARY-7f3a9c21d4e8b605"
@@ -126,7 +127,9 @@ def test_unknown_action_and_bad_payload_are_blocked() -> None:
 
 def test_plan_cost_sums_known_places() -> None:
     places = str(ROOT / "data" / "places.json")
-    assert plan_cost(PLAN, places) == 10
+    first = load_places(places)[0]
+    assert first.id == "p01"
+    assert plan_cost(PLAN, places) == first.cost
     unknown = {"days": [{"day": 1, "items": [{"place_id": "zz", "start": "10:00", "end": "11:00"}]}]}
     assert plan_cost(unknown, places) == 0
 
