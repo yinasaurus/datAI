@@ -1,0 +1,100 @@
+{
+  "id": "chat_03",
+  "description": "5 friends, Singlish and strong clashes: temples vs no temples, nightlife vs no nightlife.",
+  "messages": [
+    {
+      "sender": "Fiona",
+      "text": "ok this group chat is for kyoto trip only ah, don't spam memes"
+    },
+    {
+      "sender": "Gabe",
+      "text": "orh. anyway i want the famous temples, golden pavilion all that"
+    },
+    {
+      "sender": "Hana",
+      "text": "temples again? cannot lah, i went last year, skip all the temple stuff for me"
+    },
+    {
+      "sender": "Ivan",
+      "text": "i want to go out at night, bars, see the city lights"
+    },
+    {
+      "sender": "Jo",
+      "text": "i don't do late nights, i sleep by 9, no bars for me pls"
+    },
+    {
+      "sender": "Fiona",
+      "text": "i just want to eat, the markets and food halls"
+    },
+    {
+      "sender": "Hana",
+      "text": "i like museums and old culture stuff tho"
+    },
+    {
+      "sender": "Gabe",
+      "text": "can spend 180"
+    },
+    {
+      "sender": "Hana",
+      "text": "100"
+    },
+    {
+      "sender": "Ivan",
+      "text": "150 can"
+    },
+    {
+      "sender": "Jo",
+      "text": "80 only"
+    },
+    {
+      "sender": "Fiona",
+      "text": "200"
+    },
+    {
+      "sender": "Ivan",
+      "text": "tripbot itinerary pls"
+    }
+  ],
+  "truth": {
+    "profiles": {
+      "Fiona": {
+        "likes": [
+          "food",
+          "markets"
+        ],
+        "hard_limits": [],
+        "budget": 200
+      },
+      "Gabe": {
+        "likes": [
+          "temples"
+        ],
+        "hard_limits": [],
+        "budget": 180
+      },
+      "Hana": {
+        "likes": [
+          "culture"
+        ],
+        "hard_limits": [
+          "no_temples"
+        ],
+        "budget": 100
+      },
+      "Ivan": {
+        "likes": [
+          "nightlife"
+        ],
+        "hard_limits": [],
+        "budget": 150
+      },
+      "Jo": {
+        "likes": [],
+        "hard_limits": [
+          "no_nightlife"
+        ],
+        "budget": 80
+      }
+    }
+  }
+}

@@ -12,7 +12,7 @@ from tripbot.bot.core import TELEGRAM_LIMIT, handle_message, split_reply
 from tripbot.bot.guard_adapter import GuardResult
 from tripbot.bot.telegram_app import deliver
 from tripbot.planning.registry import PlanResult
-from tripbot.schemas import Plan
+from tripbot.schemas import Plan, load_places
 
 ROOT = Path(__file__).resolve().parents[1]
 MARKER = "UNIQUE_CHAT_MARKER"
@@ -110,8 +110,9 @@ def test_plan_reply_uses_the_plan_and_hides_chat_text(
 
     assert reply is not None
     assert "Day 1" in reply
-    assert "10:00-11:00 PLACEHOLDER 01" in reply
-    assert "Cost per person: 10" in reply
+    first = load_places(ROOT / "data" / "places.json")[0]
+    assert f"10:00-11:00 {first.name}" in reply
+    assert f"Cost per person: {first.cost}" in reply
     assert "Violations: none" in reply
     assert MARKER not in reply
     assert len(reply) <= TELEGRAM_LIMIT

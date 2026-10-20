@@ -11,7 +11,7 @@
         "temples"
       ],
       "hard_limits": [],
-      "budget": 67
+      "budget": 32
     },
     "Ben": {
       "likes": [
@@ -20,7 +20,7 @@
       "hard_limits": [
         "no_temples"
       ],
-      "budget": 76
+      "budget": 36
     },
     "Cara": {
       "likes": [
@@ -29,7 +29,7 @@
       "hard_limits": [
         "no_nightlife"
       ],
-      "budget": 79
+      "budget": 37
     }
   }
 }

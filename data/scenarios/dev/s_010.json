@@ -11,7 +11,7 @@
         "temples"
       ],
       "hard_limits": [],
-      "budget": 67
+      "budget": 50
     },
     "Ben": {
       "likes": [
@@ -20,28 +20,28 @@
       "hard_limits": [
         "no_temples"
       ],
-      "budget": 74
+      "budget": 47
     },
     "Cara": {
       "likes": [
         "culture"
       ],
       "hard_limits": [],
-      "budget": 78
+      "budget": 43
     },
     "Dan": {
       "likes": [
         "outdoor"
       ],
       "hard_limits": [],
-      "budget": 68
+      "budget": 37
     },
     "Eve": {
       "likes": [
-        "markets"
+        "food"
       ],
       "hard_limits": [],
-      "budget": 85
+      "budget": 44
     }
   }
 }

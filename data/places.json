@@ -1,27 +1,376 @@
 [
-  {"id": "p01", "name": "PLACEHOLDER 01", "tags": ["food"], "cost": 10, "opens": "10:00", "closes": "21:00", "area": "centre", "duration_min": 60, "source": "TODO", "verified": false},
-  {"id": "p02", "name": "PLACEHOLDER 02", "tags": ["shopping"], "cost": 25, "opens": "10:00", "closes": "20:00", "area": "centre", "duration_min": 90, "source": "TODO", "verified": false},
-  {"id": "p03", "name": "PLACEHOLDER 03", "tags": ["temples", "culture"], "cost": 15, "opens": "09:00", "closes": "17:00", "area": "centre", "duration_min": 60, "source": "TODO", "verified": false},
-  {"id": "p04", "name": "PLACEHOLDER 04", "tags": ["nightlife", "food"], "cost": 40, "opens": "18:00", "closes": "23:00", "area": "centre", "duration_min": 90, "source": "TODO", "verified": false},
-  {"id": "p05", "name": "PLACEHOLDER 05", "tags": ["hiking", "outdoor"], "cost": 20, "opens": "07:00", "closes": "09:30", "area": "centre", "duration_min": 60, "source": "TODO", "verified": false},
-  {"id": "p06", "name": "PLACEHOLDER 06", "tags": ["culture"], "cost": 15, "opens": "10:00", "closes": "18:00", "area": "north", "duration_min": 60, "source": "TODO", "verified": false},
-  {"id": "p07", "name": "PLACEHOLDER 07", "tags": ["markets", "food"], "cost": 20, "opens": "09:00", "closes": "16:00", "area": "north", "duration_min": 75, "source": "TODO", "verified": false},
-  {"id": "p08", "name": "PLACEHOLDER 08", "tags": ["temples"], "cost": 30, "opens": "08:00", "closes": "16:00", "area": "north", "duration_min": 45, "source": "TODO", "verified": false},
-  {"id": "p09", "name": "PLACEHOLDER 09", "tags": ["nightlife"], "cost": 50, "opens": "19:00", "closes": "23:00", "area": "north", "duration_min": 60, "source": "TODO", "verified": false},
-  {"id": "p10", "name": "PLACEHOLDER 10", "tags": ["hiking"], "cost": 10, "opens": "07:00", "closes": "09:00", "area": "north", "duration_min": 45, "source": "TODO", "verified": false},
-  {"id": "p11", "name": "PLACEHOLDER 11", "tags": ["outdoor", "culture"], "cost": 20, "opens": "10:00", "closes": "17:00", "area": "east", "duration_min": 90, "source": "TODO", "verified": false},
-  {"id": "p12", "name": "PLACEHOLDER 12", "tags": ["shopping", "markets"], "cost": 35, "opens": "11:00", "closes": "20:00", "area": "east", "duration_min": 60, "source": "TODO", "verified": false},
-  {"id": "p13", "name": "PLACEHOLDER 13", "tags": ["food"], "cost": 15, "opens": "08:00", "closes": "15:00", "area": "east", "duration_min": 45, "source": "TODO", "verified": false},
-  {"id": "p14", "name": "PLACEHOLDER 14", "tags": ["nightlife", "culture"], "cost": 60, "opens": "17:00", "closes": "23:00", "area": "east", "duration_min": 120, "source": "TODO", "verified": false},
-  {"id": "p15", "name": "PLACEHOLDER 15", "tags": ["hiking", "outdoor"], "cost": 25, "opens": "07:00", "closes": "09:30", "area": "east", "duration_min": 75, "source": "TODO", "verified": false},
-  {"id": "p16", "name": "PLACEHOLDER 16", "tags": ["food", "markets"], "cost": 10, "opens": "10:00", "closes": "18:00", "area": "south", "duration_min": 60, "source": "TODO", "verified": false},
-  {"id": "p17", "name": "PLACEHOLDER 17", "tags": ["shopping"], "cost": 45, "opens": "10:00", "closes": "21:00", "area": "south", "duration_min": 90, "source": "TODO", "verified": false},
-  {"id": "p18", "name": "PLACEHOLDER 18", "tags": ["temples", "outdoor"], "cost": 20, "opens": "09:00", "closes": "15:00", "area": "south", "duration_min": 60, "source": "TODO", "verified": false},
-  {"id": "p19", "name": "PLACEHOLDER 19", "tags": ["nightlife"], "cost": 30, "opens": "18:00", "closes": "22:30", "area": "south", "duration_min": 60, "source": "TODO", "verified": false},
-  {"id": "p20", "name": "PLACEHOLDER 20", "tags": ["culture"], "cost": 15, "opens": "12:00", "closes": "18:00", "area": "south", "duration_min": 60, "source": "TODO", "verified": false},
-  {"id": "p21", "name": "PLACEHOLDER 21", "tags": ["outdoor"], "cost": 20, "opens": "10:00", "closes": "16:00", "area": "west", "duration_min": 90, "source": "TODO", "verified": false},
-  {"id": "p22", "name": "PLACEHOLDER 22", "tags": ["food", "culture"], "cost": 25, "opens": "09:00", "closes": "17:00", "area": "west", "duration_min": 60, "source": "TODO", "verified": false},
-  {"id": "p23", "name": "PLACEHOLDER 23", "tags": ["markets"], "cost": 15, "opens": "10:00", "closes": "19:00", "area": "west", "duration_min": 45, "source": "TODO", "verified": false},
-  {"id": "p24", "name": "PLACEHOLDER 24", "tags": ["temples", "shopping"], "cost": 40, "opens": "10:00", "closes": "17:00", "area": "west", "duration_min": 75, "source": "TODO", "verified": false},
-  {"id": "p25", "name": "PLACEHOLDER 25", "tags": ["hiking"], "cost": 30, "opens": "07:00", "closes": "09:00", "area": "west", "duration_min": 60, "source": "TODO", "verified": false}
+  {
+    "id": "p01",
+    "name": "Ippodo Tea Kyoto Main Store",
+    "tags": [
+      "food",
+      "shopping",
+      "culture"
+    ],
+    "cost": 8,
+    "opens": "10:00",
+    "closes": "17:00",
+    "area": "centre",
+    "duration_min": 45,
+    "source": "https://global.ippodo-tea.co.jp/pages/store-kyoto",
+    "verified": true
+  },
+  {
+    "id": "p02",
+    "name": "Kyoto International Manga Museum",
+    "tags": [
+      "culture"
+    ],
+    "cost": 10,
+    "opens": "10:00",
+    "closes": "17:00",
+    "area": "centre",
+    "duration_min": 120,
+    "source": "https://kyotomm.jp/en/guide-inuse/",
+    "verified": true
+  },
+  {
+    "id": "p03",
+    "name": "Nijo Castle",
+    "tags": [
+      "culture"
+    ],
+    "cost": 11,
+    "opens": "08:45",
+    "closes": "17:00",
+    "area": "centre",
+    "duration_min": 90,
+    "source": "https://nijo-jocastle.city.kyoto.lg.jp/visit/fee/?lang=en",
+    "verified": true
+  },
+  {
+    "id": "p04",
+    "name": "Ginkaku-ji (Silver Pavilion)",
+    "tags": [
+      "temples",
+      "culture"
+    ],
+    "cost": 8,
+    "opens": "08:30",
+    "closes": "17:00",
+    "area": "east",
+    "duration_min": 60,
+    "source": "https://www.shokoku-ji.jp/en/ginkakuji/access/",
+    "verified": true
+  },
+  {
+    "id": "p05",
+    "name": "Gion Corner",
+    "tags": [
+      "culture",
+      "nightlife"
+    ],
+    "cost": 45,
+    "opens": "18:00",
+    "closes": "19:50",
+    "area": "east",
+    "duration_min": 50,
+    "source": "https://www.kyoto-gioncorner.com/global/en.html",
+    "verified": true
+  },
+  {
+    "id": "p06",
+    "name": "Heian Jingu Shrine Shin-en Garden",
+    "tags": [
+      "temples",
+      "outdoor",
+      "culture"
+    ],
+    "cost": 5,
+    "opens": "08:30",
+    "closes": "17:30",
+    "area": "east",
+    "duration_min": 60,
+    "source": "https://www.heianjingu.or.jp/map/garden/",
+    "verified": true
+  },
+  {
+    "id": "p07",
+    "name": "Kyoto National Museum",
+    "tags": [
+      "culture"
+    ],
+    "cost": 6,
+    "opens": "09:30",
+    "closes": "17:00",
+    "area": "east",
+    "duration_min": 120,
+    "source": "https://www.kyohaku.go.jp/eng/visit/info/",
+    "verified": true
+  },
+  {
+    "id": "p08",
+    "name": "Nanzen-ji",
+    "tags": [
+      "temples",
+      "outdoor",
+      "culture"
+    ],
+    "cost": 5,
+    "opens": "08:40",
+    "closes": "17:00",
+    "area": "east",
+    "duration_min": 75,
+    "source": "https://nanzenji.or.jp/about_rinzaishu/visit",
+    "verified": true
+  },
+  {
+    "id": "p09",
+    "name": "Nanzenji Junsei",
+    "tags": [
+      "food",
+      "culture"
+    ],
+    "cost": 31,
+    "opens": "11:00",
+    "closes": "21:30",
+    "area": "east",
+    "duration_min": 75,
+    "source": "https://to-fu.co.jp/menu/",
+    "verified": true
+  },
+  {
+    "id": "p10",
+    "name": "National Museum of Modern Art, Kyoto (MOMAK)",
+    "tags": [
+      "culture"
+    ],
+    "cost": 8,
+    "opens": "10:00",
+    "closes": "18:00",
+    "area": "east",
+    "duration_min": 90,
+    "source": "https://www.momak.go.jp/English/guide/",
+    "verified": true
+  },
+  {
+    "id": "p11",
+    "name": "Kinkaku-ji (Golden Pavilion)",
+    "tags": [
+      "temples",
+      "culture"
+    ],
+    "cost": 4,
+    "opens": "09:00",
+    "closes": "17:00",
+    "area": "north",
+    "duration_min": 60,
+    "source": "https://www.shokoku-ji.jp/en/kinkakuji/access/",
+    "verified": true
+  },
+  {
+    "id": "p12",
+    "name": "Kitano Tenmangu Shrine",
+    "tags": [
+      "temples",
+      "culture"
+    ],
+    "cost": 0,
+    "opens": "07:00",
+    "closes": "17:00",
+    "area": "north",
+    "duration_min": 45,
+    "source": "https://kitanotenmangu.or.jp/access/",
+    "verified": true
+  },
+  {
+    "id": "p13",
+    "name": "Kurama-dera",
+    "tags": [
+      "temples",
+      "hiking",
+      "outdoor"
+    ],
+    "cost": 2,
+    "opens": "09:00",
+    "closes": "16:00",
+    "area": "north",
+    "duration_min": 180,
+    "source": "https://prev.kyoto.travel/ms/shrine_temple/143",
+    "verified": true
+  },
+  {
+    "id": "p14",
+    "name": "Kyoto Botanical Gardens",
+    "tags": [
+      "outdoor"
+    ],
+    "cost": 4,
+    "opens": "09:00",
+    "closes": "17:00",
+    "area": "north",
+    "duration_min": 90,
+    "source": "https://www.kyotobotanicalgardens.jp/english",
+    "verified": true
+  },
+  {
+    "id": "p15",
+    "name": "Fushimi Inari Taisha",
+    "tags": [
+      "temples",
+      "hiking",
+      "outdoor",
+      "culture"
+    ],
+    "cost": 0,
+    "opens": "07:00",
+    "closes": "18:30",
+    "area": "south",
+    "duration_min": 150,
+    "source": "https://prev.kyoto.travel/ms/shrine_temple/180",
+    "verified": true
+  },
+  {
+    "id": "p16",
+    "name": "Gekkeikan Okura Sake Museum",
+    "tags": [
+      "culture",
+      "food"
+    ],
+    "cost": 5,
+    "opens": "09:30",
+    "closes": "16:30",
+    "area": "south",
+    "duration_min": 60,
+    "source": "http://www.gekkeikan.com/museum/",
+    "verified": true
+  },
+  {
+    "id": "p17",
+    "name": "Kyoto Aquarium",
+    "tags": [
+      "culture"
+    ],
+    "cost": 21,
+    "opens": "10:00",
+    "closes": "18:30",
+    "area": "south",
+    "duration_min": 120,
+    "source": "https://en.kyoto-aquarium.com/about/price/",
+    "verified": true
+  },
+  {
+    "id": "p18",
+    "name": "Kyoto Railway Museum",
+    "tags": [
+      "culture"
+    ],
+    "cost": 12,
+    "opens": "10:00",
+    "closes": "17:00",
+    "area": "south",
+    "duration_min": 150,
+    "source": "https://www.kyotorailwaymuseum.jp/en/",
+    "verified": true
+  },
+  {
+    "id": "p19",
+    "name": "Kyoto Ramen Koji",
+    "tags": [
+      "food"
+    ],
+    "cost": 9,
+    "opens": "11:00",
+    "closes": "22:00",
+    "area": "south",
+    "duration_min": 45,
+    "source": "https://www.kyoto-station-building.co.jp/ramen_koji/",
+    "verified": true
+  },
+  {
+    "id": "p20",
+    "name": "Kyoto Tower Sando",
+    "tags": [
+      "food",
+      "shopping",
+      "nightlife"
+    ],
+    "cost": 8,
+    "opens": "11:00",
+    "closes": "23:00",
+    "area": "south",
+    "duration_min": 60,
+    "source": "https://kyoto-tower-sando.jp/",
+    "verified": true
+  },
+  {
+    "id": "p21",
+    "name": "Kyoto Tower Observation Deck",
+    "tags": [
+      "nightlife",
+      "culture"
+    ],
+    "cost": 8,
+    "opens": "10:00",
+    "closes": "21:00",
+    "area": "south",
+    "duration_min": 45,
+    "source": "https://www.kyoto-tower.jp/fee/",
+    "verified": true
+  },
+  {
+    "id": "p22",
+    "name": "To-ji",
+    "tags": [
+      "temples",
+      "culture"
+    ],
+    "cost": 6,
+    "opens": "08:00",
+    "closes": "17:00",
+    "area": "south",
+    "duration_min": 60,
+    "source": "https://toji.or.jp/en/location/index.html",
+    "verified": true
+  },
+  {
+    "id": "p23",
+    "name": "Hozugawa River Boat Ride",
+    "tags": [
+      "outdoor"
+    ],
+    "cost": 49,
+    "opens": "09:00",
+    "closes": "15:00",
+    "area": "west",
+    "duration_min": 120,
+    "source": "https://ja.kyoto.travel/event/single.php?event_id=4450",
+    "verified": true
+  },
+  {
+    "id": "p24",
+    "name": "Jojakko-ji Temple",
+    "tags": [
+      "temples",
+      "outdoor"
+    ],
+    "cost": 5,
+    "opens": "09:00",
+    "closes": "17:00",
+    "area": "west",
+    "duration_min": 45,
+    "source": "https://www.jojakko-ji.or.jp/",
+    "verified": true
+  },
+  {
+    "id": "p25",
+    "name": "Tenryu-ji",
+    "tags": [
+      "temples",
+      "outdoor",
+      "culture"
+    ],
+    "cost": 4,
+    "opens": "08:30",
+    "closes": "17:00",
+    "area": "west",
+    "duration_min": 60,
+    "source": "https://www.tenryuji.com/en/visit/",
+    "verified": true
+  }
 ]

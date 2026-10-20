@@ -1,0 +1,73 @@
+{
+  "id": "chat_04",
+  "description": "3 friends with indirect wording and sarcasm. Preferences are implied, not named.",
+  "messages": [
+    {
+      "sender": "Kai",
+      "text": "ugh not waking up at 6am again like the last trip"
+    },
+    {
+      "sender": "Lena",
+      "text": "LOL you were a zombie at that sunrise thing"
+    },
+    {
+      "sender": "Kai",
+      "text": "exactly. anything before 10 is a no from me"
+    },
+    {
+      "sender": "Lena",
+      "text": "i'm happiest in gardens and by rivers, just being outside"
+    },
+    {
+      "sender": "Max",
+      "text": "same but more like, walk up a hill until my legs die"
+    },
+    {
+      "sender": "Kai",
+      "text": "i'll be the one buying souvenirs for everyone lol"
+    },
+    {
+      "sender": "Max",
+      "text": "max 90 sgd for the 2 days"
+    },
+    {
+      "sender": "Lena",
+      "text": "160"
+    },
+    {
+      "sender": "Kai",
+      "text": "120 should be ok"
+    },
+    {
+      "sender": "Lena",
+      "text": "tripbot, make us a plan"
+    }
+  ],
+  "truth": {
+    "profiles": {
+      "Kai": {
+        "likes": [
+          "shopping"
+        ],
+        "hard_limits": [
+          "no_early_mornings"
+        ],
+        "budget": 120
+      },
+      "Lena": {
+        "likes": [
+          "outdoor"
+        ],
+        "hard_limits": [],
+        "budget": 160
+      },
+      "Max": {
+        "likes": [
+          "hiking"
+        ],
+        "hard_limits": [],
+        "budget": 90
+      }
+    }
+  }
+}

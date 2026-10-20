@@ -11,7 +11,7 @@
         "temples"
       ],
       "hard_limits": [],
-      "budget": 245
+      "budget": 160
     },
     "Ben": {
       "likes": [
@@ -20,7 +20,7 @@
       "hard_limits": [
         "no_temples"
       ],
-      "budget": 226
+      "budget": 173
     }
   }
 }

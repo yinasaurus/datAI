@@ -1,0 +1,58 @@
+{
+  "id": "chat_05",
+  "description": "2 friends with distractors: a past trip's cost and a joke that is not a real preference.",
+  "messages": [
+    {
+      "sender": "Nina",
+      "text": "my bali trip last year cost like 800, this one has to be way cheaper"
+    },
+    {
+      "sender": "Omar",
+      "text": "haha same. for kyoto i'm thinking 110 total for the 2 days"
+    },
+    {
+      "sender": "Nina",
+      "text": "i'll do 140"
+    },
+    {
+      "sender": "Omar",
+      "text": "i want history and culture, castles, museums, that kind of thing"
+    },
+    {
+      "sender": "Nina",
+      "text": "i want to try the tea and the local food"
+    },
+    {
+      "sender": "Omar",
+      "text": "and no clubbing pls, last time was a disaster"
+    },
+    {
+      "sender": "Nina",
+      "text": "lol i'd climb a volcano before going clubbing with you again"
+    },
+    {
+      "sender": "Omar",
+      "text": "/plan"
+    }
+  ],
+  "truth": {
+    "profiles": {
+      "Nina": {
+        "likes": [
+          "food"
+        ],
+        "hard_limits": [],
+        "budget": 140
+      },
+      "Omar": {
+        "likes": [
+          "culture"
+        ],
+        "hard_limits": [
+          "no_nightlife"
+        ],
+        "budget": 110
+      }
+    }
+  }
+}

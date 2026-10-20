@@ -9,10 +9,10 @@
     "Amy": {
       "likes": [
         "temples",
-        "hiking"
+        "nightlife"
       ],
       "hard_limits": [],
-      "budget": 245
+      "budget": 125
     },
     "Ben": {
       "likes": [
@@ -20,9 +20,10 @@
       ],
       "hard_limits": [
         "no_temples",
+        "no_nightlife",
         "no_early_mornings"
       ],
-      "budget": 244
+      "budget": 144
     }
   }
 }
