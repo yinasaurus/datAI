@@ -125,3 +125,55 @@ results measure enforcement and must stay separate from Gemini attack outcomes.
 Security regression tests use simulated model responses and the actual bot
 handler/guard path. No real Telegram delivery or Gemini attacks are implied by
 passing these tests.
+
+## Evaluation protocol
+
+The agreed [evaluation protocol](EVALUATION_PROTOCOL.md) defines A/B/C plus the
+C0/C2 ablation, three fresh generations, disabled experiment caching, metrics,
+failure handling, paired analysis, and qualitative review. It is a design document,
+not completed experimental results. New held-out sets and the main runner remain
+pending; ordinary bot cache defaults are unchanged.
+
+## Planning experiment runner
+
+The runner executes A, B, C2, and C0 sequentially, with three fresh generations
+per scenario by default. It forces caching off without changing the bot config.
+Start with a dry run (no API requests):
+
+```bash
+.venv/bin/python -m tripbot.eval.run --scenarios data/scenarios_v2/dev --dataset kyoto-v2-dev --output results/kyoto-v2-dryrun --dry-run
+```
+
+For an actual development run, use a fresh output directory and omit `--dry-run`
+(requires Gemini access and consumes API usage):
+
+```bash
+.venv/bin/python -m tripbot.eval.run --scenarios data/scenarios_v2/dev --dataset kyoto-v2-dev --output results/kyoto-v2-pilot --max-jobs 4
+```
+
+A cap executes only the shuffled prefix; remaining jobs stay pending. To select
+just A/B/C without the ablation, use `--conditions A B C2`. For a synthetic world:
+
+```bash
+.venv/bin/python -m tripbot.eval.run --config data/synthetic_v1/n3/config.yaml --scenarios data/synthetic_v1/n3/dev --dataset synthetic-v1-n3-dev --output results/synthetic-n3-dryrun --dry-run
+```
+
+Always run from the repository root and use each world's matching config.
+For held-out data, explicitly specify `--split heldout`; new held-out designs are
+still pending. Never pool results solely because filenames or scenario IDs match.
+
+Each experiment saves `manifest.json` (config, versions, input/source hashes),
+`inputs/`, a relevant `source/` snapshot including uncommitted code,
+`schedule.json`, and `state.json`. Per-job `result.json` and `calls.jsonl` retain
+outcomes, plans/checker reports, prompts, raw model responses, and physical request
+attempts. `runs.jsonl` collects terminal results. Successful usage is retained when
+a later request fails; missing usage stays null with separate known subtotals.
+Exception messages are omitted to avoid capturing credential-bearing URLs, and
+known environment credentials are redacted from artifacts.
+
+`experiment_error` stops execution for investigation. API failures are recorded
+and execution continues. Interruptions are separate from model failures. A hard
+process termination can leave a job marked running; do not treat it as completed.
+Existing output directories are refused: automatic resume and silent reruns are
+not implemented. Saved artifacts support offline analysis without new API calls;
+the statistical analysis pipeline remains pending.

@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 import time
+from contextvars import ContextVar
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable
@@ -19,6 +20,8 @@ from google import genai
 from google.genai import errors, types
 
 from tripbot.planning.prompts import PROMPT_VERSION
+
+CALL_OBSERVER: ContextVar[Any] = ContextVar("tripbot_call_observer", default=None)
 
 RETRY_STATUS_CODES = {408, 429, 500, 502, 503, 504}
 MAX_ATTEMPTS = 4
@@ -36,6 +39,21 @@ class LLMResult:
 
 
 def call_llm(
+    system: str, prompt: str, config: dict[str, Any], json_mode: bool = True,
+    *, client: Any = None, sleeper: Callable[[float], None] = time.sleep,
+    response_schema: dict[str, Any] | None = None,
+) -> LLMResult:
+    """Generate normally; an optional scoped observer records evaluation calls."""
+    observer = CALL_OBSERVER.get()
+    if observer is None:
+        return _call_llm(system, prompt, config, json_mode, client=client,
+                         sleeper=sleeper, response_schema=response_schema)
+    with observer.logical_call(system, prompt, config, json_mode, response_schema):
+        return _call_llm(system, prompt, config, json_mode, client=client,
+                         sleeper=sleeper, response_schema=response_schema)
+
+
+def _call_llm(
     system: str,
     prompt: str,
     config: dict[str, Any],
@@ -95,7 +113,7 @@ def call_llm(
                     seed,
                     json_mode,
                     attempts=attempt,
-                    error=str(exc),
+                    error=type(exc).__name__,
                     seconds=time.perf_counter() - started,
                 )
                 raise

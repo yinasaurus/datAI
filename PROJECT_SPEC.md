@@ -385,3 +385,37 @@ Gemini harness results, and bot-handler regression tests support separate claims
 Final planning scope is A/B/C, plus a C negotiation-round ablation (zero versus
 two extra rounds). There is no B-budget or fourth architecture. Report actual
 calls/tokens/time; B versus C does not isolate architecture from extra computation.
+
+
+## Agreed evaluation protocol
+
+`EVALUATION_PROTOCOL.md` records the current agreed experiment and analysis rules.
+Use its explicit failure/denominator definitions and separate delivered quality
+from raw checker scores. The final study retains A/B/C and a C0/C2 ablation only,
+with three fresh generations, experiment caching disabled, operational failures
+reported separately, Kyoto paired analysis, and descriptive synthetic diagnostics.
+The protocol is not yet a frozen final experiment: held-out design/counts and
+runner instrumentation remain pending. Existing bot cache defaults are unchanged.
+
+
+## Evaluation runner implementation
+
+`python -m tripbot.eval.run --scenarios <folder-or-file> --dataset <version/world>
+--output <fresh-folder>` runs A/B/C2/C0 with three fresh generations by default.
+`--dry-run` saves the manifest and schedule with no model calls. `--config` selects
+a matching world, `--conditions` selects conditions, `--split` enforces scenario
+split, and `--max-jobs` limits execution while preserving pending jobs. See README
+for exact commands. Output directories are never silently overwritten or resumed.
+
+`tripbot/eval/capture.py` wraps the existing SDK client and records physical
+attempts, raw responses, known/unknown usage, and timings. An optional context-local
+observer in `tripbot/llm.py` records logical calls without changing planner or
+LLMResult contracts. The LLM layer retains the existing retry policy. Failure
+artifacts omit exception message text and redact known environment credentials.
+Normal bot calls have no observer and retain their cache settings.
+
+The runner saves source/input snapshots and hashes, runtime versions, schedule,
+state, per-job artifacts, and terminal JSONL results. Program/checker defects stop
+the experiment; API failures are operational outcomes; interruptions and pending
+jobs remain distinct. Unit/integration tests are offline; no performance results
+or new held-out sets are implied. Statistical analysis remains pending.
