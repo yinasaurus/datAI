@@ -162,7 +162,7 @@ def _plan(
         return _reply(group_id, sender, text, config, "I could not build a plan.", [])
 
     descriptions = [place.description for place in places if place.description]
-    sent = _reply(group_id, sender, text, config, reply, descriptions)
+    sent = _reply(group_id, sender, text, config, reply, descriptions, plan=result.plan)
     if sent is None:
         return None
     if result.plan is not None:
@@ -228,12 +228,17 @@ def _reply(
     config: dict[str, Any],
     reply: str,
     descriptions: list[str],
+    *,
+    plan: Plan | None = None,
 ) -> str | None:
     body = _cap(reply)
+    context = _context(group_id, sender, text, config, descriptions)
+    if plan is not None:
+        context["plan"] = plan.model_dump()
     decision = check_action(
         "reply",
         {"text": body},
-        _context(group_id, sender, text, config, descriptions),
+        context,
     )
     if not decision.allowed:
         logger.warning("reply blocked: %s", decision.reason)

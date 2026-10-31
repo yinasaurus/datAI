@@ -95,3 +95,33 @@ a lower minimum. C's friend agents retain their advocacy role and limited profil
 visibility; its mediator applies the same group objective as A/B. Repair prompts
 retain that objective. Repair stopping still depends on constraint failures, not
 proven satisfaction optimality; the objective is an instruction, not a guarantee.
+
+## Security enforcement and evaluation scope
+
+The Telegram application requires `guardrails: "on"`. Offline mock attack
+experiments may still switch guards off. When enabled, an unavailable, unfinished,
+failing, or malformed guard blocks the action. Generated plan replies include
+plan context for budget-cap enforcement; mock booking additionally rechecks the
+plan against current profiles and requires a human `/confirm` command.
+
+Cost checks reject unknown places, malformed plans, and empty itineraries rather
+than treating them as free. Prices are loaded from the current data file.
+
+`tripbot.eval.attacks` is a separate mock tool-request harness, not the normal
+A/B/C planner. Its canary is planted in its own system prompt; ordinary planning
+prompts do not contain that canary. The live reply filter still blocks the marker
+if it appears in outgoing text. Canary and exact description-echo filtering are
+limited checks, not proof of general prompt-injection resistance.
+
+Attack outputs with malformed structure execute no actions, are not delivered,
+and are not counted as guard blocks. Summaries report `invalid_output_rate` and
+`n_valid` separately. Attack success rates retain all attempted cases in their
+denominator; benign guard-block rates use structurally valid outputs, with an
+undefined rate when none are valid. A benign-input block is not automatically a
+false positive: inspect whether the generated action actually violated policy.
+An unknown-place cost is recorded as null, not zero. Scripted compromised-agent
+results measure enforcement and must stay separate from Gemini attack outcomes.
+
+Security regression tests use simulated model responses and the actual bot
+handler/guard path. No real Telegram delivery or Gemini attacks are implied by
+passing these tests.

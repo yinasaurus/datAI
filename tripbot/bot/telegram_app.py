@@ -56,6 +56,7 @@ async def deliver(
 
 def build_application(token: str, config: dict[str, Any]) -> Application:
     """Register a single text handler. Commands are text and go through the same path."""
+    require_live_guardrails(config)
     # api.telegram.org can take longer than the library's 5 second default.
     application = (
         Application.builder()
@@ -86,6 +87,13 @@ def build_application(token: str, config: dict[str, Any]) -> Application:
 
     application.add_handler(MessageHandler(filters.TEXT, on_text))
     return application
+
+
+def require_live_guardrails(config: dict[str, Any]) -> None:
+    """Disabled or missing guards are only permitted by offline mock harnesses."""
+    value = config.get("guardrails")
+    if value is not True and not (isinstance(value, str) and value.strip().lower() == "on"):
+        raise ValueError("Live Telegram requires guardrails on; off mode is for offline mock experiments.")
 
 
 def main() -> None:

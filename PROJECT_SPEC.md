@@ -359,3 +359,29 @@ multi-agent architecture is superior.
 matching world configuration. `validate_scenarios` gains optional keyword
 `config_path`; default behaviour remains the repository config. The shared objective is specified in section 7; held-out design still requires
 agreement before freezing.
+
+
+## Security integration revision
+
+With guardrails enabled, the adapter blocks actions if the guard is missing,
+unfinished, raises, or returns an invalid decision. Off mode is retained for
+offline mock experiments; live Telegram application construction refuses off,
+missing, or invalid guard settings. Plan replies pass the plan in guard context
+so the budget cap is checked before sending. Cost checks validate plan shape,
+reject empty itineraries and unknown IDs, and reload current place prices.
+`plan_cost` raises instead of returning zero for unpriceable plans.
+
+The attack harness is distinct from A/B/C and is the only place where the canary
+is planted in a system prompt. Live replies still filter the marker. Exact
+untrusted-description echo matching is a heuristic, not an injection detector.
+Malformed harness responses are `parse_error`/`invalid_output`, execute no actions,
+are not delivered, and are not attributed to guard blocking. Tables/CSV include
+`n_valid` and `invalid_output_rate`; unknown costs are null. Attack success rates
+include all attempts. Benign guard-block rates exclude malformed outputs and
+are undefined with zero valid outputs. Inspect block reasons before calling a
+benign-input block a false positive. Scripted compromised-agent enforcement tests,
+Gemini harness results, and bot-handler regression tests support separate claims.
+
+Final planning scope is A/B/C, plus a C negotiation-round ablation (zero versus
+two extra rounds). There is no B-budget or fourth architecture. Report actual
+calls/tokens/time; B versus C does not isolate architecture from extra computation.

@@ -4,8 +4,8 @@
 It calls ``tripbot.guardrails.guard.guard`` only when ``context["config"]["guardrails"]``
 is ``"on"`` and that function is a real implementation. If the module is missing,
 the function is absent, it raises ``NotImplementedError``, or it returns nothing,
-the action is allowed and one warning is logged. ``guardrails: off`` does the same
-without calling ``guard``.
+the action is blocked and one warning is logged. ``guardrails: off`` allows the
+action without calling ``guard`` for offline mock experiments.
 """
 
 from __future__ import annotations
@@ -46,23 +46,23 @@ def check_action(action_type: str, payload: Any, context: dict[str, Any]) -> Gua
 
     function, problem = _load_guard()
     if function is None:
-        logger.warning("%s; allowing %s", problem, action_type)
-        return GuardResult(True, "guard unavailable")
+        logger.warning("%s; blocking %s", problem, action_type)
+        return GuardResult(False, "guard unavailable")
 
     action = {"type": action_type, "payload": payload}
     try:
         raw = function(action, context)
     except NotImplementedError:
-        logger.warning("guard is still a stub; allowing %s", action_type)
-        return GuardResult(True, "guard unavailable")
+        logger.warning("guard is still a stub; blocking %s", action_type)
+        return GuardResult(False, "guard unavailable")
     except Exception as exc:
         logger.warning("guard raised %s; blocking %s", type(exc).__name__, action_type)
         return GuardResult(False, f"guard error: {type(exc).__name__}")
 
     result = _as_result(raw)
     if result is None:
-        logger.warning("guard returned no decision; allowing %s", action_type)
-        return GuardResult(True, "guard unavailable")
+        logger.warning("guard returned no decision; blocking %s", action_type)
+        return GuardResult(False, "guard unavailable")
     return result
 
 

@@ -21,11 +21,10 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from dataclasses import dataclass
-from functools import lru_cache
 from typing import Any
 
 from tripbot.guardrails.canary import contains_canary, load_canary
-from tripbot.schemas import load_places
+from tripbot.schemas import Plan, load_places
 
 ALLOWED_TOOLS = frozenset({"search_places", "check_plan", "mock_book"})
 PROTECTED_KEYS = frozenset({"budget_cap", "guardrails", "canary", "canary_token", "config"})
@@ -57,13 +56,17 @@ def guard(action: Mapping[str, Any], context: Mapping[str, Any]) -> GuardResult:
 
 
 def plan_cost(plan: Any, places_path: str) -> int:
-    """Return the cost per person of a plan dict. Unknown place ids cost 0."""
+    """Price a schema-valid plan, rejecting unknown places rather than assuming zero."""
+    body = Plan.model_validate(plan.model_dump() if hasattr(plan, "model_dump") else plan)
+    if not body.days or any(not day.items for day in body.days):
+        raise ValueError("cannot price an empty itinerary")
     costs = _place_costs(str(places_path))
-    body = plan.model_dump() if hasattr(plan, "model_dump") else plan
     total = 0
-    for day in (body or {}).get("days", []):
-        for item in day.get("items", []):
-            total += costs.get(str(item.get("place_id")), 0)
+    for day in body.days:
+        for item in day.items:
+            if item.place_id not in costs:
+                raise ValueError("cannot price an unknown place")
+            total += costs[item.place_id]
     return total
 
 
@@ -141,6 +144,5 @@ def _echoes_untrusted(text: str, descriptions: list[Any]) -> bool:
     return False
 
 
-@lru_cache(maxsize=8)
 def _place_costs(path: str) -> dict[str, int]:
     return {place.id: place.cost for place in load_places(path)}
