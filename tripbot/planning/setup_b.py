@@ -8,6 +8,7 @@ from typing import Any
 from pydantic import ValidationError
 
 from tripbot.checker.check_plan import check_plan
+from tripbot.checker.rules import hard_limit_failures
 from tripbot.llm import call_llm
 from tripbot.planning.prompts import (
     PLAN_RESPONSE_SCHEMA,
@@ -18,7 +19,7 @@ from tripbot.planning.prompts import (
 )
 from tripbot.planning.registry import PlanResult
 from tripbot.planning.setup_a import parse_plan_text
-from tripbot.schemas import Place, Plan, Profile, TravelTimes
+from tripbot.schemas import Place, Plan, Profile, TravelTimes, load_tag_catalog
 
 
 def run_setup_b(
@@ -105,4 +106,8 @@ def _check_reply(
         return None, [{"type": "invalid_plan", "detail": str(exc)}]
     report = check_plan(plan, profiles, places, travel_times, config)
     violations = [{"type": item.type, "detail": item.detail} for item in report.violations]
+    violations.extend(hard_limit_failures(
+        plan, profiles, {place.id: place for place in places},
+        load_tag_catalog(config["paths"]["tags"]),
+    ))
     return plan, violations

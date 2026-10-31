@@ -26,11 +26,13 @@ paths:
 def test_shipped_config_loads() -> None:
     config = load_config(ROOT / "config.yaml", [])
 
-    assert config["model"] == "REPLACE_WITH_EXACT_MODEL_NAME"
+    assert isinstance(config["model"], str) and config["model"].strip()
     assert config["temperature"] == 0
     assert config["seed"] == 42
     assert config["cache"] is True
     assert config["setup"] == "C"
+    assert config["days"] == 2
+    assert config["min_activities_per_day"] == 2
     assert config["guardrails"] == "on"
     assert config["day_start"] == "07:00"
     assert config["day_end"] == "23:00"

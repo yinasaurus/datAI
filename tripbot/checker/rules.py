@@ -40,7 +40,47 @@ def feasibility_violations(
     violations.extend(_overlaps(plan))
     violations.extend(_travel_gaps(plan, places_by_id, travel_times))
     violations.extend(_over_budget(plan, profiles, places_by_id))
+    violations.extend(_trip_structure(plan, config))
     return violations
+
+
+def _trip_structure(plan: Plan, config: dict[str, Any]) -> list[Violation]:
+    """Require the requested days, sufficient activities, and unique visits."""
+    expected = list(range(1, int(config.get("days", 1)) + 1))
+    actual = sorted(day.day for day in plan.days)
+    found: list[Violation] = []
+    if actual != expected:
+        found.append(Violation(type="invalid_days", detail=f"expected days {expected}, got {actual}"))
+    minimum = int(config.get("min_activities_per_day", 2))
+    seen: set[str] = set()
+    for day in _days(plan):
+        if len(day.items) < minimum:
+            found.append(Violation(
+                type="insufficient_activities",
+                detail=f"day {day.day} has {len(day.items)} activities, needs {minimum}",
+            ))
+        for item in day.items:
+            if item.place_id in seen:
+                found.append(Violation(type="repeated_place", detail=f"day {day.day} {item.place_id}"))
+            seen.add(item.place_id)
+    return found
+
+
+def hard_limit_failures(
+    plan: Plan,
+    profiles: dict[str, Profile],
+    places_by_id: dict[str, Place],
+    catalog: TagCatalog,
+) -> list[dict[str, str]]:
+    """Describe failed hard limits for repairs, separately from feasibility."""
+    tags = _tags_in_plan(plan, places_by_id)
+    starts = [_start(item) for day in _days(plan) for item in day.items]
+    return [
+        {"type": "hard_limit", "detail": f"{name}: {limit_name}"}
+        for name, profile in profiles.items()
+        for limit_name in profile.hard_limits
+        if not _limit_holds(limit_name, catalog, tags, starts)
+    ]
 
 
 def hard_limit_satisfaction(

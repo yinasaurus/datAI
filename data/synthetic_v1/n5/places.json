@@ -1,0 +1,161 @@
+[
+  {
+    "id": "private_0",
+    "name": "FICTIONAL private_0",
+    "description": "",
+    "tags": [
+      "interest_0_a",
+      "interest_0_b"
+    ],
+    "cost": 6,
+    "opens": "10:00",
+    "closes": "18:00",
+    "area": "synthetic_centre",
+    "duration_min": 60,
+    "source": "synthetic: designed benchmark fixture; no real venue",
+    "verified": false
+  },
+  {
+    "id": "private_1",
+    "name": "FICTIONAL private_1",
+    "description": "",
+    "tags": [
+      "interest_1_a",
+      "interest_1_b"
+    ],
+    "cost": 6,
+    "opens": "10:00",
+    "closes": "18:00",
+    "area": "synthetic_centre",
+    "duration_min": 60,
+    "source": "synthetic: designed benchmark fixture; no real venue",
+    "verified": false
+  },
+  {
+    "id": "private_2",
+    "name": "FICTIONAL private_2",
+    "description": "",
+    "tags": [
+      "interest_2_a",
+      "interest_2_b"
+    ],
+    "cost": 6,
+    "opens": "10:00",
+    "closes": "18:00",
+    "area": "synthetic_centre",
+    "duration_min": 60,
+    "source": "synthetic: designed benchmark fixture; no real venue",
+    "verified": false
+  },
+  {
+    "id": "private_3",
+    "name": "FICTIONAL private_3",
+    "description": "",
+    "tags": [
+      "interest_3_a",
+      "interest_3_b"
+    ],
+    "cost": 6,
+    "opens": "10:00",
+    "closes": "18:00",
+    "area": "synthetic_centre",
+    "duration_min": 60,
+    "source": "synthetic: designed benchmark fixture; no real venue",
+    "verified": false
+  },
+  {
+    "id": "private_4",
+    "name": "FICTIONAL private_4",
+    "description": "",
+    "tags": [
+      "interest_4_a",
+      "interest_4_b"
+    ],
+    "cost": 6,
+    "opens": "10:00",
+    "closes": "18:00",
+    "area": "synthetic_centre",
+    "duration_min": 60,
+    "source": "synthetic: designed benchmark fixture; no real venue",
+    "verified": false
+  },
+  {
+    "id": "shared",
+    "name": "FICTIONAL shared",
+    "description": "",
+    "tags": [
+      "interest_0_a",
+      "interest_1_a",
+      "interest_2_a",
+      "interest_3_a",
+      "interest_4_a"
+    ],
+    "cost": 3,
+    "opens": "10:00",
+    "closes": "18:00",
+    "area": "synthetic_centre",
+    "duration_min": 60,
+    "source": "synthetic: designed benchmark fixture; no real venue",
+    "verified": false
+  },
+  {
+    "id": "neutral_0",
+    "name": "FICTIONAL neutral_0",
+    "description": "",
+    "tags": [
+      "neutral"
+    ],
+    "cost": 0,
+    "opens": "10:00",
+    "closes": "18:00",
+    "area": "synthetic_centre",
+    "duration_min": 60,
+    "source": "synthetic: designed benchmark fixture; no real venue",
+    "verified": false
+  },
+  {
+    "id": "neutral_1",
+    "name": "FICTIONAL neutral_1",
+    "description": "",
+    "tags": [
+      "neutral"
+    ],
+    "cost": 0,
+    "opens": "10:00",
+    "closes": "18:00",
+    "area": "synthetic_centre",
+    "duration_min": 60,
+    "source": "synthetic: designed benchmark fixture; no real venue",
+    "verified": false
+  },
+  {
+    "id": "neutral_2",
+    "name": "FICTIONAL neutral_2",
+    "description": "",
+    "tags": [
+      "neutral"
+    ],
+    "cost": 0,
+    "opens": "10:00",
+    "closes": "18:00",
+    "area": "synthetic_centre",
+    "duration_min": 60,
+    "source": "synthetic: designed benchmark fixture; no real venue",
+    "verified": false
+  },
+  {
+    "id": "neutral_3",
+    "name": "FICTIONAL neutral_3",
+    "description": "",
+    "tags": [
+      "neutral"
+    ],
+    "cost": 0,
+    "opens": "10:00",
+    "closes": "18:00",
+    "area": "synthetic_centre",
+    "duration_min": 60,
+    "source": "synthetic: designed benchmark fixture; no real venue",
+    "verified": false
+  }
+]

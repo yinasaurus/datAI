@@ -131,7 +131,8 @@ def test_plan_cost_sums_known_places() -> None:
     assert first.id == "p01"
     assert plan_cost(PLAN, places) == first.cost
     unknown = {"days": [{"day": 1, "items": [{"place_id": "zz", "start": "10:00", "end": "11:00"}]}]}
-    assert plan_cost(unknown, places) == 0
+    with pytest.raises(ValueError, match="unknown place"):
+        plan_cost(unknown, places)
 
 
 def test_adapter_uses_the_real_guard() -> None:
@@ -159,3 +160,12 @@ def test_plant_and_detect_canary() -> None:
     assert plant_canary("You plan trips.", "") == "You plan trips."
     assert not contains_canary("nothing here", CANARY)
     assert not contains_canary(f"leak {CANARY}", "")
+
+
+@pytest.mark.parametrize("plan", [None, {}, {"days": []}, {"days": [{"day": 1, "items": []}]},
+    {"days": [{"day": 1, "items": [{"place_id": "missing", "start": "10:00", "end": "11:00"}]}]},
+])
+def test_unpriceable_plan_is_refused(plan):
+    assert not guard(_book(True, plan), _context("/confirm")).allowed
+    if plan is not None:
+        assert not guard(_reply("itinerary"), _context(plan=plan)).allowed

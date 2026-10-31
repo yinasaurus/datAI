@@ -266,6 +266,9 @@ class Violation(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     type: Literal[
+        "invalid_days",
+        "insufficient_activities",
+        "repeated_place",
         "unknown_place",
         "closed",
         "too_short",

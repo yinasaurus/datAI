@@ -1,0 +1,26 @@
+{
+  "id": "syn_n2_budget06",
+  "split": "dev",
+  "days": 2,
+  "n_friends": 2,
+  "conflict": "mild",
+  "budget": "tight",
+  "friends": {
+    "Ben": {
+      "likes": [
+        "interest_0_a",
+        "interest_0_b"
+      ],
+      "hard_limits": [],
+      "budget": 6
+    },
+    "Amy": {
+      "likes": [
+        "interest_1_a",
+        "interest_1_b"
+      ],
+      "hard_limits": [],
+      "budget": 6
+    }
+  }
+}

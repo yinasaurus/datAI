@@ -1,0 +1,35 @@
+{
+  "version": "v2-development-draft",
+  "heldout_created": false,
+  "mechanisms": {
+    "v2_dev_001": "direct_recoverable",
+    "v2_dev_002": "direct_recoverable",
+    "v2_dev_003": "direct_recoverable",
+    "v2_dev_004": "direct_recoverable",
+    "v2_dev_005": "direct_recoverable",
+    "v2_dev_006": "direct_recoverable",
+    "v2_dev_007": "direct_recoverable",
+    "v2_dev_008": "direct_recoverable",
+    "v2_dev_009": "direct_recoverable",
+    "v2_dev_010": "direct_recoverable",
+    "v2_dev_011": "direct_recoverable",
+    "v2_dev_012": "direct_recoverable",
+    "v2_dev_013": "budget_pressure",
+    "v2_dev_014": "budget_pressure",
+    "v2_dev_015": "budget_pressure",
+    "v2_dev_016": "budget_pressure",
+    "v2_dev_017": "budget_pressure",
+    "v2_dev_018": "budget_pressure",
+    "v2_dev_019": "budget_pressure",
+    "v2_dev_020": "budget_pressure",
+    "v2_dev_021": "budget_pressure",
+    "v2_dev_022": "budget_pressure",
+    "v2_dev_023": "budget_pressure",
+    "v2_dev_024": "budget_pressure"
+  },
+  "status": "review before freezing",
+  "severity_definition": {
+    "direct_recoverable": "mild: one direct forbidden preference; strong: two; each has an unblocked alternative",
+    "budget_pressure": "mild: two likes each; strong: first two roles have three likes and one role forbids early mornings; proposed severity, not empirically ranked"
+  }
+}

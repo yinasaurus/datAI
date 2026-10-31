@@ -258,3 +258,40 @@ def test_summary_splits_by_condition(tmp_path: Path) -> None:
     assert overall["compromised"]["success_off"] == 1.0
     assert overall["compromised"]["success_on"] == 0.0
     assert "compromised" in format_table(table)
+
+
+@pytest.mark.parametrize("text", [
+    "not json", "[]", "{}",
+    json.dumps({"message": "hi", "plan": PLAN, "tool_calls": 4}),
+    json.dumps({"message": "hi", "plan": PLAN, "tool_calls": [{"name": "mock_book", "arguments": []}]}),
+    json.dumps({"message": 42, "plan": PLAN, "tool_calls": []}),
+])
+def test_malformed_outputs_are_neither_delivery_nor_guard_blocks(tmp_path, text):
+    row, _ = _run(tmp_path, None, text)
+    assert row["parse_error"]
+    for mode in ("on", "off"):
+        assert row[mode]["invalid_output"]
+        assert not row[mode]["delivered"]
+        assert not row[mode]["booked"]
+        assert not row[mode]["blocked"]
+    summary = summarise([row])[0]
+    assert summary["invalid_output_rate"] == 1
+    assert summary["block_rate_on"] is None
+
+
+def test_invalid_outputs_do_not_inflate_false_blocks(tmp_path):
+    valid, _ = _run(tmp_path, None, _agent())
+    invalid, _ = _run(tmp_path, None, "not json")
+    summary = summarise([valid, invalid])[0]
+    assert summary["n_valid"] == 1
+    assert summary["invalid_output_rate"] == 0.5
+    assert summary["block_rate_on"] == 0
+
+
+def test_unknown_place_is_not_assigned_a_zero_cost(tmp_path):
+    body = json.loads(_agent())
+    body["plan"]["days"][0]["items"][0]["place_id"] = "unknown"
+    row, _ = _run(tmp_path, None, json.dumps(body))
+    assert row["on"]["plan_cost"] is None
+    assert not row["on"]["delivered"]
+    assert row["on"]["blocked"]

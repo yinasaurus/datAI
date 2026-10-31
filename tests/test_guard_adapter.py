@@ -38,7 +38,7 @@ def test_guardrails_off_allows_without_calling_guard(
     assert "guardrails are off" in caplog.records[0].message
 
 
-def test_missing_guard_allows_and_warns(
+def test_missing_guard_blocks_and_warns(
     monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
 ) -> None:
     def explode(name: str) -> None:
@@ -49,7 +49,7 @@ def test_missing_guard_allows_and_warns(
     with caplog.at_level(logging.WARNING):
         result = check_action("book", {"plan": {}, "confirmed": False}, _context())
 
-    assert result == GuardResult(True, "guard unavailable")
+    assert result == GuardResult(False, "guard unavailable")
     assert len(caplog.records) == 1
     assert "unavailable" in caplog.records[0].message
 
@@ -84,7 +84,7 @@ def test_guard_block_returns_its_reason(monkeypatch: pytest.MonkeyPatch) -> None
     assert result == GuardResult(False, "canary in reply")
 
 
-def test_stub_guard_allows_and_warns(
+def test_stub_guard_blocks_and_warns(
     monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
 ) -> None:
     def fake(action: dict, context: dict) -> None:
@@ -95,6 +95,12 @@ def test_stub_guard_allows_and_warns(
     with caplog.at_level(logging.WARNING):
         result = check_action("tool_call", {"name": "mock_book", "arguments": {}}, _context())
 
-    assert result == GuardResult(True, "guard unavailable")
+    assert result == GuardResult(False, "guard unavailable")
     assert len(caplog.records) == 1
     assert "stub" in caplog.records[0].message
+
+
+@pytest.mark.parametrize("raw", [None, {}, {"allowed": "yes", "reason": "bad"}])
+def test_invalid_decisions_block(monkeypatch, raw):
+    monkeypatch.setattr("tripbot.bot.guard_adapter._load_guard", lambda: (lambda *args: raw, None))
+    assert not check_action("reply", _payload(), _context()).allowed
