@@ -65,3 +65,12 @@ profiles are archived and users need to share preferences again; the bot does no
 infer ownership from matching names. Offline replay continues using sender names.
 Extraction still depends on Gemini interpreting messages correctly; automated
 unit tests use fake responses and do not establish real extraction accuracy.
+
+## Development benchmark v2
+
+The original scenarios are preserved. A new, unfrozen development-only draft is
+in `data/scenarios_v2/dev`, with 24 scenarios, checker-verified witness plans,
+and explicit satisfaction bounds. See [the benchmark notes](data/scenarios_v2/README.md)
+for the design, limitations, and reproduction commands. No v2 held-out set exists.
+The scenario validator now checks the configured activity minimum and prevents
+repeated places across days; catalogue likes with no matching places are rejected.

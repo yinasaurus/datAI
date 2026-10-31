@@ -1,0 +1,1354 @@
+[
+  {
+    "scenario_id": "v2_dev_001",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 0.5,
+        "Ben": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.9
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_002",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 0.5,
+        "Ben": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.9
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_003",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 0.5,
+        "Amy": 0.5
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_004",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 0.5,
+        "Amy": 0.5
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_005",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 0.5,
+        "Ben": 1.0,
+        "Cara": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.9259259259259259
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_006",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 0.5,
+        "Ben": 1.0,
+        "Cara": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.9259259259259259
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_007",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 0.5,
+        "Cara": 0.5,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.8888888888888888
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_008",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 0.5,
+        "Cara": 0.5,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.8888888888888888
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_009",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 0.5,
+        "Ben": 1.0,
+        "Cara": 1.0,
+        "Dan": 0.5,
+        "Eve": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.9142857142857143
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_010",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 0.5,
+        "Ben": 1.0,
+        "Cara": 1.0,
+        "Dan": 0.5,
+        "Eve": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.9142857142857143
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_011",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 0.5,
+        "Cara": 0.5,
+        "Dan": 1.0,
+        "Eve": 0.5,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.8909090909090909
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_012",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p14",
+              "start": "09:00",
+              "end": "10:30"
+            },
+            {
+              "place_id": "p16",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p07",
+              "start": "11:00",
+              "end": "13:00"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 0.5,
+        "Cara": 0.5,
+        "Dan": 1.0,
+        "Eve": 0.5,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.8909090909090909
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_013",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "07:00",
+              "end": "07:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "08:20",
+              "end": "10:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p11",
+              "start": "09:00",
+              "end": "10:00"
+            },
+            {
+              "place_id": "p13",
+              "start": "10:10",
+              "end": "13:10"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 0.5,
+        "Ben": 0.5
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_014",
+    "minimum_satisfaction_lower_bound": 1.0,
+    "minimum_satisfaction_upper_bound": 1.0,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "07:00",
+              "end": "07:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "08:20",
+              "end": "10:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p13",
+              "start": "11:15",
+              "end": "14:15"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 1.0,
+        "Ben": 1.0
+      },
+      "fairness": {
+        "min": 1.0,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_015",
+    "minimum_satisfaction_lower_bound": 0.3333333333333333,
+    "minimum_satisfaction_upper_bound": 0.3333333333333333,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "11:20",
+              "end": "13:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p11",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "p13",
+              "start": "11:10",
+              "end": "14:10"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 0.3333333333333333,
+        "Amy": 0.6666666666666666
+      },
+      "fairness": {
+        "min": 0.3333333333333333,
+        "gap": 0.3333333333333333,
+        "jain": 0.8999999999999999
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_016",
+    "minimum_satisfaction_lower_bound": 1.0,
+    "minimum_satisfaction_upper_bound": 1.0,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "11:20",
+              "end": "13:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p13",
+              "start": "10:00",
+              "end": "13:00"
+            },
+            {
+              "place_id": "p20",
+              "start": "13:35",
+              "end": "14:35"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 1.0,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 1.0,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_017",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "07:00",
+              "end": "07:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "08:20",
+              "end": "10:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p11",
+              "start": "09:00",
+              "end": "10:00"
+            },
+            {
+              "place_id": "p13",
+              "start": "10:10",
+              "end": "13:10"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 0.5,
+        "Ben": 0.5,
+        "Cara": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.8888888888888888
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_018",
+    "minimum_satisfaction_lower_bound": 1.0,
+    "minimum_satisfaction_upper_bound": 1.0,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "07:00",
+              "end": "07:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "08:20",
+              "end": "10:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p01",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p13",
+              "start": "11:15",
+              "end": "14:15"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 1.0,
+        "Ben": 1.0,
+        "Cara": 1.0
+      },
+      "fairness": {
+        "min": 1.0,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_019",
+    "minimum_satisfaction_lower_bound": 0.3333333333333333,
+    "minimum_satisfaction_upper_bound": 0.3333333333333333,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "11:20",
+              "end": "13:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p11",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "p13",
+              "start": "11:10",
+              "end": "14:10"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 0.3333333333333333,
+        "Cara": 0.6666666666666666,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 0.3333333333333333,
+        "gap": 0.6666666666666667,
+        "jain": 0.8571428571428571
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_020",
+    "minimum_satisfaction_lower_bound": 1.0,
+    "minimum_satisfaction_upper_bound": 1.0,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "11:20",
+              "end": "13:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p13",
+              "start": "10:00",
+              "end": "13:00"
+            },
+            {
+              "place_id": "p20",
+              "start": "13:35",
+              "end": "14:35"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 1.0,
+        "Cara": 1.0,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 1.0,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_021",
+    "minimum_satisfaction_lower_bound": 0.5,
+    "minimum_satisfaction_upper_bound": 0.5,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "07:00",
+              "end": "07:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "08:20",
+              "end": "10:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p11",
+              "start": "09:00",
+              "end": "10:00"
+            },
+            {
+              "place_id": "p13",
+              "start": "10:10",
+              "end": "13:10"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 0.5,
+        "Ben": 0.5,
+        "Cara": 1.0,
+        "Dan": 0.5,
+        "Eve": 1.0
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.8909090909090909
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_022",
+    "minimum_satisfaction_lower_bound": 1.0,
+    "minimum_satisfaction_upper_bound": 1.0,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "07:00",
+              "end": "07:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "08:20",
+              "end": "10:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p13",
+              "start": "09:00",
+              "end": "12:00"
+            },
+            {
+              "place_id": "p20",
+              "start": "12:35",
+              "end": "13:35"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Amy": 1.0,
+        "Ben": 1.0,
+        "Cara": 1.0,
+        "Dan": 1.0,
+        "Eve": 1.0
+      },
+      "fairness": {
+        "min": 1.0,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_023",
+    "minimum_satisfaction_lower_bound": 0.3333333333333333,
+    "minimum_satisfaction_upper_bound": 0.3333333333333333,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "11:20",
+              "end": "13:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p11",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "p13",
+              "start": "11:10",
+              "end": "14:10"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 0.3333333333333333,
+        "Cara": 0.6666666666666666,
+        "Dan": 1.0,
+        "Eve": 0.5,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 0.3333333333333333,
+        "gap": 0.6666666666666667,
+        "jain": 0.8732673267326734
+      },
+      "task_success": true
+    }
+  },
+  {
+    "scenario_id": "v2_dev_024",
+    "minimum_satisfaction_lower_bound": 1.0,
+    "minimum_satisfaction_upper_bound": 1.0,
+    "optimum_proven": true,
+    "plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "p12",
+              "start": "10:00",
+              "end": "10:45"
+            },
+            {
+              "place_id": "p15",
+              "start": "11:20",
+              "end": "13:50"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "p13",
+              "start": "10:00",
+              "end": "13:00"
+            },
+            {
+              "place_id": "p20",
+              "start": "13:35",
+              "end": "14:35"
+            }
+          ]
+        }
+      ]
+    },
+    "report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 1.0,
+        "Cara": 1.0,
+        "Dan": 1.0,
+        "Eve": 1.0,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 1.0,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    }
+  }
+]

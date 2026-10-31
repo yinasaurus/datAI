@@ -15,6 +15,9 @@ from pydantic import ValidationError
 
 from tripbot.config import load_config
 from tripbot.schemas import (
+    Plan,
+    PlanDay,
+    PlanItem,
     Place,
     Scenario,
     TagCatalog,
@@ -26,7 +29,6 @@ from tripbot.schemas import (
     travel_minutes,
 )
 
-MAX_VISITS_PER_DAY = 3
 
 
 def validate_scenarios(scenarios_dir: Path, root: Path | None = None) -> list[str]:
@@ -57,25 +59,29 @@ def validate_scenarios(scenarios_dir: Path, root: Path | None = None) -> list[st
                 catalog,
                 day_start=str(config["day_start"]),
                 day_end=str(config["day_end"]),
+                min_activities_per_day=int(config.get("min_activities_per_day", 2)),
             )
         )
     return problems
 
 
-def has_feasible_plan(
+def find_feasible_plan(
     scenario: Scenario,
     places: list[Place],
     travel: TravelTimes,
     catalog: TagCatalog,
     day_start: str,
     day_end: str,
-) -> bool:
-    """Search for a plan with at least one visit each day, inside limits and budgets.
+    min_activities_per_day: int = 2,
+) -> Plan | None:
+    """Search distinct visits across exactly the requested days, respecting all limits.
 
     Candidates that carry a forbidden tag are removed first. The clock then
     tries cheaper places first and stops at the first schedule that fits.
     Likes are not part of this search.
     """
+    if min_activities_per_day < 1:
+        raise ValueError("min_activities_per_day must be positive")
     earliest = parse_hhmm(day_start)
     end_limit = parse_hhmm(day_end)
     forbidden: set[str] = set()
@@ -101,33 +107,50 @@ def has_feasible_plan(
             return None
         return end
 
-    def days_from(day_index: int, spent: int) -> bool:
-        if day_index == scenario.days:
-            return True
-        return fill_day(day_index, spent, earliest, None, frozenset())
+    def clock(value: int) -> str:
+        return f"{value // 60:02d}:{value % 60:02d}"
 
     def fill_day(
-        day_index: int,
-        spent: int,
-        cursor: int,
-        previous: str | None,
-        used: frozenset[str],
-    ) -> bool:
-        if used and days_from(day_index + 1, spent):
-            return True
-        if len(used) >= MAX_VISITS_PER_DAY:
-            return False
-        for place in candidates:
-            if place.id in used or spent + place.cost > budget:
+        day_index: int, spent: int, cursor: int, previous: str | None,
+        used: frozenset[str], days: list[PlanDay], items: list[PlanItem],
+    ) -> Plan | None:
+        if len(items) >= min_activities_per_day:
+            completed = days + [PlanDay(day=day_index + 1, items=items)]
+            if day_index + 1 == scenario.days:
+                return Plan(days=completed)
+            result = fill_day(day_index + 1, spent, earliest, None, used, completed, [])
+            if result is not None:
+                return result
+        needed = max(0, min_activities_per_day - len(items)) + (
+            scenario.days - day_index - 1
+        ) * min_activities_per_day
+        remaining = [place for place in candidates if place.id not in used]
+        if len(remaining) < needed or spent + sum(p.cost for p in remaining[:needed]) > budget:
+            return None
+        for place in remaining:
+            if spent + place.cost > budget:
                 continue
             end = visit_end(place, cursor, previous)
             if end is None:
                 continue
-            if fill_day(day_index, spent + place.cost, end, place.area, used | {place.id}):
-                return True
-        return False
+            item = PlanItem(place_id=place.id, start=clock(end - place.duration_min), end=clock(end))
+            result = fill_day(day_index, spent + place.cost, end, place.area,
+                              used | {place.id}, days, items + [item])
+            if result is not None:
+                return result
+        return None
 
-    return days_from(0, 0)
+    return fill_day(0, 0, earliest, None, frozenset(), [], [])
+
+
+def has_feasible_plan(
+    scenario: Scenario, places: list[Place], travel: TravelTimes,
+    catalog: TagCatalog, day_start: str, day_end: str,
+    min_activities_per_day: int = 2,
+) -> bool:
+    """Return whether a witness exists under the current itinerary rules."""
+    return find_feasible_plan(scenario, places, travel, catalog, day_start,
+                              day_end, min_activities_per_day) is not None
 
 
 def _check_file(
@@ -138,6 +161,7 @@ def _check_file(
     *,
     day_start: str,
     day_end: str,
+    min_activities_per_day: int = 2,
 ) -> list[str]:
     try:
         scenario = Scenario.model_validate(json.loads(path.read_text(encoding="utf-8")))
@@ -153,12 +177,14 @@ def _check_file(
         for tag in profile.likes:
             if tag not in catalog.tags:
                 problems.append(f"{scenario.id}: {friend} likes unknown tag {tag}")
+            elif not any(tag in place.tags for place in places):
+                problems.append(f"{scenario.id}: {friend} likes unavailable tag {tag}")
         for limit_name in profile.hard_limits:
             if limit_name not in catalog.hard_limits:
                 problems.append(f"{scenario.id}: {friend} has unknown hard limit {limit_name}")
     if problems:
         return problems
-    if not has_feasible_plan(scenario, places, travel, catalog, day_start, day_end):
+    if not has_feasible_plan(scenario, places, travel, catalog, day_start, day_end, min_activities_per_day):
         problems.append(f"{scenario.id}: unsolvable for hard limits and budgets")
     return problems
 

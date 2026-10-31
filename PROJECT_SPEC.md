@@ -296,7 +296,7 @@ paths:
   llm_log: logs/llm_calls.jsonl
 ```
 
-## 12. Working rules for Cursor
+## 12. Working rules
 
 - Read this file first. Ask before changing any schema or contract.
 - Small functions, type hints and short docstrings.
@@ -307,3 +307,23 @@ paths:
 - Explain each new file in two or three sentences, because I must be able to explain my code without notes.
 - Do not invent real-world facts. Use clearly marked placeholders.
 - Do not modify files in `data/scenarios/heldout/` or the held-out results after the freeze.
+
+
+## Development benchmark revision (v2 draft)
+
+The original `data/scenarios/dev` and `data/scenarios/heldout` files are preserved
+as legacy data. The development-only `data/scenarios_v2/dev` draft contains 24
+fixtures plus a separate mechanism manifest and witness audit. No v2 held-out
+set is generated or frozen. See `data/scenarios_v2/README.md` for severity
+semantics, synthetic budget scope, attainable minimum satisfaction bounds, and
+known limitations. Do not pool legacy and v2 results. The scenario schema is
+unchanged; mechanism metadata stays outside scenario JSON.
+
+`find_feasible_plan` in `scripts/validate_scenarios.py` returns a witness or None;
+`has_feasible_plan` retains its bool result and gains an optional activity minimum
+(default 2). The search tracks visits across the full trip, respects the requested
+days and current hard limits/budgets, and no longer uses a three-visit cap. A
+witness proves feasibility only, not satisfaction optimality. `generate_dev_v2`
+independently audits the draft's attainable minimum satisfaction with checker-
+verified four-visit witnesses and optimistic bounds. This supports data validation;
+the main experiment runner and statistical analysis remain separate work.

@@ -1,0 +1,52 @@
+{
+  "id": "v2_dev_010",
+  "split": "dev",
+  "days": 2,
+  "n_friends": 5,
+  "conflict": "mild",
+  "budget": "loose",
+  "friends": {
+    "Amy": {
+      "likes": [
+        "temples",
+        "food"
+      ],
+      "hard_limits": [],
+      "budget": 120
+    },
+    "Ben": {
+      "likes": [
+        "shopping",
+        "culture"
+      ],
+      "hard_limits": [
+        "no_temples"
+      ],
+      "budget": 121
+    },
+    "Cara": {
+      "likes": [
+        "outdoor",
+        "culture"
+      ],
+      "hard_limits": [],
+      "budget": 122
+    },
+    "Dan": {
+      "likes": [
+        "nightlife",
+        "culture"
+      ],
+      "hard_limits": [],
+      "budget": 123
+    },
+    "Eve": {
+      "likes": [
+        "outdoor",
+        "culture"
+      ],
+      "hard_limits": [],
+      "budget": 124
+    }
+  }
+}
