@@ -98,5 +98,15 @@ These eight cases are hand-designed development diagnostics, not eight independe
 samples from a real traveller population. They share one simple mechanism and
 can be solved analytically. No held-out synthetic set has been generated or
 frozen. Do not claim statistical generalisation from these cases or pool them
-with Kyoto scores. Before final evaluation, agree the objective communicated to
-all setups and a held-out design; avoid tailoring cases to make C win.
+with Kyoto scores. Before final evaluation, agree a held-out design; the shared objective is
+specified below. Avoid tailoring cases to make C win.
+
+
+The shared group objective (prompt version 3) is lexicographic: meet practical
+constraints and every hard limit, then maximise minimum friend satisfaction,
+then maximise equally weighted mean friend satisfaction. Satisfaction is distinct
+liked-tag coverage, with no likes scoring 1. A higher mean cannot compensate for
+a lower minimum. C's friend agents retain their advocacy role and limited profile
+visibility; its mediator applies the same group objective as A/B. Repair prompts
+retain that objective. Repair stopping still depends on constraint failures, not
+proven satisfaction optimality; the objective is an instruction, not a guarantee.

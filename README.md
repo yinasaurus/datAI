@@ -85,3 +85,13 @@ establish the reference minimum satisfaction and secondary mean scores. See
 limitations, and commands. Use each world's matching `--config` when running
 `scripts.run_setup_a` or `scripts.validate_scenarios`. Kyoto defaults are unchanged;
 there is no synthetic held-out set yet.
+
+
+The shared group objective (prompt version 3) is lexicographic: meet practical
+constraints and every hard limit, then maximise minimum friend satisfaction,
+then maximise equally weighted mean friend satisfaction. Satisfaction is distinct
+liked-tag coverage, with no likes scoring 1. A higher mean cannot compensate for
+a lower minimum. C's friend agents retain their advocacy role and limited profile
+visibility; its mediator applies the same group objective as A/B. Repair prompts
+retain that objective. Repair stopping still depends on constraint failures, not
+proven satisfaction optimality; the objective is an instruction, not a guarantee.

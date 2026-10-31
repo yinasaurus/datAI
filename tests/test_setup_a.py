@@ -6,6 +6,7 @@ from types import SimpleNamespace
 
 from tripbot.planning.prompts import (
     FRIEND_SYSTEM,
+    GROUP_OBJECTIVE,
     MEDIATOR_SYSTEM,
     PROMPT_VERSION,
     SYSTEM_PROMPT,
@@ -165,3 +166,18 @@ def test_unknown_setup_is_rejected(tmp_path: Path) -> None:
         assert "not implemented" in str(exc)
     else:
         raise AssertionError("unknown setup should be rejected")
+
+
+def test_group_objective_is_shared_and_retained_during_repairs():
+    profiles, places, travel = _inputs()
+    config = _config(Path("."))
+    baseline = setup_a_prompt(profiles, places, travel, config)
+    mediator = mediator_prompt(profiles, {"Amy": "{}"}, places, travel, config)
+    friend = friend_prompt("Amy", profiles["Amy"], places, travel, config)
+    for prompt in (baseline, mediator, friend,
+                   revision_prompt(baseline, "{}", []),
+                   revision_prompt(mediator, "{}", [])):
+        assert prompt.count(GROUP_OBJECTIVE) == 1
+    assert "only know this friend's profile" in friend
+    assert "equal weight per friend" in baseline
+    assert "higher mean never justifies a lower minimum" in mediator
