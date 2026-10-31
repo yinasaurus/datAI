@@ -1,0 +1,2151 @@
+[
+  {
+    "scenario_id": "syn_n2_budget06",
+    "budget_cap_per_person": 6,
+    "all_friends_full_satisfaction_minimum_cost": 12,
+    "all_friends_full_satisfaction_feasible": false,
+    "individual_full_satisfaction_witnesses": {
+      "Ben": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_0",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_1",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_2",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.5
+          },
+          "task_success": true
+        }
+      },
+      "Amy": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_1",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_0",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_1",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_2",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 0.0,
+            "Amy": 1.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.5
+          },
+          "task_success": true
+        }
+      }
+    },
+    "distinct_satisfaction_vectors": 4,
+    "feasible_visit_subsets": 16,
+    "optimal_minimum_satisfaction": 0.5,
+    "optimal_mean_subject_to_maximum_minimum": 0.5,
+    "optimal_plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "shared",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "neutral_0",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "neutral_1",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "neutral_2",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        }
+      ]
+    },
+    "optimal_report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 0.5,
+        "Amy": 0.5
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    },
+    "zero_minimum_alternative": {
+      "plan": {
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "place_id": "private_0",
+                "start": "10:00",
+                "end": "11:00"
+              },
+              {
+                "place_id": "neutral_0",
+                "start": "11:05",
+                "end": "12:05"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "place_id": "neutral_1",
+                "start": "10:00",
+                "end": "11:00"
+              },
+              {
+                "place_id": "neutral_2",
+                "start": "11:05",
+                "end": "12:05"
+              }
+            ]
+          }
+        ]
+      },
+      "report": {
+        "feasible": true,
+        "violations": [],
+        "hard_limit_satisfaction": 1.0,
+        "per_friend_satisfaction": {
+          "Ben": 1.0,
+          "Amy": 0.0
+        },
+        "fairness": {
+          "min": 0.0,
+          "gap": 1.0,
+          "jain": 0.5
+        },
+        "task_success": true
+      }
+    }
+  },
+  {
+    "scenario_id": "syn_n2_budget12",
+    "budget_cap_per_person": 12,
+    "all_friends_full_satisfaction_minimum_cost": 12,
+    "all_friends_full_satisfaction_feasible": true,
+    "individual_full_satisfaction_witnesses": {
+      "Ben": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Amy": 1.0
+          },
+          "fairness": {
+            "min": 1.0,
+            "gap": 0.0,
+            "jain": 1.0
+          },
+          "task_success": true
+        }
+      },
+      "Amy": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Amy": 1.0
+          },
+          "fairness": {
+            "min": 1.0,
+            "gap": 0.0,
+            "jain": 1.0
+          },
+          "task_success": true
+        }
+      }
+    },
+    "distinct_satisfaction_vectors": 7,
+    "feasible_visit_subsets": 49,
+    "optimal_minimum_satisfaction": 1.0,
+    "optimal_mean_subject_to_maximum_minimum": 1.0,
+    "optimal_plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "private_0",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "private_1",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "neutral_0",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "neutral_1",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        }
+      ]
+    },
+    "optimal_report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 1.0,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 1.0,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    },
+    "zero_minimum_alternative": null
+  },
+  {
+    "scenario_id": "syn_n3_budget06",
+    "budget_cap_per_person": 6,
+    "all_friends_full_satisfaction_minimum_cost": 18,
+    "all_friends_full_satisfaction_feasible": false,
+    "individual_full_satisfaction_witnesses": {
+      "Ben": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_0",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_1",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_2",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 0.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.3333333333333333
+          },
+          "task_success": true
+        }
+      },
+      "Cara": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_1",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_0",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_1",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_2",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 0.0,
+            "Cara": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.3333333333333333
+          },
+          "task_success": true
+        }
+      },
+      "Amy": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_0",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_1",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_2",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 0.0,
+            "Cara": 0.0,
+            "Amy": 1.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.3333333333333333
+          },
+          "task_success": true
+        }
+      }
+    },
+    "distinct_satisfaction_vectors": 5,
+    "feasible_visit_subsets": 21,
+    "optimal_minimum_satisfaction": 0.5,
+    "optimal_mean_subject_to_maximum_minimum": 0.5,
+    "optimal_plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "shared",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "neutral_0",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "neutral_1",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "neutral_2",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        }
+      ]
+    },
+    "optimal_report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 0.5,
+        "Cara": 0.5,
+        "Amy": 0.5
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    },
+    "zero_minimum_alternative": null
+  },
+  {
+    "scenario_id": "syn_n3_budget12",
+    "budget_cap_per_person": 12,
+    "all_friends_full_satisfaction_minimum_cost": 18,
+    "all_friends_full_satisfaction_feasible": false,
+    "individual_full_satisfaction_witnesses": {
+      "Ben": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.6666666666666666
+          },
+          "task_success": true
+        }
+      },
+      "Cara": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.6666666666666666
+          },
+          "task_success": true
+        }
+      },
+      "Amy": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_2",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 0.0,
+            "Amy": 1.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.6666666666666666
+          },
+          "task_success": true
+        }
+      }
+    },
+    "distinct_satisfaction_vectors": 11,
+    "feasible_visit_subsets": 87,
+    "optimal_minimum_satisfaction": 0.5,
+    "optimal_mean_subject_to_maximum_minimum": 0.6666666666666666,
+    "optimal_plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "private_0",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "shared",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "neutral_0",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "neutral_1",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        }
+      ]
+    },
+    "optimal_report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 1.0,
+        "Cara": 0.5,
+        "Amy": 0.5
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.8888888888888888
+      },
+      "task_success": true
+    },
+    "zero_minimum_alternative": {
+      "plan": {
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "place_id": "private_0",
+                "start": "10:00",
+                "end": "11:00"
+              },
+              {
+                "place_id": "private_1",
+                "start": "11:05",
+                "end": "12:05"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "place_id": "neutral_0",
+                "start": "10:00",
+                "end": "11:00"
+              },
+              {
+                "place_id": "neutral_1",
+                "start": "11:05",
+                "end": "12:05"
+              }
+            ]
+          }
+        ]
+      },
+      "report": {
+        "feasible": true,
+        "violations": [],
+        "hard_limit_satisfaction": 1.0,
+        "per_friend_satisfaction": {
+          "Ben": 1.0,
+          "Cara": 1.0,
+          "Amy": 0.0
+        },
+        "fairness": {
+          "min": 0.0,
+          "gap": 1.0,
+          "jain": 0.6666666666666666
+        },
+        "task_success": true
+      }
+    }
+  },
+  {
+    "scenario_id": "syn_n3_budget18",
+    "budget_cap_per_person": 18,
+    "all_friends_full_satisfaction_minimum_cost": 18,
+    "all_friends_full_satisfaction_feasible": true,
+    "individual_full_satisfaction_witnesses": {
+      "Ben": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_0",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Amy": 1.0
+          },
+          "fairness": {
+            "min": 1.0,
+            "gap": 0.0,
+            "jain": 1.0
+          },
+          "task_success": true
+        }
+      },
+      "Cara": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_0",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Amy": 1.0
+          },
+          "fairness": {
+            "min": 1.0,
+            "gap": 0.0,
+            "jain": 1.0
+          },
+          "task_success": true
+        }
+      },
+      "Amy": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_0",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Amy": 1.0
+          },
+          "fairness": {
+            "min": 1.0,
+            "gap": 0.0,
+            "jain": 1.0
+          },
+          "task_success": true
+        }
+      }
+    },
+    "distinct_satisfaction_vectors": 15,
+    "feasible_visit_subsets": 147,
+    "optimal_minimum_satisfaction": 1.0,
+    "optimal_mean_subject_to_maximum_minimum": 1.0,
+    "optimal_plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "private_0",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "private_1",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "private_2",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "neutral_0",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        }
+      ]
+    },
+    "optimal_report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 1.0,
+        "Cara": 1.0,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 1.0,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    },
+    "zero_minimum_alternative": null
+  },
+  {
+    "scenario_id": "syn_n5_budget12",
+    "budget_cap_per_person": 12,
+    "all_friends_full_satisfaction_minimum_cost": 30,
+    "all_friends_full_satisfaction_feasible": false,
+    "individual_full_satisfaction_witnesses": {
+      "Ben": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 0.0,
+            "Eve": 0.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.4
+          },
+          "task_success": true
+        }
+      },
+      "Cara": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 0.0,
+            "Eve": 0.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.4
+          },
+          "task_success": true
+        }
+      },
+      "Dan": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_2",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 0.0,
+            "Dan": 1.0,
+            "Eve": 0.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.4
+          },
+          "task_success": true
+        }
+      },
+      "Eve": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_3",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 0.0,
+            "Dan": 0.0,
+            "Eve": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.4
+          },
+          "task_success": true
+        }
+      },
+      "Amy": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_4",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "neutral_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "neutral_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 0.0,
+            "Dan": 0.0,
+            "Eve": 0.0,
+            "Amy": 1.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.4
+          },
+          "task_success": true
+        }
+      }
+    },
+    "distinct_satisfaction_vectors": 22,
+    "feasible_visit_subsets": 196,
+    "optimal_minimum_satisfaction": 0.5,
+    "optimal_mean_subject_to_maximum_minimum": 0.6,
+    "optimal_plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "private_0",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "shared",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "neutral_0",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "neutral_1",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        }
+      ]
+    },
+    "optimal_report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 1.0,
+        "Cara": 0.5,
+        "Dan": 0.5,
+        "Eve": 0.5,
+        "Amy": 0.5
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.9
+      },
+      "task_success": true
+    },
+    "zero_minimum_alternative": null
+  },
+  {
+    "scenario_id": "syn_n5_budget24",
+    "budget_cap_per_person": 24,
+    "all_friends_full_satisfaction_minimum_cost": 30,
+    "all_friends_full_satisfaction_feasible": false,
+    "individual_full_satisfaction_witnesses": {
+      "Ben": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_3",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 1.0,
+            "Eve": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.8
+          },
+          "task_success": true
+        }
+      },
+      "Cara": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_3",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 1.0,
+            "Eve": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.8
+          },
+          "task_success": true
+        }
+      },
+      "Dan": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_3",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 1.0,
+            "Eve": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.8
+          },
+          "task_success": true
+        }
+      },
+      "Eve": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_3",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 1.0,
+            "Eve": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.8
+          },
+          "task_success": true
+        }
+      },
+      "Amy": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_4",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 1.0,
+            "Eve": 0.0,
+            "Amy": 1.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.8
+          },
+          "task_success": true
+        }
+      }
+    },
+    "distinct_satisfaction_vectors": 57,
+    "feasible_visit_subsets": 736,
+    "optimal_minimum_satisfaction": 0.5,
+    "optimal_mean_subject_to_maximum_minimum": 0.8,
+    "optimal_plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "private_0",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "private_1",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "private_2",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "shared",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        }
+      ]
+    },
+    "optimal_report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 1.0,
+        "Cara": 1.0,
+        "Dan": 1.0,
+        "Eve": 0.5,
+        "Amy": 0.5
+      },
+      "fairness": {
+        "min": 0.5,
+        "gap": 0.5,
+        "jain": 0.9142857142857143
+      },
+      "task_success": true
+    },
+    "zero_minimum_alternative": {
+      "plan": {
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "place_id": "private_0",
+                "start": "10:00",
+                "end": "11:00"
+              },
+              {
+                "place_id": "private_1",
+                "start": "11:05",
+                "end": "12:05"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "place_id": "private_2",
+                "start": "10:00",
+                "end": "11:00"
+              },
+              {
+                "place_id": "private_3",
+                "start": "11:05",
+                "end": "12:05"
+              }
+            ]
+          }
+        ]
+      },
+      "report": {
+        "feasible": true,
+        "violations": [],
+        "hard_limit_satisfaction": 1.0,
+        "per_friend_satisfaction": {
+          "Ben": 1.0,
+          "Cara": 1.0,
+          "Dan": 1.0,
+          "Eve": 1.0,
+          "Amy": 0.0
+        },
+        "fairness": {
+          "min": 0.0,
+          "gap": 1.0,
+          "jain": 0.8
+        },
+        "task_success": true
+      }
+    }
+  },
+  {
+    "scenario_id": "syn_n5_budget30",
+    "budget_cap_per_person": 30,
+    "all_friends_full_satisfaction_minimum_cost": 30,
+    "all_friends_full_satisfaction_feasible": true,
+    "individual_full_satisfaction_witnesses": {
+      "Ben": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_3",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 1.0,
+            "Eve": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.8
+          },
+          "task_success": true
+        }
+      },
+      "Cara": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_3",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 1.0,
+            "Eve": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.8
+          },
+          "task_success": true
+        }
+      },
+      "Dan": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_3",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 1.0,
+            "Eve": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.8
+          },
+          "task_success": true
+        }
+      },
+      "Eve": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_3",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 1.0,
+            "Eve": 1.0,
+            "Amy": 0.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.8
+          },
+          "task_success": true
+        }
+      },
+      "Amy": {
+        "plan": {
+          "days": [
+            {
+              "day": 1,
+              "items": [
+                {
+                  "place_id": "private_0",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_1",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            },
+            {
+              "day": 2,
+              "items": [
+                {
+                  "place_id": "private_2",
+                  "start": "10:00",
+                  "end": "11:00"
+                },
+                {
+                  "place_id": "private_4",
+                  "start": "11:05",
+                  "end": "12:05"
+                }
+              ]
+            }
+          ]
+        },
+        "report": {
+          "feasible": true,
+          "violations": [],
+          "hard_limit_satisfaction": 1.0,
+          "per_friend_satisfaction": {
+            "Ben": 1.0,
+            "Cara": 1.0,
+            "Dan": 1.0,
+            "Eve": 0.0,
+            "Amy": 1.0
+          },
+          "fairness": {
+            "min": 0.0,
+            "gap": 1.0,
+            "jain": 0.8
+          },
+          "task_success": true
+        }
+      }
+    },
+    "distinct_satisfaction_vectors": 63,
+    "feasible_visit_subsets": 832,
+    "optimal_minimum_satisfaction": 1.0,
+    "optimal_mean_subject_to_maximum_minimum": 1.0,
+    "optimal_plan": {
+      "days": [
+        {
+          "day": 1,
+          "items": [
+            {
+              "place_id": "private_0",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "private_1",
+              "start": "11:05",
+              "end": "12:05"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "items": [
+            {
+              "place_id": "private_2",
+              "start": "10:00",
+              "end": "11:00"
+            },
+            {
+              "place_id": "private_3",
+              "start": "11:05",
+              "end": "12:05"
+            },
+            {
+              "place_id": "private_4",
+              "start": "12:10",
+              "end": "13:10"
+            }
+          ]
+        }
+      ]
+    },
+    "optimal_report": {
+      "feasible": true,
+      "violations": [],
+      "hard_limit_satisfaction": 1.0,
+      "per_friend_satisfaction": {
+        "Ben": 1.0,
+        "Cara": 1.0,
+        "Dan": 1.0,
+        "Eve": 1.0,
+        "Amy": 1.0
+      },
+      "fairness": {
+        "min": 1.0,
+        "gap": 0.0,
+        "jain": 1.0
+      },
+      "task_success": true
+    },
+    "zero_minimum_alternative": null
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "id": "syn_n5_budget30",
+  "split": "dev",
+  "days": 2,
+  "n_friends": 5,
+  "conflict": "mild",
+  "budget": "loose",
+  "friends": {
+    "Ben": {
+      "likes": [
+        "interest_0_a",
+        "interest_0_b"
+      ],
+      "hard_limits": [],
+      "budget": 30
+    },
+    "Cara": {
+      "likes": [
+        "interest_1_a",
+        "interest_1_b"
+      ],
+      "hard_limits": [],
+      "budget": 30
+    },
+    "Dan": {
+      "likes": [
+        "interest_2_a",
+        "interest_2_b"
+      ],
+      "hard_limits": [],
+      "budget": 30
+    },
+    "Eve": {
+      "likes": [
+        "interest_3_a",
+        "interest_3_b"
+      ],
+      "hard_limits": [],
+      "budget": 30
+    },
+    "Amy": {
+      "likes": [
+        "interest_4_a",
+        "interest_4_b"
+      ],
+      "hard_limits": [],
+      "budget": 30
+    }
+  }
+}

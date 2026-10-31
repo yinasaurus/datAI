@@ -1,0 +1,34 @@
+{
+  "id": "syn_n3_budget18",
+  "split": "dev",
+  "days": 2,
+  "n_friends": 3,
+  "conflict": "mild",
+  "budget": "loose",
+  "friends": {
+    "Ben": {
+      "likes": [
+        "interest_0_a",
+        "interest_0_b"
+      ],
+      "hard_limits": [],
+      "budget": 18
+    },
+    "Cara": {
+      "likes": [
+        "interest_1_a",
+        "interest_1_b"
+      ],
+      "hard_limits": [],
+      "budget": 18
+    },
+    "Amy": {
+      "likes": [
+        "interest_2_a",
+        "interest_2_b"
+      ],
+      "hard_limits": [],
+      "budget": 18
+    }
+  }
+}

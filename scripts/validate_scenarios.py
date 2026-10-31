@@ -31,14 +31,16 @@ from tripbot.schemas import (
 
 
 
-def validate_scenarios(scenarios_dir: Path, root: Path | None = None) -> list[str]:
+def validate_scenarios(
+    scenarios_dir: Path, root: Path | None = None, *, config_path: Path | None = None,
+) -> list[str]:
     """Return problems for every scenario JSON under ``scenarios_dir``.
 
     Schema and vocabulary errors are listed first. A scenario is unsolvable
     when the search finds no plan that obeys every hard limit and every budget.
     """
     repo = ROOT if root is None else root
-    config = load_config(repo / "config.yaml", [])
+    config = load_config(config_path or repo / "config.yaml", [])
     try:
         catalog = load_tag_catalog(repo / config["paths"]["tags"])
         places = load_places(repo / config["paths"]["places"])
@@ -203,8 +205,9 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         default=ROOT / "data" / "scenarios",
     )
+    parser.add_argument("--config", type=Path, default=ROOT / "config.yaml")
     args = parser.parse_args(argv)
-    problems = validate_scenarios(args.scenarios)
+    problems = validate_scenarios(args.scenarios, config_path=args.config)
     if problems:
         for problem in problems:
             print(problem)

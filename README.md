@@ -74,3 +74,14 @@ and explicit satisfaction bounds. See [the benchmark notes](data/scenarios_v2/RE
 for the design, limitations, and reproduction commands. No v2 held-out set exists.
 The scenario validator now checks the configured activity minimum and prevents
 repeated places across days; catalogue likes with no matching places are rejected.
+
+## Separate synthetic development benchmark
+
+`data/synthetic_v1/` contains eight clearly fictional budget-choice scenarios.
+Each constrained case has individually achievable preferences, incompatible
+full-group satisfaction, and several feasible compromises. Exhaustive audits
+establish the reference minimum satisfaction and secondary mean scores. See
+[the synthetic benchmark notes](data/synthetic_v1/README.md) for examples,
+limitations, and commands. Use each world's matching `--config` when running
+`scripts.run_setup_a` or `scripts.validate_scenarios`. Kyoto defaults are unchanged;
+there is no synthetic held-out set yet.

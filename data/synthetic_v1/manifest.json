@@ -1,0 +1,14 @@
+{
+  "version": "synthetic-v1-development-draft",
+  "fictional": true,
+  "heldout_created": false,
+  "currency": "abstract budget units, not SGD",
+  "mechanism": "budget competition",
+  "group_sizes": [
+    2,
+    3,
+    5
+  ],
+  "scenarios": 8,
+  "note": "hand-designed controls, not independent samples of human travel behaviour"
+}

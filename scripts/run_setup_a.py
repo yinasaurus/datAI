@@ -29,8 +29,9 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         default=ROOT / "data" / "scenarios" / "dev" / "s_001.json",
     )
+    parser.add_argument("--config", type=Path, default=ROOT / "config.yaml")
     args = parser.parse_args(argv)
-    config = load_config(ROOT / "config.yaml", [])
+    config = load_config(args.config, [])
     if not os.environ.get("GEMINI_API_KEY"):
         print("Put GEMINI_API_KEY in .env (copy .env.example).")
         return 1

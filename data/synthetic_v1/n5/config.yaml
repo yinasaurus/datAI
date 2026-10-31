@@ -1,0 +1,25 @@
+model: gemini-3.5-flash-lite
+temperature: 0
+seed: 42
+cache: true
+setup: C
+days: 2
+min_activities_per_day: 2
+max_revisions: 3
+negotiation_rounds: 2
+guardrails: 'on'
+budget_cap: 3000
+bot_name: tripbot
+cooldown_seconds: 20
+day_start: '10:00'
+day_end: '18:00'
+breaking_point_threshold: 0.5
+bootstrap_resamples: 1000
+runs: 3
+paths:
+  places: data/synthetic_v1/n5/places.json
+  tags: data/synthetic_v1/n5/tags.json
+  travel_times: data/synthetic_v1/n5/travel_times.json
+  results: results/synthetic_runs.jsonl
+  llm_log: logs/synthetic_llm_calls.jsonl
+  bot_state: data/bot_state.json
