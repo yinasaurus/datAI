@@ -3,6 +3,8 @@ temperature: 0
 seed: 42
 cache: true
 setup: C
+days: 2
+min_activities_per_day: 2
 max_revisions: 3
 negotiation_rounds: 2
 guardrails: "on"  # quoted: unquoted on/off is a boolean in YAML

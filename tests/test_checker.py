@@ -18,6 +18,8 @@ from tripbot.schemas import (
 ROOT = Path(__file__).resolve().parents[1]
 
 CONFIG = {
+    "days": 1,
+    "min_activities_per_day": 1,
     "day_start": "07:00",
     "day_end": "23:00",
     "paths": {"tags": str(ROOT / "data" / "tags.json")},
@@ -268,7 +270,7 @@ def test_items_on_different_days_do_not_overlap_or_need_travel() -> None:
         _profiles(Amy=(["food"], [], 100), Ben=(["shopping"], [], 100)),
         PLACES,
         TRAVEL,
-        CONFIG,
+        {**CONFIG, "days": 2},
     )
 
     assert report.feasible is True
@@ -359,3 +361,39 @@ def test_unknown_hard_limit_is_rejected() -> None:
             TRAVEL,
             CONFIG,
         )
+
+
+@pytest.mark.parametrize("numbers", [[], [1], [1, 1], [1, 3], [1, 2, 3]])
+def test_requested_days_must_appear_exactly_once(numbers: list[int]) -> None:
+    plan = Plan(days=[PlanDay(day=n, items=[]) for n in numbers])
+    report = check_plan(plan, {}, PLACES, TRAVEL, {**CONFIG, "days": 2})
+    assert "invalid_days" in _types(report)
+    assert not report.task_success
+
+
+def test_two_distinct_activities_per_day_succeeds() -> None:
+    plan = _plan(
+        [("food", "10:00", "11:00"), ("shop", "11:20", "12:20")],
+        [("temple", "10:00", "11:00"), ("hike", "11:05", "12:05")],
+    )
+    places = [FOOD, SHOP, TEMPLE, HIKE.model_copy(update={"closes": "13:00"})]
+    report = check_plan(plan, {}, places, TRAVEL,
+                        {**CONFIG, "days": 2, "min_activities_per_day": 2})
+    assert report.task_success
+
+
+@pytest.mark.parametrize("count", [0, 1])
+def test_sparse_days_fail_by_default(count: int) -> None:
+    plan = _plan([("food", "10:00", "11:00")] * count)
+    config = {k: v for k, v in CONFIG.items() if k != "min_activities_per_day"}
+    report = check_plan(plan, {}, PLACES, TRAVEL, config)
+    assert "insufficient_activities" in _types(report)
+
+
+@pytest.mark.parametrize("across_days", [False, True])
+def test_repeated_places_fail(across_days: bool) -> None:
+    visits = [("food", "10:00", "11:00"), ("food", "12:00", "13:00")]
+    plan = _plan([visits[0]], [visits[1]]) if across_days else _plan(visits)
+    report = check_plan(plan, {}, PLACES, TRAVEL,
+                        {**CONFIG, "days": 2 if across_days else 1})
+    assert _types(report) == ["repeated_place"]

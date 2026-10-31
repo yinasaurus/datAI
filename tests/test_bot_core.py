@@ -39,6 +39,7 @@ def _config(tmp_path: Path) -> dict[str, object]:
         "cache": False,
         "setup": "A",
         "days": 1,
+        "min_activities_per_day": 1,
         "bot_name": "tripbot",
         "cooldown_seconds": 20,
         "guardrails": "on",
@@ -232,3 +233,44 @@ def test_telegram_logs_handler_errors(
         asyncio.run(deliver(Message(), "g1", "Amy", "hello", _config(tmp_path)))
 
     assert any("telegram update failed" in record.message for record in caplog.records)
+
+
+@pytest.mark.parametrize("change, expected", [
+    ({"budget": 1}, "budget"),
+    ({"hard_limits": ["no_early_mornings"]}, "hard limit"),
+])
+def test_confirm_rechecks_current_profiles(tmp_path, monkeypatch, change, expected):
+    config, client = _seed_two_friends(tmp_path, monkeypatch)
+    from tripbot.bot.core import load_state
+    group = load_state(config)["groups"]["g1"]
+    group["latest_plan"] = PLAN.model_dump()
+    if "hard_limits" in change:
+        group["latest_plan"]["days"][0]["items"][0].update(start="09:00", end="10:00")
+    group["profiles"]["Ben"].update(change)
+    def refuse(*args, **kwargs):
+        raise AssertionError("invalid plan must never reach booking")
+    monkeypatch.setattr("tripbot.bot.core.mock_book", refuse)
+    client._texts.append(_empty())
+    reply = handle_message("g1", "Amy", "/confirm", config, client=client)
+    assert "Cannot book" in reply
+    assert expected in reply
+
+
+def test_another_member_can_confirm_valid_plan(tmp_path, monkeypatch):
+    config, client = _seed_two_friends(tmp_path, monkeypatch)
+    client._texts.extend([_empty(), _empty()])
+    handle_message("g1", "Amy", "/plan", config, client=client)
+    reply = handle_message("g1", "Ben", "/confirm", config, client=client)
+    assert reply == "Booked the latest plan."
+
+
+def test_confirm_rejects_sparse_plan_and_budget_cap(tmp_path, monkeypatch):
+    config, client = _seed_two_friends(tmp_path, monkeypatch)
+    from tripbot.bot.core import load_state
+    load_state(config)["groups"]["g1"]["latest_plan"] = PLAN.model_dump()
+    client._texts.extend([_empty(), _empty()])
+    config["min_activities_per_day"] = 2
+    assert "needs 2" in handle_message("g1", "Ben", "/confirm", config, client=client)
+    config["min_activities_per_day"] = 1
+    config["budget_cap"] = 1
+    assert "exceeds budget cap" in handle_message("g1", "Ben", "/confirm", config, client=client)

@@ -35,6 +35,7 @@ def _config(tmp_path: Path, max_revisions: int) -> dict[str, object]:
         "cache": False,
         "days": 1,
         "max_revisions": max_revisions,
+        "min_activities_per_day": 1,
         "day_start": "07:00",
         "day_end": "23:00",
         "paths": {
@@ -130,3 +131,21 @@ def test_zero_revisions_makes_the_same_model_call_as_setup_a(tmp_path: Path) -> 
     assert len(client_a.calls) == 1
     assert len(client_b.calls) == 1
     assert _call_view(client_a.calls[0]) == _call_view(client_b.calls[0])
+
+
+@pytest.mark.parametrize("setup", ["B", "C"])
+def test_hard_limit_failure_triggers_repair_without_feasibility_failure(
+    tmp_path: Path, setup: str,
+) -> None:
+    profiles, places, travel = _inputs()
+    profiles["Amy"] = Profile(likes=["food"], hard_limits=["no_early_mornings"], budget=100)
+    early = GOOD_PLAN.replace("10:00", "09:00").replace("11:00", "10:00")
+    config = _config(tmp_path, 1)
+    config["negotiation_rounds"] = 0
+    client = FakeClient(([GOOD_PLAN] if setup == "C" else []) + [early, GOOD_PLAN])
+    result = make_plan(setup, profiles, places, travel, config, client=client)
+    assert result.trace[-2]["violations"] == [
+        {"type": "hard_limit", "detail": "Amy: no_early_mornings"}
+    ]
+    assert result.trace[-1]["violations"] == []
+    assert "no_early_mornings" in client.calls[-1]["contents"]

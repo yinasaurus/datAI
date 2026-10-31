@@ -1,0 +1,80 @@
+{
+  "groups": {
+    "replay": {
+      "profiles": {
+        "Amy": {
+          "likes": [
+            "food",
+            "temples"
+          ],
+          "hard_limits": [],
+          "budget": 120
+        },
+        "Ben": {
+          "likes": [
+            "hiking"
+          ],
+          "hard_limits": [
+            "no_temples"
+          ],
+          "budget": 80
+        },
+        "Cara": {
+          "likes": [
+            "shopping",
+            "culture"
+          ],
+          "hard_limits": [
+            "no_early_mornings"
+          ],
+          "budget": 100
+        }
+      },
+      "latest_plan": {
+        "days": [
+          {
+            "day": 1,
+            "items": [
+              {
+                "place_id": "p14",
+                "start": "10:00",
+                "end": "11:30"
+              },
+              {
+                "place_id": "p01",
+                "start": "12:00",
+                "end": "12:45"
+              },
+              {
+                "place_id": "p02",
+                "start": "13:00",
+                "end": "15:00"
+              }
+            ]
+          },
+          {
+            "day": 2,
+            "items": [
+              {
+                "place_id": "p17",
+                "start": "10:00",
+                "end": "12:00"
+              },
+              {
+                "place_id": "p18",
+                "start": "12:25",
+                "end": "14:55"
+              },
+              {
+                "place_id": "p19",
+                "start": "15:15",
+                "end": "16:00"
+              }
+            ]
+          }
+        ]
+      },
+      "last_plan_at": 1793469714.354649
+    }
+  }
+}

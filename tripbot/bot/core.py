@@ -156,6 +156,27 @@ def _confirm(
     stored = group.get("latest_plan")
     if not stored:
         return _reply(group_id, sender, text, config, "There is nothing to confirm.", [])
+    try:
+        plan = Plan.model_validate(stored)
+        profiles = _ready_profiles(group)
+        if len(profiles) < 2:
+            return _reply(group_id, sender, text, config,
+                          "I need valid budgets from at least two friends before booking.", [])
+        places = load_places(config["paths"]["places"])
+        travel = load_travel_times(config["paths"]["travel_times"])
+        validation_config = dict(config)
+        validation_config["days"] = int(config.get("days", 2))
+        report = check_plan(plan, profiles, places, travel, validation_config)
+        if not report.task_success:
+            reasons = [item.detail for item in report.violations]
+            if report.hard_limit_satisfaction < 1.0:
+                reasons.append("The plan breaks a current hard limit.")
+            return _reply(group_id, sender, text, config,
+                          "Cannot book the latest plan: " + "; ".join(reasons), [])
+    except Exception:
+        logger.exception("booking validation failed")
+        return _reply(group_id, sender, text, config,
+                      "Cannot book: I could not validate the latest plan.", [])
     context = _context(group_id, sender, text, config, [])
     decision = check_action(
         "book",
@@ -164,8 +185,9 @@ def _confirm(
     )
     if not decision.allowed:
         logger.warning("booking blocked: %s", decision.reason)
-        return None
-    outcome = mock_book(Plan.model_validate(stored), True)
+        return _reply(group_id, sender, text, config,
+                      "Cannot book the latest plan: " + decision.reason, [])
+    outcome = mock_book(plan, True)
     if not outcome.get("booked"):
         return _reply(group_id, sender, text, config, "I could not book the latest plan.", [])
     return _reply(group_id, sender, text, config, "Booked the latest plan.", [])

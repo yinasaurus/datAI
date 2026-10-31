@@ -38,6 +38,7 @@ def _config(tmp_path: Path, *, rounds: int, revisions: int) -> dict[str, object]
         "days": 1,
         "negotiation_rounds": rounds,
         "max_revisions": revisions,
+        "min_activities_per_day": 1,
         "day_start": "07:00",
         "day_end": "23:00",
         "paths": {
