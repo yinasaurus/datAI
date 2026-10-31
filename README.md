@@ -45,3 +45,23 @@ python -m tripbot.bot.telegram_app
 
 Existing saved plans are revalidated under these rules at confirmation. Scores
 from earlier rule or prompt versions should not be combined with new results.
+
+## Profile corrections and unchecked requirements
+
+State a correction explicitly, for example "remove hiking from my likes" or
+"temples are fine now". Budgets are whole SGD per person for the entire itinerary.
+`/profiles` shows the saved preferences and unchecked requirement categories.
+Recognised slash commands do not make a profile-extraction API request.
+
+The bot cannot verify dietary, accessibility, general availability, or other
+unsupported requirements. It warns when these are detected. Dietary or
+accessibility requirements pause planning and booking until each affected person
+sends `/acknowledge` for their own requirements, or explicitly withdraws them.
+Acknowledgement does **not** establish that the trip accommodates the requirement.
+Repeating a requirement requires acknowledgement again.
+
+Telegram profiles now use stable user IDs. On first live use, old name-based
+profiles are archived and users need to share preferences again; the bot does not
+infer ownership from matching names. Offline replay continues using sender names.
+Extraction still depends on Gemini interpreting messages correctly; automated
+unit tests use fake responses and do not establish real extraction accuracy.

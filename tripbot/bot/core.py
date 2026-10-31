@@ -1,7 +1,7 @@
 """Group chat handling: profiles, plans, confirm, and cooldown.
 
-``handle_message`` updates the sender from every message and replies only when
-the group addressed the bot. Outgoing text and booking both go through
+``handle_message`` extracts updates from ordinary text, handles commands without
+extraction, and warns about unsupported requirements. Outgoing text and booking both go through
 ``check_action``.
 """
 
@@ -24,7 +24,7 @@ from tripbot.schemas import Plan, Profile, load_places, load_travel_times
 logger = logging.getLogger(__name__)
 
 TELEGRAM_LIMIT = 4096
-_COMMANDS = {"plan", "itinerary", "profiles", "confirm"}
+_COMMANDS = {"plan", "itinerary", "profiles", "confirm", "acknowledge"}
 _PLAN_WORDS = re.compile(r"\b(itinerary|plan|schedule)\b", re.IGNORECASE)
 _CACHE: dict[str, dict[str, Any]] = {}
 
@@ -36,15 +36,37 @@ def handle_message(
     config: dict[str, Any],
     *,
     client: Any = None,
+    sender_id: str | None = None,
 ) -> str | None:
-    """Update the sender's profile and maybe reply. Ordinary chat returns None."""
+    """Update the sender profile, handle commands, and warn on unchecked requirements."""
     group, path = _group(config, group_id)
-    update = extract_update(text, config, client=client)
-    if update is not None:
-        _merge_profile(group, sender, update)
+    identity = f"telegram:{sender_id}" if sender_id is not None else sender
+    if sender_id is not None and not group.get("stable_identity"):
+        # Names cannot safely establish ownership of old Telegram profiles.
+        group["legacy_profiles"] = group.pop("profiles", {})
+        group["profiles"] = {}
+        group["latest_plan"] = None
+        group["stable_identity"] = True
         _save(path)
-
+    group.setdefault("display_names", {})[identity] = sender
     kind = _addressed(text, str(config.get("bot_name", "tripbot")))
+    recognised_command = text.strip().startswith("/") and kind is not None
+    update = None if recognised_command else extract_update(text, config, client=client)
+    if update is not None:
+        _merge_profile(group, identity, update)
+    _save(path)
+    if kind == "acknowledge":
+        raw = group.get("profiles", {}).get(identity)
+        if raw is not None:
+            raw["acknowledged"] = list(raw.get("unsupported", []))
+            _save(path)
+        return _reply(group_id, sender, text, config,
+                      "Acknowledged your current unsupported requirements. They remain unchecked; "
+                      "acknowledgement does not mean the itinerary accommodates them.", [])
+    if update is not None and update.unsupported:
+        warning = _unsupported_notice(group)
+        if kind is None:
+            return _reply(group_id, sender, text, config, warning, [])
     if kind is None:
         return None
     if kind in {"plan", "itinerary"}:
@@ -102,6 +124,8 @@ def _plan(
     config: dict[str, Any],
     client: Any,
 ) -> str | None:
+    if _pending_requirements(group):
+        return _reply(group_id, sender, text, config, _unsupported_notice(group), [])
     if _cooling(group, config):
         return None
     profiles = _ready_profiles(group)
@@ -131,6 +155,8 @@ def _plan(
         if result.plan is not None:
             report = check_plan(result.plan, profiles, places, travel, planner_config)
         reply = _format_plan(result.plan, places, report)
+        if any(raw.get("unsupported") for raw in group.get("profiles", {}).values()):
+            reply = _unsupported_notice(group) + "\n\n" + reply
     except Exception as exc:
         logger.warning("plan failed: %s", exc)
         return _reply(group_id, sender, text, config, "I could not build a plan.", [])
@@ -153,6 +179,8 @@ def _confirm(
     text: str,
     config: dict[str, Any],
 ) -> str | None:
+    if _pending_requirements(group):
+        return _reply(group_id, sender, text, config, _unsupported_notice(group), [])
     stored = group.get("latest_plan")
     if not stored:
         return _reply(group_id, sender, text, config, "There is nothing to confirm.", [])
@@ -259,16 +287,39 @@ def _cooling(group: dict[str, Any], config: dict[str, Any]) -> bool:
 def _merge_profile(group: dict[str, Any], sender: str, update: ProfileUpdate) -> None:
     profiles = group.setdefault("profiles", {})
     stored = profiles.get(sender) or {"likes": [], "hard_limits": [], "budget": None}
-    likes = list(stored["likes"])
-    for tag in update.likes:
-        if tag not in likes:
-            likes.append(tag)
-    limits = list(stored["hard_limits"])
-    for name in update.hard_limits:
-        if name not in limits:
-            limits.append(name)
-    budget = update.budget if update.budget is not None else stored.get("budget")
-    profiles[sender] = {"likes": likes, "hard_limits": limits, "budget": budget}
+    def revised(old: list[str], added: list[str], removed: list[str]) -> list[str]:
+        return [name for name in dict.fromkeys(old + added) if name not in removed]
+
+    unsupported = revised(stored.get("unsupported", []), update.unsupported, update.remove_unsupported)
+    profiles[sender] = {
+        "likes": revised(stored["likes"], update.likes, update.remove_likes),
+        "hard_limits": revised(stored["hard_limits"], update.hard_limits, update.remove_hard_limits),
+        "budget": update.budget if update.budget is not None else stored.get("budget"),
+        "unsupported": unsupported,
+        "acknowledged": [name for name in stored.get("acknowledged", [])
+                         if name in unsupported and name not in update.unsupported],
+    }
+
+
+def _pending_requirements(group: dict[str, Any]) -> bool:
+    return any(
+        (set(raw.get("unsupported", [])) - set(raw.get("acknowledged", [])))
+        & {"dietary", "accessibility"}
+        for raw in group.get("profiles", {}).values()
+    )
+
+
+def _unsupported_notice(group: dict[str, Any]) -> str:
+    categories = sorted({name for raw in group.get("profiles", {}).values()
+                         for name in raw.get("unsupported", [])})
+    body = "The bot cannot check these requirements: " + ", ".join(categories) + "."
+    if _pending_requirements(group):
+        body += (" Planning and booking are paused. Each affected person must send /acknowledge "
+                 "to accept that their dietary or accessibility requirements remain unchecked, "
+                 "or explicitly withdraw the requirement.")
+    else:
+        body += " These requirements remain unchecked in any itinerary."
+    return body
 
 
 def _ready_profiles(group: dict[str, Any]) -> dict[str, Profile]:
@@ -277,7 +328,9 @@ def _ready_profiles(group: dict[str, Any]) -> dict[str, Profile]:
         budget = raw.get("budget")
         if not isinstance(budget, int) or budget <= 0:
             continue
-        ready[name] = Profile(
+        label = group.get("display_names", {}).get(name, name)
+        key = f"{label} ({name})" if name.startswith("telegram:") else name
+        ready[key] = Profile(
             likes=list(raw.get("likes") or []),
             hard_limits=list(raw.get("hard_limits") or []),
             budget=budget,
@@ -288,6 +341,8 @@ def _ready_profiles(group: dict[str, Any]) -> dict[str, Profile]:
 def _format_profiles(group: dict[str, Any]) -> str:
     profiles = group.get("profiles") or {}
     if not profiles:
+        if group.get("legacy_profiles"):
+            return "Older profiles were archived because their owners could not be verified. Please share preferences again."
         return "No profiles yet."
     lines = ["Profiles:"]
     for name in sorted(profiles):
@@ -296,7 +351,12 @@ def _format_profiles(group: dict[str, Any]) -> str:
         limits = ", ".join(raw.get("hard_limits") or []) or "none"
         budget = raw.get("budget")
         budget_text = str(budget) if isinstance(budget, int) else "unset"
-        lines.append(f"{name}: likes {likes}; limits {limits}; budget {budget_text}")
+        label = group.get("display_names", {}).get(name, name)
+        lines.append(f"{label}: likes {likes}; limits {limits}; budget {budget_text} SGD per person for the trip")
+        if raw.get("unsupported"):
+            lines.append("Unchecked requirements: " + ", ".join(raw["unsupported"]))
+    if group.get("legacy_profiles"):
+        lines.append("Older profiles were archived because their owners could not be verified. Please share preferences again.")
     return "\n".join(lines)
 
 

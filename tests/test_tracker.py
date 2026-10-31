@@ -78,3 +78,16 @@ def test_bad_model_output_makes_no_update(
 
     assert update is None
     assert any("profile update ignored" in record.message for record in caplog.records)
+
+
+@pytest.mark.parametrize("field, values, expected", [
+    ("remove_likes", ["hiking", "unknown"], ["hiking"]),
+    ("remove_hard_limits", ["no_temples", "unknown"], ["no_temples"]),
+    ("unsupported", ["dietary", "accessibility", "invented"], ["dietary", "accessibility"]),
+    ("remove_unsupported", ["availability"], ["availability"]),
+])
+def test_removal_and_unsupported_only_updates(tmp_path, field, values, expected):
+    body = {"likes": [], "hard_limits": [], "budget": None, field: values}
+    update = extract_update("explicit update", _config(tmp_path), client=FakeClient([json.dumps(body)]))
+    assert update is not None
+    assert getattr(update, field) == expected

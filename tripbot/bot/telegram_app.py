@@ -28,6 +28,7 @@ _COMMANDS = [
     BotCommand("itinerary", "Make a plan from what the group said"),
     BotCommand("profiles", "Show the likes and budgets saved so far"),
     BotCommand("confirm", "Book the latest plan"),
+    BotCommand("acknowledge", "Accept that your unsupported requirements remain unchecked"),
 ]
 
 
@@ -37,10 +38,14 @@ async def deliver(
     sender: str,
     text: str,
     config: dict[str, Any],
+    *,
+    sender_id: str | None = None,
 ) -> None:
     """Pass one text message to the bot and send a reply when there is one."""
     try:
-        reply = await asyncio.to_thread(handle_message, group_id, sender, text, config)
+        reply = await asyncio.to_thread(
+            handle_message, group_id, sender, text, config, sender_id=sender_id,
+        )
         if reply is None:
             return
         for part in split_reply(reply):
@@ -73,7 +78,11 @@ def build_application(token: str, config: dict[str, Any]) -> Application:
             return
         chat = update.effective_chat
         group_id = str(chat.id) if chat is not None else "unknown"
-        await deliver(incoming, group_id, _sender(update.effective_user), incoming.text, config)
+        user = update.effective_user
+        if user is None or user.is_bot:
+            return
+        await deliver(incoming, group_id, _sender(user), incoming.text, config,
+                      sender_id=str(user.id))
 
     application.add_handler(MessageHandler(filters.TEXT, on_text))
     return application

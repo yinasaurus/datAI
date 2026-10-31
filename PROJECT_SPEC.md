@@ -222,7 +222,7 @@ Categories: injected_instruction (3), impersonate_organiser (2), booking_without
 ## 9. Bot
 
 - `handle_message(group_id, sender, text, config) -> str | None`. It updates profiles and returns a reply only when addressed.
-- `tracker.py` extracts a `Profile` update from a message with the LLM, validated by pydantic, and drops any tag not in tags.json.
+- `tracker.py` extracts a `ProfileUpdate` from ordinary text with the LLM, validated by pydantic, and drops any tag not in tags.json.
 - Triggers: `/plan`, `/itinerary`, or a message that names the bot (`bot_name` in config) and contains a word like itinerary, plan or schedule. Add a cooldown so repeated triggers do not spam.
 - On trigger: build a plan with `config.setup`, run `check_plan`, run `guard`, and return a short text under 4096 characters, made from the plan JSON, never from raw chat text.
 - Any group member may use `/confirm`. Revalidate the saved plan using current
@@ -232,7 +232,28 @@ Categories: injected_instruction (3), impersonate_organiser (2), booking_without
 - Failed hard limits are included as `hard_limit` repair feedback for B/C, with
   the friend and limit name. They remain separate from feasibility violations in
   the checker report; report schemas and satisfaction formulas are unchanged.
-- State is an in-memory dict saved to a JSON file.
+- Tracker updates contain `likes`, `hard_limits`, `budget`, `remove_likes`,
+  `remove_hard_limits`, `unsupported`, and `remove_unsupported`. Add/remove fields
+  are lists; budget is an optional positive whole-number SGD amount per person
+  for the entire itinerary. Remove fields require explicit withdrawal, not an
+  ambiguous statement. Removal wins if an entry appears in both lists. Extract
+  only the sender's own preferences. Scenario `Profile` and plan schemas stay unchanged.
+- Unsupported category labels are `dietary`, `accessibility`, `availability`, and
+  `other`; no free-form model text is stored or echoed as a requirement. Ordinary
+  unsupported preferences warn and allow planning. Dietary/accessibility needs
+  pause planning and booking until each affected person sends `/acknowledge` for
+  their own current categories or explicitly withdraws them. Acknowledgement is
+  acceptance of an unchecked limitation, never verification of accommodation.
+  Mentioning a category again clears its acknowledgement. Warnings remain in plans.
+- Recognised slash commands skip profile extraction, including `/acknowledge`.
+- Live Telegram profiles use `telegram:<user_id>` keys with separate display names;
+  renamed users retain their profile and identical display names stay distinct.
+  `handle_message` accepts optional keyword `sender_id`; offline replay can keep
+  name-based identities. First live use archives unverifiable name-based profiles
+  in `legacy_profiles` and clears the old plan rather than guessing ownership.
+- State is an in-memory dict saved to a JSON file. Each stored profile additionally
+  holds `unsupported` and `acknowledged` category lists. Legacy profiles default
+  these lists to empty. Display names are stored in a group `display_names` map.
 - `telegram_app.py` contains Telegram wiring only and calls `handle_message`.
 - Token from `TELEGRAM_BOT_TOKEN` in `.env`.
 

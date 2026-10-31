@@ -274,3 +274,88 @@ def test_confirm_rejects_sparse_plan_and_budget_cap(tmp_path, monkeypatch):
     config["min_activities_per_day"] = 1
     config["budget_cap"] = 1
     assert "exceeds budget cap" in handle_message("g1", "Ben", "/confirm", config, client=client)
+
+
+@pytest.mark.parametrize("command", ["/plan", "/itinerary", "/profiles", "/confirm", "/acknowledge", "/profiles@tripbot"])
+def test_commands_skip_model_extraction(tmp_path, monkeypatch, command):
+    def fail(*args, **kwargs):
+        raise AssertionError("commands must not invoke extraction")
+    monkeypatch.setattr("tripbot.bot.core.extract_update", fail)
+    handle_message("g", "Amy", command, _config(tmp_path))
+
+
+def test_explicit_removals_update_saved_state(tmp_path, monkeypatch):
+    from tripbot.bot.core import load_state
+    from tripbot.bot.tracker import ProfileUpdate
+    config, _ = _seed_two_friends(tmp_path, monkeypatch)
+    monkeypatch.setattr("tripbot.bot.core.extract_update", lambda *a, **k: ProfileUpdate(
+        likes=["culture", "food"], hard_limits=["no_temples"], budget=120,
+        remove_likes=["food"], remove_hard_limits=["no_temples"],
+    ))
+    handle_message("g1", "Amy", "correction", config)
+    saved = json.loads(Path(config["paths"]["bot_state"]).read_text())
+    raw = saved["groups"]["g1"]["profiles"]["Amy"]
+    assert raw["likes"] == ["culture"]
+    assert raw["hard_limits"] == []
+    assert raw["budget"] == 120
+
+
+def test_stable_ids_survive_renames_and_separate_identical_names(tmp_path):
+    from tripbot.bot.core import load_state
+    config = _config(tmp_path)
+    client = FakeClient([_profile(["food"], [], 100), _profile(["culture"], [], 120),
+                         _profile(["hiking"], [], 80)])
+    handle_message("g", "Same", "food", config, sender_id="11", client=client)
+    handle_message("g", "Renamed", "culture", config, sender_id="11", client=client)
+    handle_message("g", "Same", "hiking", config, sender_id="22", client=client)
+    group = load_state(config)["groups"]["g"]
+    assert set(group["profiles"]) == {"telegram:11", "telegram:22"}
+    assert group["profiles"]["telegram:11"]["likes"] == ["food", "culture"]
+    reply = handle_message("g", "Renamed", "/profiles", config, sender_id="11")
+    assert "Renamed:" in reply and "Same:" in reply
+
+
+def test_name_based_live_profiles_are_preserved_as_archive(tmp_path, monkeypatch):
+    from tripbot.bot.core import load_state
+    config, _ = _seed_two_friends(tmp_path, monkeypatch)
+    reply = handle_message("g1", "Amy", "/profiles", config, sender_id="11")
+    group = load_state(config)["groups"]["g1"]
+    assert set(group["legacy_profiles"]) == {"Amy", "Ben"}
+    assert not group["profiles"]
+    assert "archived" in reply
+
+
+def test_unsupported_requirements_pause_until_owner_acknowledges(tmp_path, monkeypatch):
+    from tripbot.bot.core import load_state
+    from tripbot.bot.tracker import ProfileUpdate
+    config, _ = _seed_two_friends(tmp_path, monkeypatch)
+    monkeypatch.setattr("tripbot.bot.core.extract_update", lambda *a, **k: ProfileUpdate(
+        likes=[], hard_limits=[], budget=None, unsupported=["dietary"],
+    ))
+    warning = handle_message("g1", "Ben", "I need a dietary accommodation", config)
+    assert "paused" in warning
+    assert "paused" in handle_message("g1", "Amy", "/plan", config)
+    handle_message("g1", "Amy", "/acknowledge", config)
+    assert "paused" in handle_message("g1", "Amy", "/confirm", config)
+    handle_message("g1", "Ben", "/acknowledge", config)
+    reply = handle_message("g1", "Amy", "/plan", config)
+    assert "Day 1" in reply and "remain unchecked" in reply
+    # A fresh requirement in the same category needs a fresh acknowledgement.
+    handle_message("g1", "Ben", "another dietary requirement", config)
+    assert "paused" in handle_message("g1", "Amy", "/confirm", config)
+    # Explicit withdrawal clears the requirement without erasing other data.
+    monkeypatch.setattr("tripbot.bot.core.extract_update", lambda *a, **k: ProfileUpdate(
+        likes=[], hard_limits=[], budget=None, remove_unsupported=["dietary"],
+    ))
+    handle_message("g1", "Ben", "withdraw requirement", config)
+    assert not load_state(config)["groups"]["g1"]["profiles"]["Ben"]["unsupported"]
+
+
+def test_ordinary_unsupported_preference_warns_without_pausing(tmp_path, monkeypatch):
+    from tripbot.bot.tracker import ProfileUpdate
+    config, _ = _seed_two_friends(tmp_path, monkeypatch)
+    monkeypatch.setattr("tripbot.bot.core.extract_update", lambda *a, **k: ProfileUpdate(
+        likes=[], hard_limits=[], budget=None, unsupported=["availability"],
+    ))
+    assert "cannot check" in handle_message("g1", "Amy", "afternoons only", config)
+    assert "Day 1" in handle_message("g1", "Ben", "/plan", config)
