@@ -1,0 +1,28 @@
+{
+  "id": "v2_dev_001",
+  "split": "dev",
+  "days": 2,
+  "n_friends": 2,
+  "conflict": "mild",
+  "budget": "tight",
+  "friends": {
+    "Amy": {
+      "likes": [
+        "temples",
+        "food"
+      ],
+      "hard_limits": [],
+      "budget": 23
+    },
+    "Ben": {
+      "likes": [
+        "shopping",
+        "culture"
+      ],
+      "hard_limits": [
+        "no_temples"
+      ],
+      "budget": 24
+    }
+  }
+}

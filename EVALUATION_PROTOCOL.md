@@ -23,8 +23,11 @@ or fourth architecture is included.
 All conditions receive the same practical constraints and group objective:
 meet feasibility and all hard limits, then maximise minimum friend satisfaction,
 then equally weighted mean friend satisfaction. C retains its individual advocacy
-roles and limited per-friend visibility. Current development prompt version is 4; the preserved baseline experiments used version 3. A is single
-pass; B/C use up to 3 corrections. These differences are intentional.
+roles and limited per-friend visibility. Current development method/prompt version is 7; preserved development experiments used versions 3–6. A is single
+pass; B/C use up to 3 corrections. These differences are intentional. Under v7, B/C repairs include explicit
+cost-compatible candidate assistance. A→B therefore evaluates the combined
+checker-guided assisted-repair harness, not checking alone. Shared eligibility is
+applied to all architectures; B/C use the same repair helper.
 
 ## Datasets and boundaries
 

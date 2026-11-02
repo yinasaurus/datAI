@@ -134,3 +134,124 @@ Byte-identical copies of Kyoto v2 development inputs are staged under its `dev/`
 - All 48 reports and group repair-feedback lists match recomputation using archived inputs. Each scenario/condition yields one unique final plan over three fresh requests. Independent teammate review is still pending.
 - Evidence: [v4 summary](results/kyoto-v2-dev-four-v4-01/analysis/summary.md), [version comparison](results/kyoto-v2-dev-four-v4-01/analysis/v3_vs_v4.csv), [interpretation and limitations](results/kyoto-v2-dev-four-v4-01/analysis/v3_vs_v4_notes.md), [recheck](results/kyoto-v2-dev-four-v4-01/analysis/recheck.json).
 - Conclusion: limited development gain, not a general fix. Budget instructions and feedback changed together; the runs also occurred at different times. Preserve both versions. Next discussion: inspect representative repairs before deciding whether to retain bounded planning or introduce stronger constraint assistance. No further prompt changes or architecture additions made.
+
+
+## Step 6 — inspect representative v4 repair histories, 3 November 2026
+
+- Read-only inspection of C0/009/r1 (success), B/001/r1, and B/009/r1 (hard-limit failures). No live calls or application changes.
+- C0/009: 25 → 25 → 23 by replacing p10 (8) with p07 (6); four valid visits, budget/hard limits/timing pass. Minimum satisfaction 0.5, mean 0.8. Saved travel gaps checked explicitly: 35/35 and 30/15 minutes actual/required.
+- B/001: 32 → 18 (forbidden p12) → 28 → 22 (forbidden p12 again). Final feasibility true but task success false. Both raw preference scores are 1; this is not usable success because Ben forbids temples.
+- B/009: 32 → 15 (forbidden p12) → 25 → 20 (forbidden p12 plus 25-minute gap where 40 required).
+- Inspected budget feedback, hard-limit feedback, and stopping condition match the observed runs. No implementation bug identified in these paths. More specific offending-place feedback is a hypothesis for development improvement, not an implemented or proven fix.
+- Evidence: [repair case studies and hand calculations](results/kyoto-v2-dev-four-v4-01/analysis/repair_case_studies.md).
+- Next decision requires discussion: targeted hard-limit feedback for B/C versus a larger deterministic constraint-assistance intervention. No additional prompt revision, solver, filtering, or rerun performed.
+
+
+## Step 7 — targeted hard-limit feedback revision 5, 3 November 2026
+
+- User approved continuing with targeted feedback after discussing the controlled-testbed versus real-world scope.
+- Changed only repair diagnostics/versioning: B and C share richer hard-limit messages naming the affected friend/rule and every offending day/place/tag or actual/earliest start time. Example from saved B/001: `Ben: no_temples; forbids tag temples; offending visits: day 2 p12 has forbidden tag temples`.
+- One feedback row per failed friend/rule is retained. Unknown rules still raise; unknown place tags are not invented. The report schema, feasibility/hard-limit scoring, satisfaction metrics, source datasets, architectures, model settings, and repair allowance remain unchanged. Existing v4 budget guidance is retained.
+- Verification: `.venv/bin/python -m pytest -q` → **228 passed**, one existing SDK/Python deprecation warning. Tests cover specific offending visits, multiple visits/friends, earliest-start boundaries, unknown places/rules, metric separation, and actual B/C repair prompts.
+- Recomputed the 48 archived v4 final reports using the updated checker: **48/48 identical**. This establishes scoring consistency, not model performance improvement. Saved v4 feedback traces are historical and should not be expected to equal the newly expanded v5 diagnostic strings.
+- No live API calls for v5. No prior artifacts changed. Application changes remain uncommitted after checkpoint `2b8aeb0`.
+- Next: a version-separated development comparison if proceeding; final held-out design and independent teammate manual review remain pending. No stronger solver/filter or architecture added.
+
+
+## Step 8 — v5 development test, 3 November 2026
+
+```bash
+.venv/bin/python -u -m tripbot.eval.run --scenarios data/eval_selections/dev-four-v1/dev --dataset kyoto-v2-dev-four-v1 --output results/kyoto-v2-dev-four-v5-01
+.venv/bin/python -m tripbot.eval.summarise results/kyoto-v2-dev-four-v5-01
+```
+
+- Completed 48/48 jobs; no terminal API failures, interruptions, or pending jobs. Same input hashes and schedule as v4; model/settings/revision allowance unchanged. No changes during execution.
+- Task success unchanged: A 3/12 (25%), B 3/12 (25%), C0 6/12 (50%), C2 3/12 (25%). No delivered-quality gain.
+- B/001 changes across all three repetitions: v4 cost 22 with forbidden temple → v5 cost 27 with hard limit satisfied but over budget. B hard-limit failures decrease 6→3 jobs, over-budget failures increase 3→6. B/009 still breaks a hard limit and travel gap.
+- 45/48 final plans and reports match v4 exactly. Rechecked all 48 v5 reports and group repair-feedback lists against archived inputs: all match. Repetition outputs remain identical within each scenario/condition; no independent-scenario or significance claim.
+- Usage: 294 physical requests; known input/output tokens 1,409,388 / 60,708. No monetary cost inferred.
+- Evidence: [v5 summary](results/kyoto-v2-dev-four-v5-01/analysis/summary.md), [comparison CSV](results/kyoto-v2-dev-four-v5-01/analysis/v4_vs_v5.csv), [interpretation](results/kyoto-v2-dev-four-v5-01/analysis/v4_vs_v5_notes.md), [recheck](results/kyoto-v2-dev-four-v5-01/analysis/recheck.json).
+- Conclusion: more specific hard-limit feedback changes a failure mode without improving task success on this selected development sample. Preserve the negative result. Recommend pausing further paid prompt tweaks and discussing final system scope/version, independent manual review, held-out design, and analysis completion before final testing. No further architecture change or run authorised by this log entry.
+
+
+## Step 9 — shared eligibility method revision 6, 3 November 2026
+
+- User approved improving constraint handling; implemented the first scoped step, shared hard-limit filtering only. Replacement-cost assistance/solvers are not added.
+- New `tripbot/planning/eligibility.py`: computes allowed IDs and exclusion reasons. All A/B/C callers through `make_plan` receive the same catalogue. Exclude globally forbidden tags and places with no allowed minimum-duration visit window; do not rank/filter by preferences or budget.
+- C friend agents still see only their own raw profiles, but the common eligible catalogue incorporates group restrictions. This information change is explicit and applied fairly across architectures, not claimed identical to earlier v5 conditions.
+- Full places remain available to checker/repair cost calculation, so hallucinated excluded IDs remain diagnosed as known-place hard-limit violations. Caller inputs/source data are not mutated, outputs are not replaced, and empty eligibility remains explicit. Trace records filter version, eligible IDs, and exclusions/reasons.
+- Version incremented to 6 because this is a harness/method revision. Checker/scoring definitions, datasets, model settings, and repair allowances are unchanged; earlier versions/results preserved.
+- Verification: `.venv/bin/python -m pytest -q` → **237 passed**, one existing SDK/Python deprecation warning. Tests cover shared actual A/B/C prompts including C negotiation, checking excluded IDs against the full dataset, exact earliest-start boundaries, input immutability, empty lists, unknown rules, and independence from likes/budget.
+- Offline selection audit: 001/002/009 each retain 15 of 25 places and exclude p12; 021 retains all 25 because it has no forbidden category in its mild case. This does not solve its budget difficulty.
+- No live v6 requests or performance claims yet. Next step: a small development pilot, with separate versioned artifacts, before considering further assistance. Changes remain uncommitted after checkpoint `2b8aeb0`.
+
+
+## Step 10 — v6 small development pilot, 3 November 2026
+
+- Prespecified selection: 001/009, A/B/C0/C2, one fresh generation each (eight jobs). Selection reasons and hashes saved in `data/eval_selections/v6-smoke-v1/selection.json`. Small diagnostic only; not comparable to a full 48-job average.
+
+```bash
+.venv/bin/python -u -m tripbot.eval.run --scenarios data/eval_selections/v6-smoke-v1/dev --dataset kyoto-v2-v6-smoke-v1 --runs 1 --output results/kyoto-v2-v6-smoke-01
+.venv/bin/python -m tripbot.eval.summarise results/kyoto-v2-v6-smoke-01
+```
+
+- Completed eight/eight; no terminal API failures, interruptions, or pending jobs. Usage: 49 physical requests, known input/output tokens 167,580 / 10,738.
+- Case 001: all conditions fail (A cost 28, B cost 26, C0/C2 three activities). Case 009: A/B/C0 pass at cost 23; C2 fails activity minimum. Every final hard limit passes.
+- Same eight repetition-1 identities from v5: one success then versus three now; gains are A/B on 009. This is not an independent final sample or significance claim. The smoke job order differs from the larger v5 schedule.
+- All eight final reports and group repair feedback match recomputation from saved inputs. Every captured prompt catalogue uses the intended same 15 IDs. The checker still uses the full original dataset.
+- Evidence: [smoke interpretation](results/kyoto-v2-v6-smoke-01/analysis/pilot_notes.md), [summary](results/kyoto-v2-v6-smoke-01/analysis/summary.md), [matched repetition-1 comparison](results/kyoto-v2-v6-smoke-01/analysis/v5_vs_v6_smoke.csv), [recheck](results/kyoto-v2-v6-smoke-01/analysis/recheck.json).
+- Interpretation: hard-limit filtering shows a limited gain on 009 but is not a general feasibility solution. Next discussion: replacement-cost assistance for B/C versus freezing the bounded methods. No added assistance, solver, or larger v6 rerun was performed.
+
+
+## Step 11 — method revision 7, cost-compatible B/C repair options
+
+- User approved arithmetic-only suggestions for replacements on over-budget plans and additions on underfilled days. Implemented shared `tripbot/planning/repair_options.py`; B/C both include its output through their existing budget feedback.
+- Each option names an unused eligible place, its cost, the affected day/1-based visit for replacement, and resulting whole-trip cost. Candidates are sorted by cost/ID with no satisfaction ranking. The model must still choose and schedule.
+- No automatic rewrite, solver, reference-plan fallback, budget change, or extra revision allowance. A stays single-pass with v6 eligibility. Scoring, datasets, model settings, and schemas unchanged; record this as a B/C harness intervention under version 7.
+- Important limits: timing/travel and combined edits are not certified; options cannot be blindly combined. Empty one-edit lists do not establish infeasibility. Unknown/unparseable total cost receives no fabricated options.
+- Verification: `.venv/bin/python -m pytest -q` → **244 passed**, one existing SDK/Python deprecation warning. Covers arithmetic, unused/eligible IDs, whole-trip budget, missing days, empty lists, unknown IDs, unchanged plans, timing caveats, and actual B/C feedback wiring.
+- Offline example from saved v6 B/001: previous cost 26, replacing p19 (9) with eligible unused p07 (6) yields 23. This is a candidate cost calculation, not a new generated success or proof of a fully valid replacement schedule.
+- No live v7 API requests. Earlier artifacts preserved. Next decision: small version-separated B/C development pilot before considering a full rerun; no new held-out set/freeze or automatic additional experiment in this entry.
+
+
+## Step 12 — v7 B/C cost-assistance development smoke, 3 November 2026
+
+- Prespecified cases 001/009, conditions B/C0/C2, one generation each (six jobs); A not run because this smoke targets repair assistance.
+
+```bash
+.venv/bin/python -u -m tripbot.eval.run --scenarios data/eval_selections/v6-smoke-v1/dev --dataset kyoto-v2-cost-assistance-smoke --conditions B C0 C2 --runs 1 --output results/kyoto-v2-v7-smoke-01
+.venv/bin/python -m tripbot.eval.summarise results/kyoto-v2-v7-smoke-01
+```
+
+- **6/6 passed**, no terminal API failures, pending jobs, or interruptions. Every final plan costs 23, has minimum satisfaction 0.5, and passes timing/travel, hard limits, exact days, activity minimum, and uniqueness.
+- Matched v6 repetition-1 identities: successes 2/6 → 6/6, requests 45 → 41. Development smoke only: different job orders/times, no fresh held-out evidence, no stable pass-rate estimate.
+- V7 usage: 41 physical requests; known input/output tokens 140,872 / 8,934. B requests 2/1 for 001/009; C0 5/7; C2 9/17. No monetary cost inferred.
+- Saved prompt/response inspection: B/001 uses offered p14 replacing p19 (28→23). C0/C2/001 first reduce 30→26 without a one-edit solution, then use offered p07 replacing p19 (26→23). This supports candidate use, not claims about internal reasoning. B/009 passes without repair. The decisive live repairs exercise replacements, not the addition feature.
+- All six final reports and group repair-feedback lists match recomputation from saved inputs; each prompt uses the same intended 15-place eligible catalogue. Independent teammate manual review remains pending.
+- Evidence: [pilot interpretation](results/kyoto-v2-v7-smoke-01/analysis/pilot_notes.md), [summary](results/kyoto-v2-v7-smoke-01/analysis/summary.md), [matched v6/v7 table](results/kyoto-v2-v7-smoke-01/analysis/v6_vs_v7.csv), [option-use observations](results/kyoto-v2-v7-smoke-01/analysis/repair_option_observations.json), [recheck](results/kyoto-v2-v7-smoke-01/analysis/recheck.json).
+- No post-run prompt/code/data changes. Next decision: broader prespecified development coverage before choosing a final version and freezing untouched final evaluation; do not generalise six familiar-case successes to all trips.
+
+
+## Step 13 — broader v7 development selection fixed before calls
+
+Selected on 3 November 2026: 003 (two friends, strong direct conflict, tight), 007 (three friends, strong direct conflict, tight), 018 (three friends, mild budget pressure, loose control), 023 (five friends, strong budget pressure, tight/earliest-start limit). These files were not used in prior model runs, but are related development templates, not independent held-out evidence.
+
+Selection reasons/hashes: `data/eval_selections/v7-broader-v1/selection.json`. Byte-identical source copies; no prompts, method, scoring, or model changes. A/B/C0/C2 once each, 16 jobs; all outcomes will be retained. Single generations cannot establish variability or generalisation. Planned output: `results/kyoto-v2-v7-broader-01/`.
+
+
+### Step 13 results — broader v7 development check
+
+```bash
+.venv/bin/python -u -m tripbot.eval.run --scenarios data/eval_selections/v7-broader-v1/dev --dataset kyoto-v2-v7-broader-v1 --runs 1 --output results/kyoto-v2-v7-broader-01
+.venv/bin/python -m tripbot.eval.summarise results/kyoto-v2-v7-broader-01
+```
+
+- All 16 jobs completed with no terminal API failures, interruptions, or pending jobs. No code/prompt changes during the run.
+- Task success: A 1/4, B 4/4, C0 4/4, C2 3/4. Every final hard limit passes. C2's failure is case 023: day-2 p15→p13 has 30-minute gap versus 35 required. Retained as failure, without postprocessing correction.
+- Mean delivered minimum satisfaction: A 0.125; B/C0 0.5833; C2 0.5. Mean requests/job: A 1; B 2.25; C0 5.75; C2 12.75.
+- Usage: 87 physical requests; known input/output tokens 356,157 / 18,244. No monetary cost inferred.
+- All sixteen final reports and group repair-feedback lists match recomputation using archived inputs. Independent teammate manual review remains pending.
+- Evidence: [interpretation](results/kyoto-v2-v7-broader-01/analysis/pilot_notes.md), [summary](results/kyoto-v2-v7-broader-01/analysis/summary.md), [per-case CSV](results/kyoto-v2-v7-broader-01/analysis/per_scenario.csv), [recheck](results/kyoto-v2-v7-broader-01/analysis/recheck.json).
+- These scenario IDs were not previously run, but share related development templates. One generation each is descriptive, not final held-out evidence or a stability estimate. Do not pool with earlier versions or synthetic cases.
+- Interpretation: B/C0 succeed broadly in this selected sample with different resource use. A→B now measures the whole checker-guided cost-assisted repair harness, not checking alone. Extra C negotiation does not improve every case.
+- Recommend pausing method changes and treating v7 as a final candidate pending independent review, checkpoint commit, completion of analysis/repetition decisions, and new held-out freeze. No freeze or further experiment automatically performed.

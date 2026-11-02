@@ -145,10 +145,12 @@ def test_hard_limit_failure_triggers_repair_without_feasibility_failure(
     client = FakeClient(([GOOD_PLAN] if setup == "C" else []) + [early, GOOD_PLAN])
     result = make_plan(setup, profiles, places, travel, config, client=client)
     assert result.trace[-2]["violations"] == [
-        {"type": "hard_limit", "detail": "Amy: no_early_mornings"}
+        {"type": "hard_limit", "detail": "Amy: no_early_mornings; earliest allowed start 10:00; offending visits: day 1 food starts 09:00"}
     ]
     assert result.trace[-1]["violations"] == []
     assert "no_early_mornings" in client.calls[-1]["contents"]
+    assert "day 1 food starts 09:00" in client.calls[-1]["contents"]
     assert '"previous_total_cost_per_person": 20' in client.calls[-1]["contents"]
     assert '"group_budget_per_person_whole_trip": 100' in client.calls[-1]["contents"]
     assert "ALL original constraints" in client.calls[-1]["contents"]
+    assert '"cost_compatible_options"' in client.calls[-1]["contents"]

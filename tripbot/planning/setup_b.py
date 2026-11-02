@@ -82,7 +82,7 @@ def run_setup_b(
         if revision >= max_revisions:
             break
         prompt = revision_prompt(base, result.text, violations,
-                                 budget_feedback=repair_budget_summary(result.text, profiles, places))
+                                 budget_feedback=repair_budget_summary(result.text, profiles, places, config=config))
 
     return PlanResult(
         plan=plan,

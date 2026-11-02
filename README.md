@@ -222,3 +222,60 @@ activity minimum, uniqueness, timing/travel, and hard limits while fixing budget
 No schemas, scoring rules, revision allowances, datasets, or reference answers
 changed. V3 results are preserved; do not combine them with v4 results as one
 fixed-system experiment. V4 improvement has not yet been tested with live calls.
+
+## Development feedback revision 5
+
+V5 retains v4 budget guidance and makes B/C hard-limit repair feedback specific:
+the affected friend, rule, offending day/place, and forbidden tag or actual versus
+allowed start time. All offending visits are listed in one row per failed rule.
+The normal report schema, feasibility/hard-limit separation, scores, datasets,
+model, and revision allowance stay unchanged. This feedback revision is versioned
+because it changes model inputs even though the base prompt wording is retained.
+
+Local tests pass and all 48 stored v4 reports reproduce unchanged. No live v5
+performance results exist yet. Retain v3/v4 runs separately; a v5 development run
+must use a fresh output directory and is not final held-out evidence.
+
+## Development method revision 6: shared candidate eligibility
+
+At the public `make_plan` boundary, every architecture receives the same eligible
+place catalogue computed from all friends' hard limits. Places carrying any
+forbidden tag are excluded. A place is also excluded if its minimum duration
+cannot fit between the group's earliest allowed start, its opening hours, and
+the day end. Remaining places still need valid scheduled times and travel gaps.
+No preferences, budget rankings, reference answers, or solver determine this list.
+
+C's friend agents retain only their own raw profiles, but now receive the shared
+group-derived eligible catalogue: this is an explicit shared preprocessing change,
+not an identical information condition to v5. B/C repairs and the external checker
+continue checking against the full dataset. Excluded known IDs remain known
+places with hard-limit failures, rather than being relabelled hallucinations.
+
+The first trace entry records `place_filter` metadata: version, original count,
+eligible IDs, and excluded IDs/reasons. No source places/profiles/config are mutated,
+and no invalid output is replaced with a reference plan. Empty eligibility is
+visible in prompts/trace; the existing output validation still decides failure.
+
+V6 is a method revision, not just a prompt wording change. Keep v3/v4/v5 results
+separate. Local tests pass; no live v6 improvement has been measured yet. The
+ordinary bot also uses this preprocessing through `make_plan`.
+
+## Development method revision 7: cost-compatible repair options
+
+B/C repairs now receive the same arithmetic-only candidate helper. For an
+over-budget plan it lists eligible unused replacements whose single substitution
+would bring the whole-trip total within the group budget. For an underfilled or
+missing day it lists eligible unused additions affordable within the remaining
+whole-trip budget. Entries include IDs, costs, resulting total, and affected day/
+visit; options are ordered by cost then ID without preference ranking.
+
+The model still chooses and schedules the itinerary. Candidates are **not**
+certified timing/travel solutions and multiple options cannot be combined without
+recalculating cost and avoiding repeated IDs. No single-edit option does not prove
+infeasibility: coordinated changes may be necessary. Unknown/unparseable totals
+receive no invented suggestions. The checker remains the final authority.
+
+A remains single-pass with shared v6 eligibility. This is a documented expansion
+of B/C's feedback harness, not a fourth architecture. Existing datasets, scores,
+model settings, and revision limits are unchanged. Local tests pass. A six-job B/C development smoke passed all cases; this is
+preliminary familiar-case evidence, not final generalisation. See EVALUATION_LOG.md.
