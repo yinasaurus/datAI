@@ -87,7 +87,7 @@ limitations, and commands. Use each world's matching `--config` when running
 there is no synthetic held-out set yet.
 
 
-The shared group objective (prompt version 3) is lexicographic: meet practical
+The shared group objective (introduced in prompt version 3, retained in version 4) is lexicographic: meet practical
 constraints and every hard limit, then maximise minimum friend satisfaction,
 then maximise equally weighted mean friend satisfaction. Satisfaction is distinct
 liked-tag coverage, with no likes scoring 1. A higher mean cannot compensate for
@@ -177,3 +177,48 @@ process termination can leave a job marked running; do not treat it as completed
 Existing output directories are refused: automatic resume and silent reruns are
 not implemented. Saved artifacts support offline analysis without new API calls;
 the statistical analysis pipeline remains pending.
+
+## Read experiment results without API calls
+
+Generate an offline report from one saved experiment:
+
+```bash
+.venv/bin/python -m tripbot.eval.summarise results/kyoto-v2-pilot-01
+```
+
+Open `results/kyoto-v2-pilot-01/analysis/summary.md` for the readable table.
+`conditions.csv` includes metric denominators; `failures.csv` links final failures
+to jobs; `failure_counts.csv` distinguishes affected jobs from individual violations.
+`jobs.csv` lists all scheduled jobs, including pending ones. `pairs.csv` shows
+matched-scenario differences and complete-pair counts, descriptively only.
+`summary.json` provides the corresponding machine-readable output.
+
+An existing analysis folder is preserved. To regenerate into a new folder:
+
+```bash
+.venv/bin/python -m tripbot.eval.summarise results/kyoto-v2-pilot-01 --output results/kyoto-v2-pilot-01/analysis-02
+```
+
+Incomplete pilots cannot establish an architecture ranking. The summary averages
+repetitions within scenarios before averaging scenarios, excludes unknown token
+counts from token means with explicit denominators, and distinguishes API failures
+from completed planning failures. It does not produce bootstrap intervals or
+statistical significance claims; uncertainty analysis and qualitative review are
+still required. `pytest.ini` restricts normal test discovery to `tests/`, keeping
+archived source snapshots inside results from being collected as active tests.
+
+## Development prompt revision 4
+
+After v3 development pilots exposed repeated budget failures, v4 makes arithmetic
+explicit for all architectures: whole-trip cost is the sum of every visit across
+all days, and the shared group limit is the minimum individual budget. A/B and
+C's mediator receive identical budget guidance; friend agents receive only their
+own limit, without other profiles. Costs remain in each dataset's units.
+
+B/C repairs receive the programmatically calculated prior total, limit, and
+remaining/over-budget amount. Unknown IDs or unparseable plans have unknown total
+rather than an invented zero. Repairs are reminded to preserve exact days,
+activity minimum, uniqueness, timing/travel, and hard limits while fixing budget.
+No schemas, scoring rules, revision allowances, datasets, or reference answers
+changed. V3 results are preserved; do not combine them with v4 results as one
+fixed-system experiment. V4 improvement has not yet been tested with live calls.

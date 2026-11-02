@@ -81,7 +81,7 @@ Review this development design before defining new held-out scenarios. Keep
 witnesses, ceilings, and audit metadata out of model prompts in the final study.
 
 
-The shared group objective (prompt version 3) is lexicographic: meet practical
+The shared group objective (introduced in prompt version 3, retained in version 4) is lexicographic: meet practical
 constraints and every hard limit, then maximise minimum friend satisfaction,
 then maximise equally weighted mean friend satisfaction. Satisfaction is distinct
 liked-tag coverage, with no likes scoring 1. A higher mean cannot compensate for

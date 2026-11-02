@@ -419,3 +419,40 @@ state, per-job artifacts, and terminal JSONL results. Program/checker defects st
 the experiment; API failures are operational outcomes; interruptions and pending
 jobs remain distinct. Unit/integration tests are offline; no performance results
 or new held-out sets are implied. Statistical analysis remains pending.
+
+
+## Offline descriptive result summaries
+
+`python -m tripbot.eval.summarise <experiment-folder>` reads the manifest,
+schedule, state, and collected results, checking for duplicate/unscheduled rows,
+identity/version mismatches, and inconsistent states. It writes a fresh `analysis/`
+folder with a readable summary, metric-denominator CSV, per-job status table,
+final failure detail/counts, descriptive paired differences, and JSON summary.
+Existing reports are preserved; `--output` chooses a fresh analysis folder.
+No model calls occur. Pending/missing conditions are not scored as zero. Rates
+average within scenario then across scenarios; conditional quality is explicitly
+labelled, and unknown usage remains excluded with visible denominators.
+
+The tool warns on incomplete experiments and experiment errors. It does not yet
+supply bootstrap intervals, dependence-aware inference, plots, or qualitative
+coding. Those remain analysis work. `pytest.ini` excludes archived experiment
+source snapshots from normal test discovery and is captured in new runner snapshots.
+
+
+## Development prompt revision 4 — 3 November 2026
+
+Motivation: the preserved v3 development pilots show repeated budget failures and
+repairs that introduce new constraints failures. V4 retains the shared objective,
+architectures, model configuration, evaluator, datasets, and revision budget.
+A/B and C's mediator receive the computed minimum friend budget plus identical
+whole-trip cost arithmetic instructions. Friend agents receive their own budget
+only, preserving limited profile visibility.
+
+`repair_budget_summary(previous, profiles, places)` computes prior candidate cost
+across all scheduled visits. Unknown places leave the total unknown and expose a
+labelled known subtotal; malformed outputs have unknown total. `revision_prompt`
+accepts optional keyword `budget_feedback`; B/C provide this summary on every
+repair. The repair text requires rechecking all constraints, not just the latest
+violation. No reference witness or optimum enters the prompts. Prompt version is
+4; old v3 artifacts remain unchanged. Passing local tests does not demonstrate
+live quality improvement; a version-separated development comparison is pending.

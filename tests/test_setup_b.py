@@ -149,3 +149,6 @@ def test_hard_limit_failure_triggers_repair_without_feasibility_failure(
     ]
     assert result.trace[-1]["violations"] == []
     assert "no_early_mornings" in client.calls[-1]["contents"]
+    assert '"previous_total_cost_per_person": 20' in client.calls[-1]["contents"]
+    assert '"group_budget_per_person_whole_trip": 100' in client.calls[-1]["contents"]
+    assert "ALL original constraints" in client.calls[-1]["contents"]

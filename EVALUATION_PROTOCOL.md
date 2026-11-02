@@ -23,7 +23,7 @@ or fourth architecture is included.
 All conditions receive the same practical constraints and group objective:
 meet feasibility and all hard limits, then maximise minimum friend satisfaction,
 then equally weighted mean friend satisfaction. C retains its individual advocacy
-roles and limited per-friend visibility. Current prompt version is 3. A is single
+roles and limited per-friend visibility. Current development prompt version is 4; the preserved baseline experiments used version 3. A is single
 pass; B/C use up to 3 corrections. These differences are intentional.
 
 ## Datasets and boundaries
@@ -174,6 +174,10 @@ separately. Normal bot calls do not enable the observer. Existing planner traces
 still provide their original summaries; the per-job call artifacts preserve full
 responses and intermediate prompts, including calls before terminal API failure.
 
-The analysis pipeline, new held-out design/counts, and final freeze remain pending.
+An offline descriptive summariser is implemented in `tripbot.eval.summarise`.
+It checks identities/state, preserves missing conditions, averages within scenarios,
+and exports denominators, final failure tables, and descriptive paired differences.
+Bootstrap inference, dependence-aware intervals, plots, qualitative coding, new
+held-out design/counts, and the final freeze remain pending.
 Runner tests use simulated responses and dry runs; implementation is not evidence
 of model performance. No automatic resume or replacement of failed jobs is enabled.

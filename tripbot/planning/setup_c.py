@@ -21,6 +21,7 @@ from tripbot.planning.prompts import (
     mediator_prompt,
     negotiation_prompt,
     revision_prompt,
+    repair_budget_summary,
     with_prompt_version,
 )
 from tripbot.planning.registry import PlanResult
@@ -96,7 +97,8 @@ def run_setup_c(
     for revision in range(max_revisions):
         if plan is not None and not violations:
             break
-        prompt = revision_prompt(base, previous_text, violations)
+        prompt = revision_prompt(base, previous_text, violations,
+                                 budget_feedback=repair_budget_summary(previous_text, profiles, places))
         result = _generate(MEDIATOR_SYSTEM, prompt, config, client)
         tokens_in, tokens_out, seconds = _add(tokens_in, tokens_out, seconds, result)
         plan, violations = _check_reply(result.text, profiles, places, travel_times, config)

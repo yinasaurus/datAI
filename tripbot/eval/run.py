@@ -48,7 +48,7 @@ def source_snapshot(output: Path) -> dict:
     for folder in ("tripbot", "scripts", "tests"):
         files.extend(sorted((ROOT / folder).rglob("*.py")))
     files += [ROOT / name for name in ("config.yaml", "requirements.txt", "PROJECT_SPEC.md",
-                                      "EVALUATION_PROTOCOL.md")]
+                                      "EVALUATION_PROTOCOL.md", "pytest.ini")]
     hashes = {}
     for source in files:
         relative = source.relative_to(ROOT)
