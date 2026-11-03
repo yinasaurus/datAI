@@ -1,0 +1,61 @@
+{
+  "id": "final_v1_10_tight",
+  "split": "heldout",
+  "days": 3,
+  "n_friends": 5,
+  "conflict": "strong",
+  "budget": "tight",
+  "friends": {
+    "Friend_1": {
+      "likes": [
+        "hiking",
+        "outdoor",
+        "culture"
+      ],
+      "hard_limits": [
+        "no_temples"
+      ],
+      "budget": 48
+    },
+    "Friend_2": {
+      "likes": [
+        "nightlife",
+        "shopping",
+        "culture"
+      ],
+      "hard_limits": [
+        "no_nightlife"
+      ],
+      "budget": 49
+    },
+    "Friend_3": {
+      "likes": [
+        "temples",
+        "food",
+        "culture"
+      ],
+      "hard_limits": [
+        "no_early_mornings"
+      ],
+      "budget": 50
+    },
+    "Friend_4": {
+      "likes": [
+        "food",
+        "outdoor",
+        "culture"
+      ],
+      "hard_limits": [],
+      "budget": 51
+    },
+    "Friend_5": {
+      "likes": [
+        "shopping",
+        "outdoor",
+        "culture"
+      ],
+      "hard_limits": [],
+      "budget": 52
+    }
+  }
+}

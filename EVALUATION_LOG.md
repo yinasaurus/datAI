@@ -255,3 +255,15 @@ Selection reasons/hashes: `data/eval_selections/v7-broader-v1/selection.json`. B
 - These scenario IDs were not previously run, but share related development templates. One generation each is descriptive, not final held-out evidence or a stability estimate. Do not pool with earlier versions or synthetic cases.
 - Interpretation: B/C0 succeed broadly in this selected sample with different resource use. A→B now measures the whole checker-guided cost-assisted repair harness, not checking alone. Extra C negotiation does not improve every case.
 - Recommend pausing method changes and treating v7 as a final candidate pending independent review, checkpoint commit, completion of analysis/repetition decisions, and new held-out freeze. No freeze or further experiment automatically performed.
+
+## 2026-11-03 — final evaluation preparation (no model experiments)
+
+Retained method v7 eligibility filtering, repair assistance, verification loops and negotiation architecture. Prompt version 8 aligns explicit group-generation constraint wording across A/B/C; no task-performance optimisations were made. Development results remain historical and must not be pooled with this new prompt version.
+
+Created `data/final_eval_v1`: 20 new held-out profiles in 10 families, each with two budget variants; 8 straightforward, 8 conflicting and 4 highly constrained. All checker witnesses pass feasibility and hard limits and attain positive minimum satisfaction. No intentionally infeasible cases. Family IDs, scenario/world hashes and checker settings are recorded. Witnesses stay outside planner inputs. Constructed profiles deliberately share culture; disclose this limitation.
+
+Completed scenario-weighted raw/delivered quality, feasibility, hard-limit, usage and revision summaries. Added B−A, C0−B, C2−C0 differences with family-cluster percentile bootstrap intervals for eligible complete batches (1,000 resamples, seed 42). API failures remain separately counted. Added dataset preflight hash checks, family metadata, delivered per-friend utilities, explicit revision counts, final protocol snapshots and an optional clean-Git freeze requirement.
+
+Validation: `.venv/bin/python -m pytest -q` → **249 passed**, one existing Google SDK deprecation warning. Scenario validator → **20 checked, unsolvable 0**. Dry run at `results/kyoto-final-v1-dryrun-01` → **240 scheduled / 0 completed / 240 pending**; no API calls. Offline summary smoke check created that directory's `analysis/`, with unavailable metrics and no confidence intervals (not invented zero performance).
+
+Active procedure and exact commands: `FINAL_EVALUATION_PROTOCOL.md`. Before the full run, review and commit the freeze, obtain user approval, then execute its `--require-clean` command in a fresh directory. No full evaluation has been executed or authorised. Guardrail evaluation remains separate.

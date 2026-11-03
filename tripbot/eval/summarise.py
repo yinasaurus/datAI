@@ -9,6 +9,8 @@ from pathlib import Path
 from statistics import mean
 from typing import Any
 
+from tripbot.eval.statistics import cluster_interval
+
 TERMINAL = {"success", "constraint_failure", "invalid_output", "api_failure",
             "experiment_error", "interrupted"}
 EVALUABLE = {"success", "constraint_failure", "invalid_output", "api_failure"}
@@ -60,6 +62,33 @@ def load_experiment(folder: Path):
     return manifest, jobs, states, rows
 
 
+def metric_value(row, metric):
+    report = row.get("report") or {}
+    fairness = report.get("fairness") or {}
+    scores = list(report.get("per_friend_satisfaction", {}).values())
+    if metric == "task_delivery":
+        return float(row["status"] == "success")
+    if metric == "feasibility":
+        return float(report.get("feasible", False)) if row["status"] in PLANNING else None
+    if metric == "hard_limit_satisfaction":
+        return report.get(metric)
+    if metric == "raw_mean":
+        return average(scores)
+    if metric.startswith("raw_"):
+        return fairness.get({"raw_minimum": "min", "raw_gap": "gap", "raw_jain": "jain"}[metric])
+    if metric == "verification_revisions":
+        if "verification_revisions" in row:
+            return row[metric]
+        return sum(t.get("step") == "revision" for t in row["trace"]) if "trace" in row and row["status"] in PLANNING else None
+    if metric in {"logical_calls", "tokens_in", "tokens_out"}:
+        return row["usage"].get(metric)
+    return row.get(metric)
+
+EXTRA_METRICS = ("feasibility", "hard_limit_satisfaction", "raw_minimum", "raw_mean",
+                 "raw_gap", "raw_jain", "verification_revisions")
+PAIR_METRICS = ("task_delivery", "delivered_minimum", "delivered_mean", *EXTRA_METRICS,
+                "logical_calls", "tokens_in", "tokens_out", "elapsed_seconds")
+
 def condition_summary(condition, scheduled, rows):
     selected = [r for r in rows if r["condition"] == condition]
     valid = [r for r in selected if r["status"] in EVALUABLE]
@@ -84,38 +113,50 @@ def condition_summary(condition, scheduled, rows):
         "tokens_in": (valid, lambda r: r["usage"]["tokens_in"]),
         "tokens_out": (valid, lambda r: r["usage"]["tokens_out"]),
     }
+    measures.update({name: (valid, lambda r, name=name: metric_value(r, name)) for name in EXTRA_METRICS})
     for name, (population, measure) in measures.items():
         result[name], result[name + "_scenarios"] = scenario_average(population, measure)
         result[name + "_jobs"] = sum(measure(r) is not None for r in population)
     return result
 
 
-def paired_summary(rows, jobs):
-    """Descriptive matched-scenario differences; no inference from a partial pilot."""
+def paired_summary(rows, jobs, families=None, *, seed=42, resamples=1000):
+    """Average repetitions first; infer only from complete, family-labelled batches."""
     grouped = defaultdict(list)
     scheduled = Counter((j["scenario_id"], j["condition"]) for j in jobs)
     for row in rows:
         if row["status"] in EVALUABLE:
             grouped[row["scenario_id"], row["condition"]].append(row)
+    batch_complete = bool(jobs) and len(rows) == len(jobs) and all(r["status"] in EVALUABLE for r in rows)
     output = []
-    for baseline, improved in (("A", "B"), ("B", "C2"), ("C0", "C2")):
-        for metric in ("task_delivery", "delivered_minimum", "delivered_mean"):
-            differences = []
+    for baseline, improved in (("A", "B"), ("B", "C0"), ("C0", "C2")):
+        for metric in PAIR_METRICS:
+            differences = {}
             complete = 0
             for scenario in sorted({key[0] for key in grouped}):
                 a, b = grouped.get((scenario, baseline), []), grouped.get((scenario, improved), [])
                 if not a or not b:
                     continue
-                def value(row):
-                    return float(row["status"] == "success") if metric == "task_delivery" else row[metric]
-                differences.append(mean(value(r) for r in b) - mean(value(r) for r in a))
+                av = [metric_value(r, metric) for r in a]
+                bv = [metric_value(r, metric) for r in b]
+                # A conditional/raw metric must be known for every repetition in both arms.
+                if any(v is None for v in av + bv):
+                    continue
+                differences[scenario] = mean(bv) - mean(av)
                 complete += len(a) == scheduled[scenario, baseline] and len(b) == scheduled[scenario, improved]
+            low, high, clusters = (None, None, 0)
+            if batch_complete and complete == len(differences) and families:
+                low, high, clusters = cluster_interval(differences, families, seed=seed, resamples=resamples)
+            values = list(differences.values())
             output.append({"comparison": f"{improved}-{baseline}", "metric": metric,
-                           "matched_scenarios": len(differences), "complete_matched_scenarios": complete,
-                           "difference": average(differences), "wins": sum(d > 1e-12 for d in differences),
-                           "ties": sum(abs(d) <= 1e-12 for d in differences),
-                           "losses": sum(d < -1e-12 for d in differences),
-                           "note": "descriptive only; repetitions may be incomplete; no confidence interval"})
+                           "matched_scenarios": len(values), "complete_matched_scenarios": complete,
+                           "difference": average(values), "wins": sum(d > 1e-12 for d in values),
+                           "ties": sum(abs(d) <= 1e-12 for d in values),
+                           "losses": sum(d < -1e-12 for d in values),
+                           "ci95_low": low, "ci95_high": high, "families": clusters,
+                           "bootstrap_seed": seed, "bootstrap_resamples": resamples,
+                           "note": "family-cluster percentile interval; conditional metrics require all repetitions known" if low is not None else
+                                   "descriptive only: incomplete batch, missing metric/family labels, or fewer than two families"})
     return output
 
 
@@ -172,7 +213,8 @@ def main(argv=None):
     counts = Counter(states.values())
     summaries = [condition_summary(c, sum(j["condition"] == c for j in jobs), rows)
                  for c in manifest["conditions"]]
-    pairs = paired_summary(rows, jobs)
+    families = {sid: entry["family_id"] for sid, entry in (manifest.get("dataset_metadata") or {}).get("scenarios", {}).items()}
+    pairs = paired_summary(rows, jobs, families, seed=42, resamples=1000)
     failures, detail = failure_rows(rows)
     invalid = counts["experiment_error"] > 0
     text = [f"# Planning results: {manifest['dataset']}", "",
@@ -192,6 +234,16 @@ def main(argv=None):
                     f"{display(row['task_success_completed'])} | {display(row['task_delivery'])} | "
                     f"{display(row['delivered_minimum'])} | {display(row['physical_requests'])} | "
                     f"{display(row['elapsed_seconds'])} |")
+    text += ["", "## Additional scenario-weighted means", "",
+             "Raw quality is diagnostic, including constraint-failed reports. Unknown values are excluded; see CSV denominators.", "",
+             "| Condition | Feasibility | Hard limits | Raw minimum | Raw mean | Gap | Jain | Delivered mean | Logical calls | Input tokens | Output tokens | Revisions |",
+             "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
+    for row in summaries:
+        text.append("| " + row["condition"] + " | " + " | ".join(display(row[k]) for k in
+            ("feasibility", "hard_limit_satisfaction", "raw_minimum", "raw_mean", "raw_gap", "raw_jain",
+             "delivered_mean", "logical_calls", "tokens_in", "tokens_out", "verification_revisions")) + " |")
+    text += ["", "## Matched differences and uncertainty", "",
+             "`pairs.csv` reports B−A, C0−B and C2−C0. Repetitions are averaged within scenarios; entire families are resampled for eligible complete batches. Primary outcomes are task delivery and delivered minimum. Intervals are marginal, without multiplicity correction."]
     text += ["", "## Final failure types", "",
              "Counts are final-output failures, not all intermediate repair feedback. A job may have multiple types.", "",
              "| Condition | Failure | Affected jobs | Occurrences |", "| --- | --- | ---: | ---: |"]
@@ -199,10 +251,10 @@ def main(argv=None):
     text += ["", "## Reading the artifacts", "",
              "`conditions.csv` includes each metric's job/scenario denominators. Token means exclude unknown "
              "usage and show their smaller denominators. `pairs.csv` contains descriptive matched-scenario "
-             "differences and complete-pair counts; it supplies no confidence intervals. `failures.csv` links "
+             "differences, complete-pair counts and 95% family-cluster bootstrap intervals when eligible. `failures.csv` links "
              "each final failure to its job result. `jobs.csv` lists every scheduled job, including pending jobs.", "",
              "This tool analyses one experiment only. Do not pool Kyoto/synthetic versions. A complete run "
-             "still needs the protocol's paired uncertainty analysis, dependence checks, and qualitative review."]
+             "needs the final protocol's dependence assumptions and qualitative review. Raw utility includes invalid plans with a checker report; delivered utility is zero for planning/API failures. Raw fairness and hard-limit means exclude absent reports; feasibility counts invalid JSON as failure and excludes API failures."]
     job_lookup = {r["job_id"]: r for r in rows}
     job_rows = [{**j, "status": states[j["job_id"]],
                  "elapsed_seconds": job_lookup.get(j["job_id"], {}).get("elapsed_seconds"),

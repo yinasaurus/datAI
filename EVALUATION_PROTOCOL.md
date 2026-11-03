@@ -184,3 +184,7 @@ Bootstrap inference, dependence-aware intervals, plots, qualitative coding, new
 held-out design/counts, and the final freeze remain pending.
 Runner tests use simulated responses and dry runs; implementation is not evidence
 of model performance. No automatic resume or replacement of failed jobs is enabled.
+
+## Final held-out protocol supplement
+
+The active final planning experiment is defined in [FINAL_EVALUATION_PROTOCOL.md](FINAL_EVALUATION_PROTOCOL.md). It retains method v7, versions shared constraint wording as prompt v8, and uses the separate 20-case `final_eval_v1` dataset. Its prespecified contrasts are B−A, C0−B and C2−C0; uncertainty resamples 10 complete template families after averaging repetitions within scenarios. Earlier development results and instructions remain historical evidence, not the final frozen experiment. No final LLM run is authorised yet.

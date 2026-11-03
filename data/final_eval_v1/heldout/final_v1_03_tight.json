@@ -1,0 +1,29 @@
+{
+  "id": "final_v1_03_tight",
+  "split": "heldout",
+  "days": 2,
+  "n_friends": 2,
+  "conflict": "strong",
+  "budget": "tight",
+  "friends": {
+    "Friend_1": {
+      "likes": [
+        "temples",
+        "outdoor",
+        "culture"
+      ],
+      "hard_limits": [
+        "no_temples"
+      ],
+      "budget": 25
+    },
+    "Friend_2": {
+      "likes": [
+        "shopping",
+        "culture"
+      ],
+      "hard_limits": [],
+      "budget": 26
+    }
+  }
+}

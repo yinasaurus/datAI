@@ -1,0 +1,219 @@
+{
+  "dataset": "kyoto-final-v1",
+  "design": "10 families x 2 budget variants; all feasible",
+  "generation": "deterministic, no LLM; new profile/day structures checked against existing data and result inputs",
+  "shared_interest": "Every profile includes culture; positive-minimum witnesses establish nondegenerate attainable utility.",
+  "limitations": "Constructed Kyoto benchmark, not random population sampling; family variants are dependent.",
+  "checker_config": {
+    "day_start": "07:00",
+    "day_end": "23:00",
+    "min_activities_per_day": 2
+  },
+  "world_hashes": {
+    "places": "5a8b688c5f61ac610455836ef946a2dcbf25cbaf95ae8f18d5addddfee133550",
+    "tags": "1d4846c380cf51b6f898ff4a34f739ad246d360c1d8cea9f8c441d2a73ad2740",
+    "travel_times": "c2fef7f7d4d10744f69b5509fba0e58b1cb133fadd7aba1e88c3be3863fb1280"
+  },
+  "scenarios": {
+    "final_v1_01_tight": {
+      "family_id": "final_family_01",
+      "template_id": "final_template_01",
+      "difficulty": "straightforward",
+      "budget_variant": "tight",
+      "n_friends": 2,
+      "days": 1,
+      "expected_feasible": true,
+      "sha256": "61d58def76a7f86ced9108b314da57771abed14ba7cb3766a1bac67951b97dd5"
+    },
+    "final_v1_01_loose": {
+      "family_id": "final_family_01",
+      "template_id": "final_template_01",
+      "difficulty": "straightforward",
+      "budget_variant": "loose",
+      "n_friends": 2,
+      "days": 1,
+      "expected_feasible": true,
+      "sha256": "88de9e54bb5844e626beadcd56f4014f39f9236d2bf397accff05cc2ea725521"
+    },
+    "final_v1_02_tight": {
+      "family_id": "final_family_02",
+      "template_id": "final_template_02",
+      "difficulty": "straightforward",
+      "budget_variant": "tight",
+      "n_friends": 2,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "cdcad0b75d4e666146bf635c783f97f3226dce2e43f125ba3d9c540f10a0cda0"
+    },
+    "final_v1_02_loose": {
+      "family_id": "final_family_02",
+      "template_id": "final_template_02",
+      "difficulty": "straightforward",
+      "budget_variant": "loose",
+      "n_friends": 2,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "d4a40d14e182f2367a5e0e9dcdcbbd007a932afa1f3b08591f2fa59d9fe053b6"
+    },
+    "final_v1_03_tight": {
+      "family_id": "final_family_03",
+      "template_id": "final_template_03",
+      "difficulty": "conflicting",
+      "budget_variant": "tight",
+      "n_friends": 2,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "d7d4383271b5cfaaadf4828f180f8d548f50a2e1129ee41b64eff87b7dd83721"
+    },
+    "final_v1_03_loose": {
+      "family_id": "final_family_03",
+      "template_id": "final_template_03",
+      "difficulty": "conflicting",
+      "budget_variant": "loose",
+      "n_friends": 2,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "7821b065bc211b3d624502848740a53053c9a6f7ff2196e7a3f0b07122ad80f3"
+    },
+    "final_v1_04_tight": {
+      "family_id": "final_family_04",
+      "template_id": "final_template_04",
+      "difficulty": "highly_constrained",
+      "budget_variant": "tight",
+      "n_friends": 2,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "b2896f215b0bf1fdf0fc74e6ed955bf36525d5ec9197c282e16e0023c1823928"
+    },
+    "final_v1_04_loose": {
+      "family_id": "final_family_04",
+      "template_id": "final_template_04",
+      "difficulty": "highly_constrained",
+      "budget_variant": "loose",
+      "n_friends": 2,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "9ec7ad09fa7a1a68bed93b355dcfaf75ddabd486ac264e30d57e5e3b67ce33d0"
+    },
+    "final_v1_05_tight": {
+      "family_id": "final_family_05",
+      "template_id": "final_template_05",
+      "difficulty": "straightforward",
+      "budget_variant": "tight",
+      "n_friends": 3,
+      "days": 1,
+      "expected_feasible": true,
+      "sha256": "391f06a2485a6e5ceb67afed960e4482f7bba07f33203600e01c9860350020be"
+    },
+    "final_v1_05_loose": {
+      "family_id": "final_family_05",
+      "template_id": "final_template_05",
+      "difficulty": "straightforward",
+      "budget_variant": "loose",
+      "n_friends": 3,
+      "days": 1,
+      "expected_feasible": true,
+      "sha256": "3c1a75a5e3eefb1049f53b2678b7d7a39fca15eb6e2c660fb7cadd99adbec76a"
+    },
+    "final_v1_06_tight": {
+      "family_id": "final_family_06",
+      "template_id": "final_template_06",
+      "difficulty": "conflicting",
+      "budget_variant": "tight",
+      "n_friends": 3,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "d09f858ab1213569c15fe577968e40055f69ea0574f8024f77f130d5da1c6920"
+    },
+    "final_v1_06_loose": {
+      "family_id": "final_family_06",
+      "template_id": "final_template_06",
+      "difficulty": "conflicting",
+      "budget_variant": "loose",
+      "n_friends": 3,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "c0d40bc99ceebfef04c1178178d99a14bd71e9b53b24c8d4728b98346290d6ac"
+    },
+    "final_v1_07_tight": {
+      "family_id": "final_family_07",
+      "template_id": "final_template_07",
+      "difficulty": "conflicting",
+      "budget_variant": "tight",
+      "n_friends": 3,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "90dac24672d8b9ead5c2ff1467c9eb3b3a2c598aa0ec193f083b6079c133fd18"
+    },
+    "final_v1_07_loose": {
+      "family_id": "final_family_07",
+      "template_id": "final_template_07",
+      "difficulty": "conflicting",
+      "budget_variant": "loose",
+      "n_friends": 3,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "3e7a276e1c54be6866a131d4fae3fd50ea3636fdd38dc8f79ca3d586a2994465"
+    },
+    "final_v1_08_tight": {
+      "family_id": "final_family_08",
+      "template_id": "final_template_08",
+      "difficulty": "straightforward",
+      "budget_variant": "tight",
+      "n_friends": 5,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "d9c61590b1ac2c93b7dfb9ebb41d556c453d73bc95c336432a7659a705476029"
+    },
+    "final_v1_08_loose": {
+      "family_id": "final_family_08",
+      "template_id": "final_template_08",
+      "difficulty": "straightforward",
+      "budget_variant": "loose",
+      "n_friends": 5,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "005baffdcce1312c5f826193c18df49fa1682385ecae4d99d5a4cf9d0fe5dcfc"
+    },
+    "final_v1_09_tight": {
+      "family_id": "final_family_09",
+      "template_id": "final_template_09",
+      "difficulty": "conflicting",
+      "budget_variant": "tight",
+      "n_friends": 5,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "e4279f4a8eb029b6428572dafc9d5763135c8ee32785cc22397b3b7dfc1a7053"
+    },
+    "final_v1_09_loose": {
+      "family_id": "final_family_09",
+      "template_id": "final_template_09",
+      "difficulty": "conflicting",
+      "budget_variant": "loose",
+      "n_friends": 5,
+      "days": 2,
+      "expected_feasible": true,
+      "sha256": "633d395a0cb76ca2d37a1b829d26714fa058d725edd051f4fdeafdc2f64fb6be"
+    },
+    "final_v1_10_tight": {
+      "family_id": "final_family_10",
+      "template_id": "final_template_10",
+      "difficulty": "highly_constrained",
+      "budget_variant": "tight",
+      "n_friends": 5,
+      "days": 3,
+      "expected_feasible": true,
+      "sha256": "c7c8bb3c64b8f2de4fe63d6ed18ecd4428ed2925479a34a5e1f847d80e54f27d"
+    },
+    "final_v1_10_loose": {
+      "family_id": "final_family_10",
+      "template_id": "final_template_10",
+      "difficulty": "highly_constrained",
+      "budget_variant": "loose",
+      "n_friends": 5,
+      "days": 3,
+      "expected_feasible": true,
+      "sha256": "514e40b1a3c1efac4b495fc343e8415091aa9aa084e4f1c5bec19ae918322898"
+    }
+  }
+}

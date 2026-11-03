@@ -1,0 +1,27 @@
+{
+  "id": "final_v1_01_loose",
+  "split": "heldout",
+  "days": 1,
+  "n_friends": 2,
+  "conflict": "mild",
+  "budget": "loose",
+  "friends": {
+    "Friend_1": {
+      "likes": [
+        "food",
+        "culture"
+      ],
+      "hard_limits": [],
+      "budget": 50
+    },
+    "Friend_2": {
+      "likes": [
+        "shopping",
+        "outdoor",
+        "culture"
+      ],
+      "hard_limits": [],
+      "budget": 51
+    }
+  }
+}

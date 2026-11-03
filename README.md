@@ -279,3 +279,7 @@ A remains single-pass with shared v6 eligibility. This is a documented expansion
 of B/C's feedback harness, not a fourth architecture. Existing datasets, scores,
 model settings, and revision limits are unchanged. Local tests pass. A six-job B/C development smoke passed all cases; this is
 preliminary familiar-case evidence, not final generalisation. See EVALUATION_LOG.md.
+
+### Final held-out evaluation (awaiting approval)
+
+The final package retains method v7 with prompt v8 shared-constraint parity. It introduces no repair or planning-performance optimisations. See [FINAL_EVALUATION_PROTOCOL.md](FINAL_EVALUATION_PROTOCOL.md) for the freeze procedure, exact dry/full commands, all metrics and family-cluster paired analysis. The new dataset is [data/final_eval_v1](data/final_eval_v1/README.md): 20 checker-validated cases in 10 dependent template families. No final model evaluation has been executed. Commit the freeze before running the protocol's `--require-clean` command, and obtain approval first.

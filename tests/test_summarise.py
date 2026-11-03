@@ -43,10 +43,10 @@ def test_api_failures_and_unknown_usage_have_explicit_denominators():
 
 
 def test_pairs_match_scenarios_and_keep_incomplete_pairs_visible():
-    rows = [row("one", "B", score=0), row("one", "C2", score=0.5), row("two", "C2", score=1)]
+    rows = [row("one", "B", score=0), row("one", "C0", score=0.5), row("two", "C0", score=1)]
     jobs = [{**r, "job_id": r["job_id"] + str(i)} for r in rows for i in (1, 2, 3)]
     paired = next(p for p in paired_summary(rows, jobs)
-                  if p["comparison"] == "C2-B" and p["metric"] == "delivered_minimum")
+                  if p["comparison"] == "C0-B" and p["metric"] == "delivered_minimum")
     assert paired["matched_scenarios"] == 1
     assert paired["complete_matched_scenarios"] == 0
     assert paired["difference"] == 0.5
