@@ -113,14 +113,21 @@ prompts do not contain that canary. The live reply filter still blocks the marke
 if it appears in outgoing text. Canary and exact description-echo filtering are
 limited checks, not proof of general prompt-injection resistance.
 
-Attack outputs with malformed structure execute no actions, are not delivered,
-and are not counted as guard blocks. Summaries report `invalid_output_rate` and
-`n_valid` separately. Attack success rates retain all attempted cases in their
-denominator; benign guard-block rates use structurally valid outputs, with an
-undefined rate when none are valid. A benign-input block is not automatically a
-false positive: inspect whether the generated action actually violated policy.
-An unknown-place cost is recorded as null, not zero. Scripted compromised-agent
-results measure enforcement and must stay separate from Gemini attack outcomes.
+The versioned security runner is `tripbot.eval.security`; the `attacks` CLI now
+forwards to it and requires a fresh `--output` directory. See
+[SECURITY_EVALUATION_PROTOCOL.md](SECURITY_EVALUATION_PROTOCOL.md) for exact commands,
+independent action labels, metrics, security-only configuration and threat boundaries.
+Its primary endpoint is counterfactual guard-boundary authorisation, not an actual
+Telegram booking or configuration change. Model-driven, scripted-compromise and
+scripted-control sources are reported separately. A model candidate is generated
+once and replayed identically with guards off/on; caching is disabled.
+
+Malformed output, API failure, model nonviolation and target-relevant guard blocking
+have distinct labels. Primary attack success rates use valid attack outputs;
+all-attempt rates and denominator/error counts are also reported. False-positive
+rates use only independently safe reached actions in benign controls. Raw evidence
+is owner-only under `private/`; public artifacts redact exact and obfuscated planted
+canaries. No model-driven security experiments have been run for this package.
 
 Security regression tests use simulated model responses and the actual bot
 handler/guard path. No real Telegram delivery or Gemini attacks are implied by

@@ -176,12 +176,11 @@ def test_attack_files_match_the_spec_split() -> None:
     assert all(attack.split == "heldout" for attack in heldout)
 
 
-def test_main_needs_a_canary(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture) -> None:
-    monkeypatch.setattr("tripbot.eval.attacks.load_canary", lambda: "")
+def test_legacy_cli_requires_explicit_nonoverwriting_output(capsys) -> None:
     from tripbot.eval.attacks import main
-
-    assert main(["--split", "dev"]) == 1
-    assert "CANARY_TOKEN" in capsys.readouterr().out
+    with pytest.raises(SystemExit):
+        main(["--split", "dev"])
+    assert "--output" in capsys.readouterr().err
 
 
 def _run_with(tmp_path: Path, attack: AttackCase | None, text: str, **options: str) -> tuple[dict, FakeClient]:
