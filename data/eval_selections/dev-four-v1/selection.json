@@ -1,0 +1,53 @@
+{
+  "status": "development selection fixed before these model runs",
+  "date_singapore": "2026-11-03",
+  "cases": [
+    {
+      "scenario_id": "v2_dev_001",
+      "source": "data/scenarios_v2/dev/v2_dev_001.json",
+      "sha256": "34fa6ccfd71300e81d399e216c8d5167546e8e5b7703e1073f782916fea49530",
+      "n_friends": 2,
+      "conflict": "mild",
+      "budget": "tight",
+      "reason": "Two friends, mild direct conflict, tight budget: smaller-group constrained case."
+    },
+    {
+      "scenario_id": "v2_dev_002",
+      "source": "data/scenarios_v2/dev/v2_dev_002.json",
+      "sha256": "7f7f84b97a49c9b5beaf2144bdf9af33ccb00fda943bc1f3d5ebab7bb60132b4",
+      "n_friends": 2,
+      "conflict": "mild",
+      "budget": "loose",
+      "reason": "Exact preference/restriction match to 001, loose budget: isolates the budget change within this pair."
+    },
+    {
+      "scenario_id": "v2_dev_009",
+      "source": "data/scenarios_v2/dev/v2_dev_009.json",
+      "sha256": "13d74ae3e5b0b9c7ace660415e50f410062c2329e85bc91925252c1d8e786632",
+      "n_friends": 5,
+      "conflict": "mild",
+      "budget": "tight",
+      "reason": "Five friends, mild recoverable direct conflict, tight budget: larger-group case without reusing the previously inspected strong-conflict 011."
+    },
+    {
+      "scenario_id": "v2_dev_021",
+      "source": "data/scenarios_v2/dev/v2_dev_021.json",
+      "sha256": "5a553939a3a5969ba5423688e0dc72432049c5254df06d7973c5965c717c9a96",
+      "n_friends": 5,
+      "conflict": "mild",
+      "budget": "tight",
+      "reason": "Five friends, mild budget pressure, tight budget: contrasting mechanism; comparison with 009 also changes preferences and numeric budgets, not a pure mechanism effect."
+    }
+  ],
+  "conditions": [
+    "A",
+    "B",
+    "C0",
+    "C2"
+  ],
+  "repetitions": 3,
+  "jobs": 48,
+  "maximum_logical_calls": 324,
+  "maximum_physical_requests_with_retries": 1296,
+  "limitations": "Purposive development diagnostics, not balanced factorial coverage or final held-out evidence. Existing prior pilots remain separate."
+}

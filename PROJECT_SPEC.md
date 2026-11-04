@@ -385,3 +385,132 @@ Gemini harness results, and bot-handler regression tests support separate claims
 Final planning scope is A/B/C, plus a C negotiation-round ablation (zero versus
 two extra rounds). There is no B-budget or fourth architecture. Report actual
 calls/tokens/time; B versus C does not isolate architecture from extra computation.
+
+
+## Agreed evaluation protocol
+
+`EVALUATION_PROTOCOL.md` records the current agreed experiment and analysis rules.
+Use its explicit failure/denominator definitions and separate delivered quality
+from raw checker scores. The final study retains A/B/C and a C0/C2 ablation only,
+with three fresh generations, experiment caching disabled, operational failures
+reported separately, Kyoto paired analysis, and descriptive synthetic diagnostics.
+The protocol is not yet a frozen final experiment: held-out design/counts and
+runner instrumentation remain pending. Existing bot cache defaults are unchanged.
+
+
+## Evaluation runner implementation
+
+`python -m tripbot.eval.run --scenarios <folder-or-file> --dataset <version/world>
+--output <fresh-folder>` runs A/B/C2/C0 with three fresh generations by default.
+`--dry-run` saves the manifest and schedule with no model calls. `--config` selects
+a matching world, `--conditions` selects conditions, `--split` enforces scenario
+split, and `--max-jobs` limits execution while preserving pending jobs. See README
+for exact commands. Output directories are never silently overwritten or resumed.
+
+`tripbot/eval/capture.py` wraps the existing SDK client and records physical
+attempts, raw responses, known/unknown usage, and timings. An optional context-local
+observer in `tripbot/llm.py` records logical calls without changing planner or
+LLMResult contracts. The LLM layer retains the existing retry policy. Failure
+artifacts omit exception message text and redact known environment credentials.
+Normal bot calls have no observer and retain their cache settings.
+
+The runner saves source/input snapshots and hashes, runtime versions, schedule,
+state, per-job artifacts, and terminal JSONL results. Program/checker defects stop
+the experiment; API failures are operational outcomes; interruptions and pending
+jobs remain distinct. Unit/integration tests are offline; no performance results
+or new held-out sets are implied. Statistical analysis remains pending.
+
+
+## Offline descriptive result summaries
+
+`python -m tripbot.eval.summarise <experiment-folder>` reads the manifest,
+schedule, state, and collected results, checking for duplicate/unscheduled rows,
+identity/version mismatches, and inconsistent states. It writes a fresh `analysis/`
+folder with a readable summary, metric-denominator CSV, per-job status table,
+final failure detail/counts, descriptive paired differences, and JSON summary.
+Existing reports are preserved; `--output` chooses a fresh analysis folder.
+No model calls occur. Pending/missing conditions are not scored as zero. Rates
+average within scenario then across scenarios; conditional quality is explicitly
+labelled, and unknown usage remains excluded with visible denominators.
+
+The tool warns on incomplete experiments and experiment errors. It does not yet
+supply bootstrap intervals, dependence-aware inference, plots, or qualitative
+coding. Those remain analysis work. `pytest.ini` excludes archived experiment
+source snapshots from normal test discovery and is captured in new runner snapshots.
+
+
+## Development prompt revision 4 — 3 November 2026
+
+Motivation: the preserved v3 development pilots show repeated budget failures and
+repairs that introduce new constraints failures. V4 retains the shared objective,
+architectures, model configuration, evaluator, datasets, and revision budget.
+A/B and C's mediator receive the computed minimum friend budget plus identical
+whole-trip cost arithmetic instructions. Friend agents receive their own budget
+only, preserving limited profile visibility.
+
+`repair_budget_summary(previous, profiles, places)` computes prior candidate cost
+across all scheduled visits. Unknown places leave the total unknown and expose a
+labelled known subtotal; malformed outputs have unknown total. `revision_prompt`
+accepts optional keyword `budget_feedback`; B/C provide this summary on every
+repair. The repair text requires rechecking all constraints, not just the latest
+violation. No reference witness or optimum enters the prompts. Prompt version is
+4; old v3 artifacts remain unchanged. Passing local tests does not demonstrate
+live quality improvement; a version-separated development comparison is pending.
+
+
+## Development feedback revision 5 — 3 November 2026
+
+`hard_limit_failures` retains its list-of-type/detail contract, with richer details
+for B/C repairs: friend and rule plus every offending day/place/tag for forbidden
+tags, or day/place/start and earliest allowed time for start restrictions. Unknown
+places are not assumed to carry forbidden tags, but their start times are still
+checked. Unknown rules still raise. Feedback has one row per failed friend/rule;
+scoring and report fields remain unchanged. Revision 5 retains v4 budget guidance,
+architectures, datasets, model settings, and revision budgets. The version is
+incremented because repair inputs change. V5 live performance remains unmeasured.
+
+
+## Development method revision 6 — shared hard-limit eligibility
+
+`tripbot/planning/eligibility.py` computes a stable eligible-ID list from the
+complete profiles and dataset at `make_plan`. All A/B/C prompt catalogues use
+that same list, including C's friend proposals, negotiation, mediator, and repairs.
+The utility excludes forbidden tags and places with no possible minimum-duration
+visit after group earliest-start limits within the configured day/opening window.
+It does not guarantee legal chosen times, budget feasibility, travel feasibility,
+or overall solvability. Likes, budgets, and oracle witnesses do not drive selection.
+
+The full dataset continues into the checker and repair cost accounting, so a
+model returning an excluded known place is still diagnosed by its actual rule
+failure. No fallback solver or automatic plan replacement is added. The caller's
+config, profiles, and dataset are unchanged; a local `_eligible_place_ids` config
+entry controls prompt rendering. First trace step records `place_filter` metadata.
+Direct internal `run_setup_*` calls bypass shared preprocessing; production bot,
+CLI, and evaluation use the public `make_plan` entry point.
+
+This changes the common agent harness. C agents now receive a group-derived
+eligible list, though they still do not receive other friends' raw profiles. The
+same preprocessing is applied to all architectures; comparisons with earlier
+versions describe a shared harness revision, not a pure prompt effect. Prompt/
+method version is 6. Checker metrics, source data, model settings, and repair
+allowances remain unchanged; v6 live quality is not yet evaluated.
+
+
+## Development method revision 7 — cost-compatible repair guidance
+
+`tripbot/planning/repair_options.py` lists arithmetic-only single-edit options:
+unused eligible replacements that bring an over-budget plan within the minimum
+friend budget, and affordable unused additions for underfilled/missing days.
+Every listed total covers the full itinerary; item numbers are 1-based. The
+helper uses shared group hard-limit eligibility and never expands the catalogue.
+It does not select, schedule, apply, or score a replacement plan. Candidate lists
+may be empty even for a feasible trip requiring coordinated edits. The model is
+explicitly warned about timing/travel, combined costs, and unique IDs.
+
+`repair_budget_summary` gains optional keyword `config`; B/C pass it to include
+`cost_compatible_options` in their existing repair feedback. Calls without that
+keyword retain the prior summary shape. Unknown/unparseable totals have no cost
+suggestions. A retains single-pass planning plus v6 shared eligibility. This is a
+B/C harness revision under version 7, with unchanged checker scores, schemas,
+data, model settings, and revision limits. A six-job B/C familiar-case development smoke passed all jobs; broader reliability
+and untouched final performance remain unmeasured. See EVALUATION_LOG.md.

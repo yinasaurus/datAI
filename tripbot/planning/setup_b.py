@@ -14,6 +14,7 @@ from tripbot.planning.prompts import (
     PLAN_RESPONSE_SCHEMA,
     SYSTEM_PROMPT,
     revision_prompt,
+    repair_budget_summary,
     setup_a_prompt,
     with_prompt_version,
 )
@@ -80,7 +81,8 @@ def run_setup_b(
             break
         if revision >= max_revisions:
             break
-        prompt = revision_prompt(base, result.text, violations)
+        prompt = revision_prompt(base, result.text, violations,
+                                 budget_feedback=repair_budget_summary(result.text, profiles, places, config=config))
 
     return PlanResult(
         plan=plan,

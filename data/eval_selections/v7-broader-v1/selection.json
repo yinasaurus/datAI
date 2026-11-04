@@ -1,0 +1,38 @@
+{
+  "purpose": "broader prespecified v7 development diagnostics; not final heldout",
+  "cases": [
+    {
+      "scenario_id": "v2_dev_003",
+      "reason": "Two friends, strong direct conflict, tight budget; harder restrictions than prior 001.",
+      "source": "data/scenarios_v2/dev/v2_dev_003.json",
+      "sha256": "7be091042c0e1d07fbe5e80e6b7fe8f1413e585aad81ae0de5cbfd648b1db390"
+    },
+    {
+      "scenario_id": "v2_dev_007",
+      "reason": "Three friends, strong direct conflict, tight budget; previously untested group size in revised system.",
+      "source": "data/scenarios_v2/dev/v2_dev_007.json",
+      "sha256": "a8c17996cec23189df27ccbda1c6336b8ea730ab49c30e350fb394f45147f9df"
+    },
+    {
+      "scenario_id": "v2_dev_018",
+      "reason": "Three friends, mild budget pressure, loose budget; control with a different preference structure.",
+      "source": "data/scenarios_v2/dev/v2_dev_018.json",
+      "sha256": "8df0b8775fb7079f7a389f2f0eff53f47e3f620c8e7b50eb5e1c4d36d6841387"
+    },
+    {
+      "scenario_id": "v2_dev_023",
+      "reason": "Five friends, strong budget pressure, tight budget; multiple-interest pressure and earliest-start restriction.",
+      "source": "data/scenarios_v2/dev/v2_dev_023.json",
+      "sha256": "0d796085a4ce5c13e2915fe52c4380c349d84cdd2fe1f81321354e14133949d1"
+    }
+  ],
+  "conditions": [
+    "A",
+    "B",
+    "C0",
+    "C2"
+  ],
+  "runs": 1,
+  "jobs": 16,
+  "selection_fixed_before_calls": true
+}

@@ -72,15 +72,31 @@ def hard_limit_failures(
     places_by_id: dict[str, Place],
     catalog: TagCatalog,
 ) -> list[dict[str, str]]:
-    """Describe failed hard limits for repairs, separately from feasibility."""
+    """Describe each failed rule and its offending visits; scoring stays separate."""
     tags = _tags_in_plan(plan, places_by_id)
     starts = [_start(item) for day in _days(plan) for item in day.items]
-    return [
-        {"type": "hard_limit", "detail": f"{name}: {limit_name}"}
-        for name, profile in profiles.items()
-        for limit_name in profile.hard_limits
-        if not _limit_holds(limit_name, catalog, tags, starts)
-    ]
+    failures: list[dict[str, str]] = []
+    for name, profile in profiles.items():
+        for limit_name in profile.hard_limits:
+            if _limit_holds(limit_name, catalog, tags, starts):
+                continue
+            rule = catalog.hard_limits[limit_name]
+            visits: list[str] = []
+            for day in _days(plan):
+                for item in day.items:
+                    if rule.type == "forbid_tag":
+                        place = places_by_id.get(item.place_id)
+                        if place is not None and rule.tag in place.tags:
+                            visits.append(f"day {day.day} {item.place_id} has forbidden tag {rule.tag}")
+                    elif rule.time is not None and _start(item) < parse_hhmm(rule.time):
+                        visits.append(f"day {day.day} {item.place_id} starts {item.start}")
+            requirement = (f"forbids tag {rule.tag}" if rule.type == "forbid_tag"
+                           else f"earliest allowed start {rule.time}")
+            failures.append({
+                "type": "hard_limit",
+                "detail": f"{name}: {limit_name}; {requirement}; offending visits: " + "; ".join(visits),
+            })
+    return failures
 
 
 def hard_limit_satisfaction(

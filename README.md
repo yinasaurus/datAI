@@ -87,7 +87,7 @@ limitations, and commands. Use each world's matching `--config` when running
 there is no synthetic held-out set yet.
 
 
-The shared group objective (prompt version 3) is lexicographic: meet practical
+The shared group objective (introduced in prompt version 3, retained in version 4) is lexicographic: meet practical
 constraints and every hard limit, then maximise minimum friend satisfaction,
 then maximise equally weighted mean friend satisfaction. Satisfaction is distinct
 liked-tag coverage, with no likes scoring 1. A higher mean cannot compensate for
@@ -113,15 +113,180 @@ prompts do not contain that canary. The live reply filter still blocks the marke
 if it appears in outgoing text. Canary and exact description-echo filtering are
 limited checks, not proof of general prompt-injection resistance.
 
-Attack outputs with malformed structure execute no actions, are not delivered,
-and are not counted as guard blocks. Summaries report `invalid_output_rate` and
-`n_valid` separately. Attack success rates retain all attempted cases in their
-denominator; benign guard-block rates use structurally valid outputs, with an
-undefined rate when none are valid. A benign-input block is not automatically a
-false positive: inspect whether the generated action actually violated policy.
-An unknown-place cost is recorded as null, not zero. Scripted compromised-agent
-results measure enforcement and must stay separate from Gemini attack outcomes.
+The versioned security runner is `tripbot.eval.security`; the `attacks` CLI now
+forwards to it and requires a fresh `--output` directory. See
+[SECURITY_EVALUATION_PROTOCOL.md](SECURITY_EVALUATION_PROTOCOL.md) for exact commands,
+independent action labels, metrics, security-only configuration and threat boundaries.
+Its primary endpoint is counterfactual guard-boundary authorisation, not an actual
+Telegram booking or configuration change. Model-driven, scripted-compromise and
+scripted-control sources are reported separately. A model candidate is generated
+once and replayed identically with guards off/on; caching is disabled.
+
+Malformed output, API failure, model nonviolation and target-relevant guard blocking
+have distinct labels. Primary attack success rates use valid attack outputs;
+all-attempt rates and denominator/error counts are also reported. False-positive
+rates use only independently safe reached actions in benign controls. Raw evidence
+is owner-only under `private/`; public artifacts redact exact and obfuscated planted
+canaries. No model-driven security experiments have been run for this package.
 
 Security regression tests use simulated model responses and the actual bot
 handler/guard path. No real Telegram delivery or Gemini attacks are implied by
 passing these tests.
+
+## Evaluation protocol
+
+The agreed [evaluation protocol](EVALUATION_PROTOCOL.md) defines A/B/C plus the
+C0/C2 ablation, three fresh generations, disabled experiment caching, metrics,
+failure handling, paired analysis, and qualitative review. It is a design document,
+not completed experimental results. New held-out sets and the main runner remain
+pending; ordinary bot cache defaults are unchanged.
+
+## Planning experiment runner
+
+The runner executes A, B, C2, and C0 sequentially, with three fresh generations
+per scenario by default. It forces caching off without changing the bot config.
+Start with a dry run (no API requests):
+
+```bash
+.venv/bin/python -m tripbot.eval.run --scenarios data/scenarios_v2/dev --dataset kyoto-v2-dev --output results/kyoto-v2-dryrun --dry-run
+```
+
+For an actual development run, use a fresh output directory and omit `--dry-run`
+(requires Gemini access and consumes API usage):
+
+```bash
+.venv/bin/python -m tripbot.eval.run --scenarios data/scenarios_v2/dev --dataset kyoto-v2-dev --output results/kyoto-v2-pilot --max-jobs 4
+```
+
+A cap executes only the shuffled prefix; remaining jobs stay pending. To select
+just A/B/C without the ablation, use `--conditions A B C2`. For a synthetic world:
+
+```bash
+.venv/bin/python -m tripbot.eval.run --config data/synthetic_v1/n3/config.yaml --scenarios data/synthetic_v1/n3/dev --dataset synthetic-v1-n3-dev --output results/synthetic-n3-dryrun --dry-run
+```
+
+Always run from the repository root and use each world's matching config.
+For held-out data, explicitly specify `--split heldout`; new held-out designs are
+still pending. Never pool results solely because filenames or scenario IDs match.
+
+Each experiment saves `manifest.json` (config, versions, input/source hashes),
+`inputs/`, a relevant `source/` snapshot including uncommitted code,
+`schedule.json`, and `state.json`. Per-job `result.json` and `calls.jsonl` retain
+outcomes, plans/checker reports, prompts, raw model responses, and physical request
+attempts. `runs.jsonl` collects terminal results. Successful usage is retained when
+a later request fails; missing usage stays null with separate known subtotals.
+Exception messages are omitted to avoid capturing credential-bearing URLs, and
+known environment credentials are redacted from artifacts.
+
+`experiment_error` stops execution for investigation. API failures are recorded
+and execution continues. Interruptions are separate from model failures. A hard
+process termination can leave a job marked running; do not treat it as completed.
+Existing output directories are refused: automatic resume and silent reruns are
+not implemented. Saved artifacts support offline analysis without new API calls;
+the statistical analysis pipeline remains pending.
+
+## Read experiment results without API calls
+
+Generate an offline report from one saved experiment:
+
+```bash
+.venv/bin/python -m tripbot.eval.summarise results/kyoto-v2-pilot-01
+```
+
+Open `results/kyoto-v2-pilot-01/analysis/summary.md` for the readable table.
+`conditions.csv` includes metric denominators; `failures.csv` links final failures
+to jobs; `failure_counts.csv` distinguishes affected jobs from individual violations.
+`jobs.csv` lists all scheduled jobs, including pending ones. `pairs.csv` shows
+matched-scenario differences and complete-pair counts, descriptively only.
+`summary.json` provides the corresponding machine-readable output.
+
+An existing analysis folder is preserved. To regenerate into a new folder:
+
+```bash
+.venv/bin/python -m tripbot.eval.summarise results/kyoto-v2-pilot-01 --output results/kyoto-v2-pilot-01/analysis-02
+```
+
+Incomplete pilots cannot establish an architecture ranking. The summary averages
+repetitions within scenarios before averaging scenarios, excludes unknown token
+counts from token means with explicit denominators, and distinguishes API failures
+from completed planning failures. It does not produce bootstrap intervals or
+statistical significance claims; uncertainty analysis and qualitative review are
+still required. `pytest.ini` restricts normal test discovery to `tests/`, keeping
+archived source snapshots inside results from being collected as active tests.
+
+## Development prompt revision 4
+
+After v3 development pilots exposed repeated budget failures, v4 makes arithmetic
+explicit for all architectures: whole-trip cost is the sum of every visit across
+all days, and the shared group limit is the minimum individual budget. A/B and
+C's mediator receive identical budget guidance; friend agents receive only their
+own limit, without other profiles. Costs remain in each dataset's units.
+
+B/C repairs receive the programmatically calculated prior total, limit, and
+remaining/over-budget amount. Unknown IDs or unparseable plans have unknown total
+rather than an invented zero. Repairs are reminded to preserve exact days,
+activity minimum, uniqueness, timing/travel, and hard limits while fixing budget.
+No schemas, scoring rules, revision allowances, datasets, or reference answers
+changed. V3 results are preserved; do not combine them with v4 results as one
+fixed-system experiment. V4 improvement has not yet been tested with live calls.
+
+## Development feedback revision 5
+
+V5 retains v4 budget guidance and makes B/C hard-limit repair feedback specific:
+the affected friend, rule, offending day/place, and forbidden tag or actual versus
+allowed start time. All offending visits are listed in one row per failed rule.
+The normal report schema, feasibility/hard-limit separation, scores, datasets,
+model, and revision allowance stay unchanged. This feedback revision is versioned
+because it changes model inputs even though the base prompt wording is retained.
+
+Local tests pass and all 48 stored v4 reports reproduce unchanged. No live v5
+performance results exist yet. Retain v3/v4 runs separately; a v5 development run
+must use a fresh output directory and is not final held-out evidence.
+
+## Development method revision 6: shared candidate eligibility
+
+At the public `make_plan` boundary, every architecture receives the same eligible
+place catalogue computed from all friends' hard limits. Places carrying any
+forbidden tag are excluded. A place is also excluded if its minimum duration
+cannot fit between the group's earliest allowed start, its opening hours, and
+the day end. Remaining places still need valid scheduled times and travel gaps.
+No preferences, budget rankings, reference answers, or solver determine this list.
+
+C's friend agents retain only their own raw profiles, but now receive the shared
+group-derived eligible catalogue: this is an explicit shared preprocessing change,
+not an identical information condition to v5. B/C repairs and the external checker
+continue checking against the full dataset. Excluded known IDs remain known
+places with hard-limit failures, rather than being relabelled hallucinations.
+
+The first trace entry records `place_filter` metadata: version, original count,
+eligible IDs, and excluded IDs/reasons. No source places/profiles/config are mutated,
+and no invalid output is replaced with a reference plan. Empty eligibility is
+visible in prompts/trace; the existing output validation still decides failure.
+
+V6 is a method revision, not just a prompt wording change. Keep v3/v4/v5 results
+separate. Local tests pass; no live v6 improvement has been measured yet. The
+ordinary bot also uses this preprocessing through `make_plan`.
+
+## Development method revision 7: cost-compatible repair options
+
+B/C repairs now receive the same arithmetic-only candidate helper. For an
+over-budget plan it lists eligible unused replacements whose single substitution
+would bring the whole-trip total within the group budget. For an underfilled or
+missing day it lists eligible unused additions affordable within the remaining
+whole-trip budget. Entries include IDs, costs, resulting total, and affected day/
+visit; options are ordered by cost then ID without preference ranking.
+
+The model still chooses and schedules the itinerary. Candidates are **not**
+certified timing/travel solutions and multiple options cannot be combined without
+recalculating cost and avoiding repeated IDs. No single-edit option does not prove
+infeasibility: coordinated changes may be necessary. Unknown/unparseable totals
+receive no invented suggestions. The checker remains the final authority.
+
+A remains single-pass with shared v6 eligibility. This is a documented expansion
+of B/C's feedback harness, not a fourth architecture. Existing datasets, scores,
+model settings, and revision limits are unchanged. Local tests pass. A six-job B/C development smoke passed all cases; this is
+preliminary familiar-case evidence, not final generalisation. See EVALUATION_LOG.md.
+
+### Final held-out evaluation (awaiting approval)
+
+The final package retains method v7 with prompt v8 shared-constraint parity. It introduces no repair or planning-performance optimisations. See [FINAL_EVALUATION_PROTOCOL.md](FINAL_EVALUATION_PROTOCOL.md) for the freeze procedure, exact dry/full commands, all metrics and family-cluster paired analysis. The new dataset is [data/final_eval_v1](data/final_eval_v1/README.md): 20 checker-validated cases in 10 dependent template families. No final model evaluation has been executed. Commit the freeze before running the protocol's `--require-clean` command, and obtain approval first.

@@ -1,0 +1,39 @@
+{
+  "id": "final_v1_07_loose",
+  "split": "heldout",
+  "days": 2,
+  "n_friends": 3,
+  "conflict": "strong",
+  "budget": "loose",
+  "friends": {
+    "Friend_1": {
+      "likes": [
+        "temples",
+        "shopping",
+        "culture"
+      ],
+      "hard_limits": [
+        "no_temples"
+      ],
+      "budget": 75
+    },
+    "Friend_2": {
+      "likes": [
+        "hiking",
+        "outdoor",
+        "culture"
+      ],
+      "hard_limits": [],
+      "budget": 76
+    },
+    "Friend_3": {
+      "likes": [
+        "food",
+        "nightlife",
+        "culture"
+      ],
+      "hard_limits": [],
+      "budget": 77
+    }
+  }
+}
