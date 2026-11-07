@@ -1,0 +1,295 @@
+{
+  "job_id": "final_v1_09_loose__C0__r1",
+  "scenario_id": "final_v1_09_loose",
+  "condition": "C0",
+  "repetition": 1,
+  "family_id": "final_family_09",
+  "expected_feasible": true,
+  "started_utc": "2026-11-03T05:44:44.348447+00:00",
+  "setup": "C",
+  "config": {
+    "model": "gemini-3.5-flash-lite",
+    "temperature": 0,
+    "seed": 42,
+    "cache": false,
+    "setup": "C",
+    "days": 2,
+    "min_activities_per_day": 2,
+    "max_revisions": 3,
+    "negotiation_rounds": 0,
+    "guardrails": "on",
+    "budget_cap": 3000,
+    "bot_name": "tripbot",
+    "cooldown_seconds": 20,
+    "day_start": "07:00",
+    "day_end": "23:00",
+    "breaking_point_threshold": 0.5,
+    "bootstrap_resamples": 1000,
+    "runs": 3,
+    "paths": {
+      "places": "/Users/eryn/Desktop/datAI/data/places.json",
+      "tags": "/Users/eryn/Desktop/datAI/data/tags.json",
+      "travel_times": "/Users/eryn/Desktop/datAI/data/travel_times.json",
+      "results": "results/runs.jsonl",
+      "llm_log": "/Users/eryn/Desktop/datAI/results/kyoto-final-v1-01/jobs/final_v1_09_loose__C0__r1/llm_log.jsonl",
+      "bot_state": "data/bot_state.json"
+    }
+  },
+  "prompt_version": "8",
+  "scenario_factors": {
+    "n_friends": 5,
+    "conflict": "strong",
+    "budget": "loose",
+    "split": "heldout"
+  },
+  "plan": {
+    "days": [
+      {
+        "day": 1,
+        "items": [
+          {
+            "place_id": "p01",
+            "start": "10:00",
+            "end": "10:45"
+          },
+          {
+            "place_id": "p02",
+            "start": "11:15",
+            "end": "13:15"
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "items": [
+          {
+            "place_id": "p07",
+            "start": "10:00",
+            "end": "12:00"
+          },
+          {
+            "place_id": "p10",
+            "start": "12:30",
+            "end": "14:00"
+          }
+        ]
+      }
+    ]
+  },
+  "report": {
+    "feasible": true,
+    "violations": [],
+    "hard_limit_satisfaction": 1.0,
+    "per_friend_satisfaction": {
+      "Friend_1": 0.6666666666666666,
+      "Friend_2": 0.3333333333333333,
+      "Friend_3": 1.0,
+      "Friend_4": 0.6666666666666666,
+      "Friend_5": 0.6666666666666666
+    },
+    "fairness": {
+      "min": 0.3333333333333333,
+      "gap": 0.6666666666666667,
+      "jain": 0.909090909090909
+    },
+    "task_success": true
+  },
+  "trace": [
+    {
+      "step": "friend",
+      "attempt": 1,
+      "tokens_in": 2369,
+      "tokens_out": 310,
+      "seconds": 1.7407676670118235,
+      "cached": false,
+      "friend": "Friend_1",
+      "round": 0,
+      "parsed": true,
+      "prompt_version": "8",
+      "place_filter": {
+        "version": 1,
+        "input_place_count": 25,
+        "eligible_place_ids": [
+          "p01",
+          "p02",
+          "p03",
+          "p07",
+          "p09",
+          "p10",
+          "p14",
+          "p16",
+          "p17",
+          "p18",
+          "p19",
+          "p23"
+        ],
+        "excluded": [
+          {
+            "place_id": "p04",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p05",
+            "reasons": [
+              "forbidden_tag:nightlife"
+            ]
+          },
+          {
+            "place_id": "p06",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p08",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p11",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p12",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p13",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p15",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p20",
+            "reasons": [
+              "forbidden_tag:nightlife"
+            ]
+          },
+          {
+            "place_id": "p21",
+            "reasons": [
+              "forbidden_tag:nightlife"
+            ]
+          },
+          {
+            "place_id": "p22",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p24",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p25",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "step": "friend",
+      "attempt": 2,
+      "tokens_in": 2369,
+      "tokens_out": 268,
+      "seconds": 1.635457625001436,
+      "cached": false,
+      "friend": "Friend_2",
+      "round": 0,
+      "parsed": true,
+      "prompt_version": "8"
+    },
+    {
+      "step": "friend",
+      "attempt": 3,
+      "tokens_in": 2352,
+      "tokens_out": 226,
+      "seconds": 1.4308940419869032,
+      "cached": false,
+      "friend": "Friend_3",
+      "round": 0,
+      "parsed": true,
+      "prompt_version": "8"
+    },
+    {
+      "step": "friend",
+      "attempt": 4,
+      "tokens_in": 2357,
+      "tokens_out": 226,
+      "seconds": 1.559984749997966,
+      "cached": false,
+      "friend": "Friend_4",
+      "round": 0,
+      "parsed": true,
+      "prompt_version": "8"
+    },
+    {
+      "step": "friend",
+      "attempt": 5,
+      "tokens_in": 2357,
+      "tokens_out": 184,
+      "seconds": 1.3051221669884399,
+      "cached": false,
+      "friend": "Friend_5",
+      "round": 0,
+      "parsed": true,
+      "prompt_version": "8"
+    },
+    {
+      "step": "mediator",
+      "attempt": 6,
+      "tokens_in": 3909,
+      "tokens_out": 226,
+      "seconds": 1.3276845829968806,
+      "cached": false,
+      "violations": [],
+      "prompt_version": "8"
+    }
+  ],
+  "task_success": true,
+  "delivered_minimum": 0.3333333333333333,
+  "delivered_mean": 0.6666666666666666,
+  "delivered_per_friend": {
+    "Friend_1": 0.6666666666666666,
+    "Friend_2": 0.3333333333333333,
+    "Friend_3": 1.0,
+    "Friend_4": 0.6666666666666666,
+    "Friend_5": 0.6666666666666666
+  },
+  "calls_artifact": "jobs/final_v1_09_loose__C0__r1/calls.jsonl",
+  "verification_revisions": 0,
+  "model_call_seconds": 8.99991083398345,
+  "planner_logical_calls": 6,
+  "status": "success",
+  "usage": {
+    "logical_calls": 6,
+    "physical_requests": 6,
+    "known_tokens_in": 15713,
+    "known_tokens_out": 1440,
+    "tokens_in": 15713,
+    "tokens_out": 1440,
+    "unknown_usage_requests": 0,
+    "request_seconds": 8.99234741696273,
+    "logical_call_seconds": 9.007786125031998
+  },
+  "elapsed_seconds": 9.012838499998907,
+  "ended_utc": "2026-11-03T05:44:53.361297+00:00"
+}

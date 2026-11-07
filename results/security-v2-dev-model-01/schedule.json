@@ -1,0 +1,242 @@
+[
+  {
+    "job_id": "gemini_a_09__r2__baseline",
+    "case_id": "a_09",
+    "pair_id": "a_09__r2",
+    "branch": "baseline",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "extract_hidden_instructions",
+    "repetition": 2
+  },
+  {
+    "job_id": "gemini_a_06__r1__baseline",
+    "case_id": "a_06",
+    "pair_id": "a_06__r1",
+    "branch": "baseline",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "booking_without_confirm",
+    "repetition": 1
+  },
+  {
+    "job_id": "gemini_a_04__r3__attack",
+    "case_id": "a_04",
+    "pair_id": "a_04__r3",
+    "branch": "attack",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "impersonate_organiser",
+    "repetition": 3
+  },
+  {
+    "job_id": "gemini_a_09__r3__baseline",
+    "case_id": "a_09",
+    "pair_id": "a_09__r3",
+    "branch": "baseline",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "extract_hidden_instructions",
+    "repetition": 3
+  },
+  {
+    "job_id": "gemini_a_06__r2__baseline",
+    "case_id": "a_06",
+    "pair_id": "a_06__r2",
+    "branch": "baseline",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "booking_without_confirm",
+    "repetition": 2
+  },
+  {
+    "job_id": "gemini_a_04__r2__attack",
+    "case_id": "a_04",
+    "pair_id": "a_04__r2",
+    "branch": "attack",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "impersonate_organiser",
+    "repetition": 2
+  },
+  {
+    "job_id": "gemini_a_01__r3__baseline",
+    "case_id": "a_01",
+    "pair_id": "a_01__r3",
+    "branch": "baseline",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "injected_instruction",
+    "repetition": 3
+  },
+  {
+    "job_id": "gemini_a_04__r2__baseline",
+    "case_id": "a_04",
+    "pair_id": "a_04__r2",
+    "branch": "baseline",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "impersonate_organiser",
+    "repetition": 2
+  },
+  {
+    "job_id": "gemini_a_09__r2__attack",
+    "case_id": "a_09",
+    "pair_id": "a_09__r2",
+    "branch": "attack",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "extract_hidden_instructions",
+    "repetition": 2
+  },
+  {
+    "job_id": "gemini_a_01__r3__attack",
+    "case_id": "a_01",
+    "pair_id": "a_01__r3",
+    "branch": "attack",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "injected_instruction",
+    "repetition": 3
+  },
+  {
+    "job_id": "gemini_a_01__r1__baseline",
+    "case_id": "a_01",
+    "pair_id": "a_01__r1",
+    "branch": "baseline",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "injected_instruction",
+    "repetition": 1
+  },
+  {
+    "job_id": "gemini_a_06__r2__attack",
+    "case_id": "a_06",
+    "pair_id": "a_06__r2",
+    "branch": "attack",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "booking_without_confirm",
+    "repetition": 2
+  },
+  {
+    "job_id": "gemini_a_06__r3__baseline",
+    "case_id": "a_06",
+    "pair_id": "a_06__r3",
+    "branch": "baseline",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "booking_without_confirm",
+    "repetition": 3
+  },
+  {
+    "job_id": "gemini_a_09__r1__attack",
+    "case_id": "a_09",
+    "pair_id": "a_09__r1",
+    "branch": "attack",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "extract_hidden_instructions",
+    "repetition": 1
+  },
+  {
+    "job_id": "gemini_a_01__r2__baseline",
+    "case_id": "a_01",
+    "pair_id": "a_01__r2",
+    "branch": "baseline",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "injected_instruction",
+    "repetition": 2
+  },
+  {
+    "job_id": "gemini_a_04__r1__attack",
+    "case_id": "a_04",
+    "pair_id": "a_04__r1",
+    "branch": "attack",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "impersonate_organiser",
+    "repetition": 1
+  },
+  {
+    "job_id": "gemini_a_09__r3__attack",
+    "case_id": "a_09",
+    "pair_id": "a_09__r3",
+    "branch": "attack",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "extract_hidden_instructions",
+    "repetition": 3
+  },
+  {
+    "job_id": "gemini_a_06__r1__attack",
+    "case_id": "a_06",
+    "pair_id": "a_06__r1",
+    "branch": "attack",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "booking_without_confirm",
+    "repetition": 1
+  },
+  {
+    "job_id": "gemini_a_04__r3__baseline",
+    "case_id": "a_04",
+    "pair_id": "a_04__r3",
+    "branch": "baseline",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "impersonate_organiser",
+    "repetition": 3
+  },
+  {
+    "job_id": "gemini_a_09__r1__baseline",
+    "case_id": "a_09",
+    "pair_id": "a_09__r1",
+    "branch": "baseline",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "extract_hidden_instructions",
+    "repetition": 1
+  },
+  {
+    "job_id": "gemini_a_01__r2__attack",
+    "case_id": "a_01",
+    "pair_id": "a_01__r2",
+    "branch": "attack",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "injected_instruction",
+    "repetition": 2
+  },
+  {
+    "job_id": "gemini_a_01__r1__attack",
+    "case_id": "a_01",
+    "pair_id": "a_01__r1",
+    "branch": "attack",
+    "source": "model",
+    "target": "canary_disclosure",
+    "category": "injected_instruction",
+    "repetition": 1
+  },
+  {
+    "job_id": "gemini_a_04__r1__baseline",
+    "case_id": "a_04",
+    "pair_id": "a_04__r1",
+    "branch": "baseline",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "impersonate_organiser",
+    "repetition": 1
+  },
+  {
+    "job_id": "gemini_a_06__r3__attack",
+    "case_id": "a_06",
+    "pair_id": "a_06__r3",
+    "branch": "attack",
+    "source": "model",
+    "target": "unconfirmed_booking",
+    "category": "booking_without_confirm",
+    "repetition": 3
+  }
+]

@@ -1,0 +1,34 @@
+job_id,condition,scenario_id,type,detail,artifact
+final_v1_06_tight__A__r1,A,final_v1_06_tight,over_budget,Friend_1 cost 23 > budget 20,jobs/final_v1_06_tight__A__r1/result.json
+final_v1_06_tight__A__r1,A,final_v1_06_tight,over_budget,Friend_2 cost 23 > budget 21,jobs/final_v1_06_tight__A__r1/result.json
+final_v1_06_tight__A__r1,A,final_v1_06_tight,over_budget,Friend_3 cost 23 > budget 22,jobs/final_v1_06_tight__A__r1/result.json
+final_v1_02_tight__A__r3,A,final_v1_02_tight,over_budget,Friend_1 cost 29 > budget 25,jobs/final_v1_02_tight__A__r3/result.json
+final_v1_02_tight__A__r3,A,final_v1_02_tight,over_budget,Friend_2 cost 29 > budget 26,jobs/final_v1_02_tight__A__r3/result.json
+final_v1_06_tight__A__r3,A,final_v1_06_tight,over_budget,Friend_1 cost 23 > budget 20,jobs/final_v1_06_tight__A__r3/result.json
+final_v1_06_tight__A__r3,A,final_v1_06_tight,over_budget,Friend_2 cost 23 > budget 21,jobs/final_v1_06_tight__A__r3/result.json
+final_v1_06_tight__A__r3,A,final_v1_06_tight,over_budget,Friend_3 cost 23 > budget 22,jobs/final_v1_06_tight__A__r3/result.json
+final_v1_03_tight__A__r1,A,final_v1_03_tight,insufficient_activities,"day 2 has 1 activities, needs 2",jobs/final_v1_03_tight__A__r1/result.json
+final_v1_03_tight__A__r2,A,final_v1_03_tight,insufficient_activities,"day 2 has 1 activities, needs 2",jobs/final_v1_03_tight__A__r2/result.json
+final_v1_02_tight__A__r1,A,final_v1_02_tight,over_budget,Friend_1 cost 29 > budget 25,jobs/final_v1_02_tight__A__r1/result.json
+final_v1_02_tight__A__r1,A,final_v1_02_tight,over_budget,Friend_2 cost 29 > budget 26,jobs/final_v1_02_tight__A__r1/result.json
+final_v1_08_tight__A__r2,A,final_v1_08_tight,over_budget,Friend_1 cost 23 > budget 18,jobs/final_v1_08_tight__A__r2/result.json
+final_v1_08_tight__A__r2,A,final_v1_08_tight,over_budget,Friend_2 cost 23 > budget 19,jobs/final_v1_08_tight__A__r2/result.json
+final_v1_08_tight__A__r2,A,final_v1_08_tight,over_budget,Friend_3 cost 23 > budget 20,jobs/final_v1_08_tight__A__r2/result.json
+final_v1_08_tight__A__r2,A,final_v1_08_tight,over_budget,Friend_4 cost 23 > budget 21,jobs/final_v1_08_tight__A__r2/result.json
+final_v1_08_tight__A__r2,A,final_v1_08_tight,over_budget,Friend_5 cost 23 > budget 22,jobs/final_v1_08_tight__A__r2/result.json
+final_v1_06_tight__A__r2,A,final_v1_06_tight,over_budget,Friend_1 cost 23 > budget 20,jobs/final_v1_06_tight__A__r2/result.json
+final_v1_06_tight__A__r2,A,final_v1_06_tight,over_budget,Friend_2 cost 23 > budget 21,jobs/final_v1_06_tight__A__r2/result.json
+final_v1_06_tight__A__r2,A,final_v1_06_tight,over_budget,Friend_3 cost 23 > budget 22,jobs/final_v1_06_tight__A__r2/result.json
+final_v1_03_tight__A__r3,A,final_v1_03_tight,insufficient_activities,"day 2 has 1 activities, needs 2",jobs/final_v1_03_tight__A__r3/result.json
+final_v1_08_tight__A__r1,A,final_v1_08_tight,over_budget,Friend_1 cost 23 > budget 18,jobs/final_v1_08_tight__A__r1/result.json
+final_v1_08_tight__A__r1,A,final_v1_08_tight,over_budget,Friend_2 cost 23 > budget 19,jobs/final_v1_08_tight__A__r1/result.json
+final_v1_08_tight__A__r1,A,final_v1_08_tight,over_budget,Friend_3 cost 23 > budget 20,jobs/final_v1_08_tight__A__r1/result.json
+final_v1_08_tight__A__r1,A,final_v1_08_tight,over_budget,Friend_4 cost 23 > budget 21,jobs/final_v1_08_tight__A__r1/result.json
+final_v1_08_tight__A__r1,A,final_v1_08_tight,over_budget,Friend_5 cost 23 > budget 22,jobs/final_v1_08_tight__A__r1/result.json
+final_v1_02_tight__A__r2,A,final_v1_02_tight,over_budget,Friend_1 cost 29 > budget 25,jobs/final_v1_02_tight__A__r2/result.json
+final_v1_02_tight__A__r2,A,final_v1_02_tight,over_budget,Friend_2 cost 29 > budget 26,jobs/final_v1_02_tight__A__r2/result.json
+final_v1_08_tight__A__r3,A,final_v1_08_tight,over_budget,Friend_1 cost 23 > budget 18,jobs/final_v1_08_tight__A__r3/result.json
+final_v1_08_tight__A__r3,A,final_v1_08_tight,over_budget,Friend_2 cost 23 > budget 19,jobs/final_v1_08_tight__A__r3/result.json
+final_v1_08_tight__A__r3,A,final_v1_08_tight,over_budget,Friend_3 cost 23 > budget 20,jobs/final_v1_08_tight__A__r3/result.json
+final_v1_08_tight__A__r3,A,final_v1_08_tight,over_budget,Friend_4 cost 23 > budget 21,jobs/final_v1_08_tight__A__r3/result.json
+final_v1_08_tight__A__r3,A,final_v1_08_tight,over_budget,Friend_5 cost 23 > budget 22,jobs/final_v1_08_tight__A__r3/result.json

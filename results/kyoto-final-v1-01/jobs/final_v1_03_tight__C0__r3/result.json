@@ -1,0 +1,257 @@
+{
+  "job_id": "final_v1_03_tight__C0__r3",
+  "scenario_id": "final_v1_03_tight",
+  "condition": "C0",
+  "repetition": 3,
+  "family_id": "final_family_03",
+  "expected_feasible": true,
+  "started_utc": "2026-11-03T05:49:42.127311+00:00",
+  "setup": "C",
+  "config": {
+    "model": "gemini-3.5-flash-lite",
+    "temperature": 0,
+    "seed": 42,
+    "cache": false,
+    "setup": "C",
+    "days": 2,
+    "min_activities_per_day": 2,
+    "max_revisions": 3,
+    "negotiation_rounds": 0,
+    "guardrails": "on",
+    "budget_cap": 3000,
+    "bot_name": "tripbot",
+    "cooldown_seconds": 20,
+    "day_start": "07:00",
+    "day_end": "23:00",
+    "breaking_point_threshold": 0.5,
+    "bootstrap_resamples": 1000,
+    "runs": 3,
+    "paths": {
+      "places": "/Users/eryn/Desktop/datAI/data/places.json",
+      "tags": "/Users/eryn/Desktop/datAI/data/tags.json",
+      "travel_times": "/Users/eryn/Desktop/datAI/data/travel_times.json",
+      "results": "results/runs.jsonl",
+      "llm_log": "/Users/eryn/Desktop/datAI/results/kyoto-final-v1-01/jobs/final_v1_03_tight__C0__r3/llm_log.jsonl",
+      "bot_state": "data/bot_state.json"
+    }
+  },
+  "prompt_version": "8",
+  "scenario_factors": {
+    "n_friends": 2,
+    "conflict": "strong",
+    "budget": "tight",
+    "split": "heldout"
+  },
+  "plan": {
+    "days": [
+      {
+        "day": 1,
+        "items": [
+          {
+            "place_id": "p01",
+            "start": "10:00",
+            "end": "10:45"
+          },
+          {
+            "place_id": "p10",
+            "start": "11:00",
+            "end": "12:30"
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "items": [
+          {
+            "place_id": "p14",
+            "start": "10:00",
+            "end": "11:30"
+          },
+          {
+            "place_id": "p16",
+            "start": "12:10",
+            "end": "13:10"
+          }
+        ]
+      }
+    ]
+  },
+  "report": {
+    "feasible": true,
+    "violations": [],
+    "hard_limit_satisfaction": 1.0,
+    "per_friend_satisfaction": {
+      "Friend_1": 0.6666666666666666,
+      "Friend_2": 1.0
+    },
+    "fairness": {
+      "min": 0.6666666666666666,
+      "gap": 0.33333333333333337,
+      "jain": 0.9615384615384613
+    },
+    "task_success": true
+  },
+  "trace": [
+    {
+      "step": "friend",
+      "attempt": 1,
+      "tokens_in": 2768,
+      "tokens_out": 226,
+      "seconds": 1.5706932920147665,
+      "cached": false,
+      "friend": "Friend_1",
+      "round": 0,
+      "parsed": true,
+      "prompt_version": "8",
+      "place_filter": {
+        "version": 1,
+        "input_place_count": 25,
+        "eligible_place_ids": [
+          "p01",
+          "p02",
+          "p03",
+          "p05",
+          "p07",
+          "p09",
+          "p10",
+          "p14",
+          "p16",
+          "p17",
+          "p18",
+          "p19",
+          "p20",
+          "p21",
+          "p23"
+        ],
+        "excluded": [
+          {
+            "place_id": "p04",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p06",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p08",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p11",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p12",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p13",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p15",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p22",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p24",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          },
+          {
+            "place_id": "p25",
+            "reasons": [
+              "forbidden_tag:temples"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "step": "friend",
+      "attempt": 2,
+      "tokens_in": 2751,
+      "tokens_out": 226,
+      "seconds": 2.319708916998934,
+      "cached": false,
+      "friend": "Friend_2",
+      "round": 0,
+      "parsed": true,
+      "prompt_version": "8"
+    },
+    {
+      "step": "mediator",
+      "attempt": 3,
+      "tokens_in": 3329,
+      "tokens_out": 226,
+      "seconds": 2.147084541997174,
+      "cached": false,
+      "violations": [
+        {
+          "type": "travel_gap",
+          "detail": "day 2 p14 to p07 gap 35 < 40"
+        },
+        {
+          "type": "over_budget",
+          "detail": "Friend_1 cost 26 > budget 25"
+        }
+      ],
+      "prompt_version": "8"
+    },
+    {
+      "step": "revision",
+      "attempt": 4,
+      "tokens_in": 4312,
+      "tokens_out": 226,
+      "seconds": 1.3309864170150831,
+      "cached": false,
+      "violations": [],
+      "prompt_version": "8"
+    }
+  ],
+  "task_success": true,
+  "delivered_minimum": 0.6666666666666666,
+  "delivered_mean": 0.8333333333333333,
+  "delivered_per_friend": {
+    "Friend_1": 0.6666666666666666,
+    "Friend_2": 1.0
+  },
+  "calls_artifact": "jobs/final_v1_03_tight__C0__r3/calls.jsonl",
+  "verification_revisions": 1,
+  "model_call_seconds": 7.368473168025957,
+  "planner_logical_calls": 4,
+  "status": "success",
+  "usage": {
+    "logical_calls": 4,
+    "physical_requests": 4,
+    "known_tokens_in": 13160,
+    "known_tokens_out": 904,
+    "tokens_in": 13160,
+    "tokens_out": 904,
+    "unknown_usage_requests": 0,
+    "request_seconds": 7.362796041998081,
+    "logical_call_seconds": 7.373987832979765
+  },
+  "elapsed_seconds": 7.378466791997198,
+  "ended_utc": "2026-11-03T05:49:49.505794+00:00"
+}

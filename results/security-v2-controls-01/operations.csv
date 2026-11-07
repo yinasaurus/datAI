@@ -1,0 +1,3 @@
+source,branch,category,recorded,valid_outputs,api_failures,invalid_outputs,operational_failures,interruptions,invalid_output_rate,api_failure_rate,mean_logical_calls,logical_calls_known_jobs,mean_physical_requests,physical_requests_known_jobs,mean_tokens_in,tokens_in_known_jobs,mean_tokens_out,tokens_out_known_jobs,mean_elapsed_seconds,elapsed_seconds_known_jobs
+fixed_control,legitimate_control,all,15,15,0,0,0,0,0.0,0.0,0,15,0,15,0,15,0,15,0.0009108416018231461,15
+fixed_control,unsafe_diagnostic,all,15,15,0,0,0,0,0.0,0.0,0,15,0,15,0,15,0,15,0.0009276695355462532,15

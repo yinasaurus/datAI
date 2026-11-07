@@ -1,0 +1,18 @@
+{
+  "git_revision": "46bf8d1e3c65ea8144e339eeb0f02d1577fae6d1",
+  "source_and_input_hashes_match": true,
+  "checker_reports_rechecked": 240,
+  "checker_mismatches": 0,
+  "delivered_scores_and_revision_counts_match": true,
+  "states": {
+    "success": 228,
+    "constraint_failure": 12
+  },
+  "conditions": {
+    "B": 60,
+    "A": 60,
+    "C2": 60,
+    "C0": 60
+  },
+  "git_working_tree_clean": true
+}

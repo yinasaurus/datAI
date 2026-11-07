@@ -1,0 +1,302 @@
+[
+  {
+    "job_id": "control_unknown_tool__r2",
+    "case_id": "unknown_tool",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 2
+  },
+  {
+    "job_id": "control_description_quote__r2",
+    "case_id": "description_quote",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 2
+  },
+  {
+    "job_id": "control_clean_reply__r2",
+    "case_id": "clean_reply",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 2
+  },
+  {
+    "job_id": "control_budget_override__r3",
+    "case_id": "budget_override",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 3
+  },
+  {
+    "job_id": "control_check__r3",
+    "case_id": "check",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 3
+  },
+  {
+    "job_id": "control_budget_override__r1",
+    "case_id": "budget_override",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 1
+  },
+  {
+    "job_id": "control_untrusted_book__r1",
+    "case_id": "untrusted_book",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 1
+  },
+  {
+    "job_id": "control_check__r2",
+    "case_id": "check",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 2
+  },
+  {
+    "job_id": "control_search__r2",
+    "case_id": "search",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 2
+  },
+  {
+    "job_id": "control_untrusted_book__r2",
+    "case_id": "untrusted_book",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 2
+  },
+  {
+    "job_id": "control_unknown_tool__r1",
+    "case_id": "unknown_tool",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 1
+  },
+  {
+    "job_id": "control_untrusted_book__r3",
+    "case_id": "untrusted_book",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 3
+  },
+  {
+    "job_id": "control_unknown_tool__r3",
+    "case_id": "unknown_tool",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 3
+  },
+  {
+    "job_id": "control_search__r3",
+    "case_id": "search",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 3
+  },
+  {
+    "job_id": "control_budget_override__r2",
+    "case_id": "budget_override",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 2
+  },
+  {
+    "job_id": "control_canary_reply__r3",
+    "case_id": "canary_reply",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 3
+  },
+  {
+    "job_id": "control_search__r1",
+    "case_id": "search",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 1
+  },
+  {
+    "job_id": "control_human_confirm__r2",
+    "case_id": "human_confirm",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 2
+  },
+  {
+    "job_id": "control_over_cap__r2",
+    "case_id": "over_cap",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 2
+  },
+  {
+    "job_id": "control_check__r1",
+    "case_id": "check",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 1
+  },
+  {
+    "job_id": "control_canary_reply__r2",
+    "case_id": "canary_reply",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 2
+  },
+  {
+    "job_id": "control_over_cap__r3",
+    "case_id": "over_cap",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 3
+  },
+  {
+    "job_id": "control_description_quote__r1",
+    "case_id": "description_quote",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 1
+  },
+  {
+    "job_id": "control_description_quote__r3",
+    "case_id": "description_quote",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 3
+  },
+  {
+    "job_id": "control_canary_reply__r1",
+    "case_id": "canary_reply",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 1
+  },
+  {
+    "job_id": "control_over_cap__r1",
+    "case_id": "over_cap",
+    "pair_id": null,
+    "branch": "unsafe_diagnostic",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 1
+  },
+  {
+    "job_id": "control_human_confirm__r3",
+    "case_id": "human_confirm",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 3
+  },
+  {
+    "job_id": "control_clean_reply__r1",
+    "case_id": "clean_reply",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 1
+  },
+  {
+    "job_id": "control_human_confirm__r1",
+    "case_id": "human_confirm",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 1
+  },
+  {
+    "job_id": "control_clean_reply__r3",
+    "case_id": "clean_reply",
+    "pair_id": null,
+    "branch": "legitimate_control",
+    "source": "fixed_control",
+    "target": null,
+    "category": null,
+    "repetition": 3
+  }
+]

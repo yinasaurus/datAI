@@ -1,0 +1,258 @@
+{
+  "job_id": "final_v1_02_tight__C2__r1",
+  "scenario_id": "final_v1_02_tight",
+  "condition": "C2",
+  "repetition": 1,
+  "family_id": "final_family_02",
+  "expected_feasible": true,
+  "started_utc": "2026-11-03T05:44:09.439771+00:00",
+  "setup": "C",
+  "config": {
+    "model": "gemini-3.5-flash-lite",
+    "temperature": 0,
+    "seed": 42,
+    "cache": false,
+    "setup": "C",
+    "days": 2,
+    "min_activities_per_day": 2,
+    "max_revisions": 3,
+    "negotiation_rounds": 2,
+    "guardrails": "on",
+    "budget_cap": 3000,
+    "bot_name": "tripbot",
+    "cooldown_seconds": 20,
+    "day_start": "07:00",
+    "day_end": "23:00",
+    "breaking_point_threshold": 0.5,
+    "bootstrap_resamples": 1000,
+    "runs": 3,
+    "paths": {
+      "places": "/Users/eryn/Desktop/datAI/data/places.json",
+      "tags": "/Users/eryn/Desktop/datAI/data/tags.json",
+      "travel_times": "/Users/eryn/Desktop/datAI/data/travel_times.json",
+      "results": "results/runs.jsonl",
+      "llm_log": "/Users/eryn/Desktop/datAI/results/kyoto-final-v1-01/jobs/final_v1_02_tight__C2__r1/llm_log.jsonl",
+      "bot_state": "data/bot_state.json"
+    }
+  },
+  "prompt_version": "8",
+  "scenario_factors": {
+    "n_friends": 2,
+    "conflict": "mild",
+    "budget": "tight",
+    "split": "heldout"
+  },
+  "plan": {
+    "days": [
+      {
+        "day": 1,
+        "items": [
+          {
+            "place_id": "p14",
+            "start": "10:00",
+            "end": "11:30"
+          },
+          {
+            "place_id": "p07",
+            "start": "12:10",
+            "end": "14:10"
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "items": [
+          {
+            "place_id": "p01",
+            "start": "10:00",
+            "end": "10:45"
+          },
+          {
+            "place_id": "p15",
+            "start": "11:15",
+            "end": "13:45"
+          }
+        ]
+      }
+    ]
+  },
+  "report": {
+    "feasible": true,
+    "violations": [],
+    "hard_limit_satisfaction": 1.0,
+    "per_friend_satisfaction": {
+      "Friend_1": 1.0,
+      "Friend_2": 1.0
+    },
+    "fairness": {
+      "min": 1.0,
+      "gap": 0.0,
+      "jain": 1.0
+    },
+    "task_success": true
+  },
+  "trace": [
+    {
+      "step": "friend",
+      "attempt": 1,
+      "tokens_in": 4143,
+      "tokens_out": 226,
+      "seconds": 1.452722750022076,
+      "cached": false,
+      "friend": "Friend_1",
+      "round": 0,
+      "parsed": true,
+      "prompt_version": "8",
+      "place_filter": {
+        "version": 1,
+        "input_place_count": 25,
+        "eligible_place_ids": [
+          "p01",
+          "p02",
+          "p03",
+          "p04",
+          "p05",
+          "p06",
+          "p07",
+          "p08",
+          "p09",
+          "p10",
+          "p11",
+          "p12",
+          "p13",
+          "p14",
+          "p15",
+          "p16",
+          "p17",
+          "p18",
+          "p19",
+          "p20",
+          "p21",
+          "p22",
+          "p23",
+          "p24",
+          "p25"
+        ],
+        "excluded": []
+      }
+    },
+    {
+      "step": "friend",
+      "attempt": 2,
+      "tokens_in": 4148,
+      "tokens_out": 226,
+      "seconds": 1.576799000002211,
+      "cached": false,
+      "friend": "Friend_2",
+      "round": 0,
+      "parsed": true,
+      "prompt_version": "8"
+    },
+    {
+      "step": "friend",
+      "attempt": 3,
+      "tokens_in": 4638,
+      "tokens_out": 226,
+      "seconds": 1.1549350839923136,
+      "cached": false,
+      "friend": "Friend_1",
+      "round": 1,
+      "parsed": true,
+      "prompt_version": "8"
+    },
+    {
+      "step": "friend",
+      "attempt": 4,
+      "tokens_in": 4643,
+      "tokens_out": 226,
+      "seconds": 1.5801307920191903,
+      "cached": false,
+      "friend": "Friend_2",
+      "round": 1,
+      "parsed": true,
+      "prompt_version": "8"
+    },
+    {
+      "step": "friend",
+      "attempt": 5,
+      "tokens_in": 4638,
+      "tokens_out": 226,
+      "seconds": 1.1776676249864977,
+      "cached": false,
+      "friend": "Friend_1",
+      "round": 2,
+      "parsed": true,
+      "prompt_version": "8"
+    },
+    {
+      "step": "friend",
+      "attempt": 6,
+      "tokens_in": 4643,
+      "tokens_out": 226,
+      "seconds": 1.6323645829979796,
+      "cached": false,
+      "friend": "Friend_2",
+      "round": 2,
+      "parsed": true,
+      "prompt_version": "8"
+    },
+    {
+      "step": "mediator",
+      "attempt": 7,
+      "tokens_in": 4709,
+      "tokens_out": 226,
+      "seconds": 1.846875707997242,
+      "cached": false,
+      "violations": [
+        {
+          "type": "travel_gap",
+          "detail": "day 1 p14 to p07 gap 35 < 40"
+        },
+        {
+          "type": "over_budget",
+          "detail": "Friend_1 cost 27 > budget 25"
+        },
+        {
+          "type": "over_budget",
+          "detail": "Friend_2 cost 27 > budget 26"
+        }
+      ],
+      "prompt_version": "8"
+    },
+    {
+      "step": "revision",
+      "attempt": 8,
+      "tokens_in": 6730,
+      "tokens_out": 226,
+      "seconds": 1.562322582991328,
+      "cached": false,
+      "violations": [],
+      "prompt_version": "8"
+    }
+  ],
+  "task_success": true,
+  "delivered_minimum": 1.0,
+  "delivered_mean": 1.0,
+  "delivered_per_friend": {
+    "Friend_1": 1.0,
+    "Friend_2": 1.0
+  },
+  "calls_artifact": "jobs/final_v1_02_tight__C2__r1/calls.jsonl",
+  "verification_revisions": 1,
+  "model_call_seconds": 11.983818125008838,
+  "planner_logical_calls": 8,
+  "status": "success",
+  "usage": {
+    "logical_calls": 8,
+    "physical_requests": 8,
+    "known_tokens_in": 38292,
+    "known_tokens_out": 1808,
+    "tokens_in": 38292,
+    "tokens_out": 1808,
+    "unknown_usage_requests": 0,
+    "request_seconds": 11.972271959966747,
+    "logical_call_seconds": 11.994421458017314
+  },
+  "elapsed_seconds": 12.002439917006996,
+  "ended_utc": "2026-11-03T05:44:21.442228+00:00"
+}

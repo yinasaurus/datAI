@@ -1,4 +1,6 @@
-# Final held-out planning evaluation: freeze candidate
+# Final held-out planning evaluation — frozen protocol
+
+> Current status: Completed: 240/240 planning jobs at commit `46bf8d1e3c65ea8144e339eeb0f02d1577fae6d1` (method 7 / prompt 8). The original procedure below is retained as the preregistered design. Its pre-run pending/approval language is historical. No rerun or tuning is authorised.
 
 No final model calls are authorised yet. Method v7 is retained; prompt v8 corrects shared constraint wording only. Final results must be labelled **method 7 / prompt 8**, separately from development versions. Commit this package and record the resulting Git revision before approving a full run. The runner's `--require-clean` enforces that freeze; manifests also preserve actual source hashes and source copies.
 

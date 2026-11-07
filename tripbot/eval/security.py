@@ -271,7 +271,7 @@ def main(argv=None,*,client=None):
     inputs={f'attacks/{a.id}.json':ROOT/'data/attacks'/args.split/f'{a.id}.json' for a in attacks}
     inputs.update({'scenario.json':args.scenario,'config.yaml':args.config,
         **{f'{k}.json':Path(config['paths'][k]) for k in ('places','tags','travel_times')},
-        'SECURITY_EVALUATION_PROTOCOL.md':ROOT/'SECURITY_EVALUATION_PROTOCOL.md',
+        'SECURITY_EVALUATION_PROTOCOL.md':ROOT/'docs/archive/SECURITY_EVALUATION_PROTOCOL.md',
         'security_controls_v1.json':ROOT/'data/security_controls_v1.json'})
     hashes={}
     for name,path in inputs.items():
