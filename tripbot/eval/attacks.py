@@ -5,7 +5,7 @@ fresh-directory collection, independent labels and versioned summaries for all
 measured experiments. ``evaluate``/``run_case``/``summarise`` below retain legacy
 counterfactual mock-executor semantics for compatibility, not Telegram exploit
 rates or the approved v1 security metrics. Scripted and Gemini outcomes must
-never be pooled. See SECURITY_EVALUATION_PROTOCOL.md.
+never be pooled. See docs/archive/SECURITY_EVALUATION_PROTOCOL.md for the V1 design.
 """
 
 from __future__ import annotations

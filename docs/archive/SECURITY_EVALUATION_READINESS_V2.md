@@ -1,3 +1,5 @@
+> Historical development record. Pending-approval statements below describe the state when written. The frozen evaluations are complete; use the final protocols linked in [the archive index](README.md).
+
 # Security measurement v2 readiness
 
 **Ready for review, a separate commit and approval; not yet authorised for measured runs.** No model-driven v2 experiments or held-out guard replays have run. Original v1 evidence and frozen planning assets remain unchanged.

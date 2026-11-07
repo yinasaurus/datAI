@@ -113,9 +113,9 @@ prompts do not contain that canary. The live reply filter still blocks the marke
 if it appears in outgoing text. Canary and exact description-echo filtering are
 limited checks, not proof of general prompt-injection resistance.
 
-The versioned security runner is `tripbot.eval.security`; the `attacks` CLI now
-forwards to it and requires a fresh `--output` directory. See
-[SECURITY_EVALUATION_PROTOCOL.md](SECURITY_EVALUATION_PROTOCOL.md) for exact commands,
+The final security runner is `tripbot.eval.security_v2`. The legacy `attacks` CLI
+forwards to the archived V1 runner; both require a fresh `--output` directory. See
+[final security V2 protocol](SECURITY_EVALUATION_PROTOCOL_V2.md) for exact commands,
 independent action labels, metrics, security-only configuration and threat boundaries.
 Its primary endpoint is counterfactual guard-boundary authorisation, not an actual
 Telegram booking or configuration change. Model-driven, scripted-compromise and
@@ -127,7 +127,7 @@ have distinct labels. Primary attack success rates use valid attack outputs;
 all-attempt rates and denominator/error counts are also reported. False-positive
 rates use only independently safe reached actions in benign controls. Raw evidence
 is owner-only under `private/`; public artifacts redact exact and obfuscated planted
-canaries. No model-driven security experiments have been run for this package.
+canaries. The V2 development and held-out experiments are complete and frozen.
 
 Security regression tests use simulated model responses and the actual bot
 handler/guard path. No real Telegram delivery or Gemini attacks are implied by
@@ -135,11 +135,9 @@ passing these tests.
 
 ## Evaluation protocol
 
-The agreed [evaluation protocol](EVALUATION_PROTOCOL.md) defines A/B/C plus the
-C0/C2 ablation, three fresh generations, disabled experiment caching, metrics,
-failure handling, paired analysis, and qualitative review. It is a design document,
-not completed experimental results. New held-out sets and the main runner remain
-pending; ordinary bot cache defaults are unchanged.
+The [final planning protocol](FINAL_EVALUATION_PROTOCOL.md) defines the frozen A/B/C0/C2 experiment and family-aware analysis. The [final security protocol](SECURITY_EVALUATION_PROTOCOL_V2.md) defines the separate matched security experiment. Both studies are complete; their original pre-run approval language is historical, not permission to rerun.
+
+Earlier protocols, development history and readiness checks are in [docs/archive](docs/archive/README.md). Keep them for traceability; use the final result CSVs for completed outcomes.
 
 ## Planning experiment runner
 
@@ -285,8 +283,10 @@ receive no invented suggestions. The checker remains the final authority.
 A remains single-pass with shared v6 eligibility. This is a documented expansion
 of B/C's feedback harness, not a fourth architecture. Existing datasets, scores,
 model settings, and revision limits are unchanged. Local tests pass. A six-job B/C development smoke passed all cases; this is
-preliminary familiar-case evidence, not final generalisation. See EVALUATION_LOG.md.
+preliminary familiar-case evidence, not final generalisation. See the [archived development log](docs/archive/EVALUATION_LOG.md).
 
-### Final held-out evaluation (awaiting approval)
+### Final held-out evaluation (completed and frozen)
 
-The final package retains method v7 with prompt v8 shared-constraint parity. It introduces no repair or planning-performance optimisations. See [FINAL_EVALUATION_PROTOCOL.md](FINAL_EVALUATION_PROTOCOL.md) for the freeze procedure, exact dry/full commands, all metrics and family-cluster paired analysis. The new dataset is [data/final_eval_v1](data/final_eval_v1/README.md): 20 checker-validated cases in 10 dependent template families. No final model evaluation has been executed. Commit the freeze before running the protocol's `--require-clean` command, and obtain approval first.
+Method v7 / prompt v8 completed all 240 planning jobs. A achieved 48/60 task successes; B, C0 and C2 each achieved 60/60. The separate security V2 held-out experiment completed 36 generations / 18 matched pairs; intended-target authorisation was 3/18 with guards off and 0/18 on. These bounded findings do not establish general architecture superiority or prompt-injection resistance.
+
+Final metrics and paired intervals are in `results/kyoto-final-v1-01/analysis/conditions.csv` and `pairs.csv`. Security target outcomes and matched comparisons are in `results/security-v2-final-review-01/heldout_targets.csv` and `paired_outcomes.csv`. The protocols preserve pre-run decisions; their pending-approval language is historical. Do not rerun or tune frozen experiments.

@@ -1,3 +1,5 @@
+> Historical development record. Pending-approval statements below describe the state when written. The frozen evaluations are complete; use the final protocols linked in [the archive index](README.md).
+
 # Security evaluation v1 readiness
 
 **Ready for review and approval as a separate action-boundary security experiment.** The security package must be committed before measured runs; `--require-clean` enforces this. No model-driven/paid security experiment has been executed. The frozen planning evaluation remains separate and unchanged.

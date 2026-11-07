@@ -1,3 +1,5 @@
+> Historical development record. Pending-approval statements below describe the state when written. The frozen evaluations are complete; use the final protocols linked in [the archive index](README.md).
+
 # Evaluation log
 
 ## Step 1 — local verification, 2 November 2026
@@ -13,7 +15,7 @@
 ```
 
 - Results: **214 tests passed**; one Google SDK/Python deprecation warning. **24 scenarios checked, zero invalid or unsolvable** under the validator's model.
-- Evidence: [captured verification output](results/evaluation-checks-2026-11-02/verification.txt).
+- Evidence: [captured verification output](../../results/evaluation-checks-2026-11-02/verification.txt).
 - Interpretation: local tests and the feasibility search pass. This does not establish LLM planning performance, real-world travel feasibility, or general security.
 - Model/API usage: none for this step.
 
@@ -33,7 +35,7 @@ python -m tripbot.eval.run \
 
 - Recorded: 4 of 288 scheduled jobs; 284 pending. One success and three constraint failures. Total physical requests recorded: 31. This entry does not represent a new model run.
 - Conditions observed: two B jobs, one C0 job, one C2 job; no A. Scenarios/repetitions differ, so this is not a balanced architecture comparison.
-- Evidence: [readable pilot summary](results/kyoto-v2-pilot-01/analysis/summary.md), [final failure details](results/kyoto-v2-pilot-01/analysis/failures.csv), and the per-job result/call artifacts.
+- Evidence: [readable pilot summary](../../results/kyoto-v2-pilot-01/analysis/summary.md), [final failure details](../../results/kyoto-v2-pilot-01/analysis/failures.csv), and the per-job result/call artifacts.
 - Observed repair behaviour: a budget correction can remove a required activity; restoring an activity can introduce budget or hard-limit failures. These are development observations, not final findings.
 
 ## Next step — matched development pilot (not started here)
@@ -71,7 +73,7 @@ python -m tripbot.eval.run \
 - Failure pattern: A/C0 over budget; B over budget and a hard-limit failure; C2 insufficient activities after reducing cost.
 - Each condition produced one unique final plan across its three fresh requests. Do not treat these repetitions as independent scenarios.
 - Recomputed every final report and repair-feedback list using archived input data: all matched. Separately rechecked the existing reference plan: cost 23, task success true, minimum satisfaction 0.5. This is evaluator consistency evidence; teammate independent review is still pending.
-- Evidence: [readable summary](results/kyoto-v2-matched-pilot-02/analysis/summary.md), [pilot interpretation and reference table](results/kyoto-v2-matched-pilot-02/analysis/pilot_notes.md), [per-job recheck](results/kyoto-v2-matched-pilot-02/analysis/recheck.json), [reference plan](results/kyoto-v2-matched-pilot-02/analysis/reference_witness.json), plus manifest/source/input/call artifacts.
+- Evidence: [readable summary](../../results/kyoto-v2-matched-pilot-02/analysis/summary.md), [pilot interpretation and reference table](../../results/kyoto-v2-matched-pilot-02/analysis/pilot_notes.md), [per-job recheck](../../results/kyoto-v2-matched-pilot-02/analysis/recheck.json), [reference plan](../../results/kyoto-v2-matched-pilot-02/analysis/reference_witness.json), plus manifest/source/input/call artifacts.
 - Interpretation: the repair loops can trade one constraint failure for another. Additional computation did not deliver success on this one development case. This is not evidence of an overall architecture ranking.
 - No prompt/model/data changes made after this pilot. Next decision: a small matched development sample covering contrasting conditions before considering revisions or final held-out design.
 
@@ -101,7 +103,7 @@ Byte-identical copies of Kyoto v2 development inputs are staged under its `dev/`
 - Actual physical requests: 297; known input tokens 1,392,285; known output tokens 63,414. Mean requests/job: A 1, B 3.25, C0 6.75, C2 13.75. Mean elapsed seconds/job: A 1.423, B 4.900, C0 9.829, C2 19.399.
 - Final failures: budget dominates; C0 on 001 ends with insufficient activities. All final hard limits satisfied in this batch. Each condition/scenario has one unique final plan across its three fresh requests.
 - Rechecked 48 final reports and group repair-feedback lists against archived inputs: all match. Reference witnesses rechecked for all four scenarios: all valid. These are same-evaluator consistency checks; independent teammate manual review remains pending.
-- Evidence: [readable summary](results/kyoto-v2-dev-four-01/analysis/summary.md), [case-by-case interpretation](results/kyoto-v2-dev-four-01/analysis/pilot_notes.md), [per-scenario table](results/kyoto-v2-dev-four-01/analysis/per_scenario.csv), [recheck results](results/kyoto-v2-dev-four-01/analysis/recheck.json), [reference witnesses](results/kyoto-v2-dev-four-01/analysis/reference_witnesses.json).
+- Evidence: [readable summary](../../results/kyoto-v2-dev-four-01/analysis/summary.md), [case-by-case interpretation](../../results/kyoto-v2-dev-four-01/analysis/pilot_notes.md), [per-scenario table](../../results/kyoto-v2-dev-four-01/analysis/per_scenario.csv), [recheck results](../../results/kyoto-v2-dev-four-01/analysis/recheck.json), [reference witnesses](../../results/kyoto-v2-dev-four-01/analysis/reference_witnesses.json).
 - Interpretation: additional checking/negotiation did not improve success on these cases. The controlled 001/002 pair suggests budget handling deserves investigation, but the small selected sample does not establish population-level effects or an overall architecture winner.
 - No implementation/prompt/data changes made in response. Proposed next discussion: explicit effective group budget and whole-trip cost wording applied fairly across group planners; agree before editing. Preserve this baseline and avoid tuning on final held-out data.
 
@@ -132,7 +134,7 @@ Byte-identical copies of Kyoto v2 development inputs are staged under its `dev/`
 - V4 physical requests 294 (v3 297); known input/output tokens 1,409,280 / 60,708. Mean requests/job: A 1, B 3.25, C0 6.5, C2 13.75. No monetary cost is inferred from these counts.
 - Remaining failures include B hard-limit regressions on 001/009 and a travel gap on 009; C0 activity-count failure on 021; budget violations elsewhere. Feasible plans that break hard limits still fail task success.
 - All 48 reports and group repair-feedback lists match recomputation using archived inputs. Each scenario/condition yields one unique final plan over three fresh requests. Independent teammate review is still pending.
-- Evidence: [v4 summary](results/kyoto-v2-dev-four-v4-01/analysis/summary.md), [version comparison](results/kyoto-v2-dev-four-v4-01/analysis/v3_vs_v4.csv), [interpretation and limitations](results/kyoto-v2-dev-four-v4-01/analysis/v3_vs_v4_notes.md), [recheck](results/kyoto-v2-dev-four-v4-01/analysis/recheck.json).
+- Evidence: [v4 summary](../../results/kyoto-v2-dev-four-v4-01/analysis/summary.md), [version comparison](../../results/kyoto-v2-dev-four-v4-01/analysis/v3_vs_v4.csv), [interpretation and limitations](../../results/kyoto-v2-dev-four-v4-01/analysis/v3_vs_v4_notes.md), [recheck](../../results/kyoto-v2-dev-four-v4-01/analysis/recheck.json).
 - Conclusion: limited development gain, not a general fix. Budget instructions and feedback changed together; the runs also occurred at different times. Preserve both versions. Next discussion: inspect representative repairs before deciding whether to retain bounded planning or introduce stronger constraint assistance. No further prompt changes or architecture additions made.
 
 
@@ -143,7 +145,7 @@ Byte-identical copies of Kyoto v2 development inputs are staged under its `dev/`
 - B/001: 32 → 18 (forbidden p12) → 28 → 22 (forbidden p12 again). Final feasibility true but task success false. Both raw preference scores are 1; this is not usable success because Ben forbids temples.
 - B/009: 32 → 15 (forbidden p12) → 25 → 20 (forbidden p12 plus 25-minute gap where 40 required).
 - Inspected budget feedback, hard-limit feedback, and stopping condition match the observed runs. No implementation bug identified in these paths. More specific offending-place feedback is a hypothesis for development improvement, not an implemented or proven fix.
-- Evidence: [repair case studies and hand calculations](results/kyoto-v2-dev-four-v4-01/analysis/repair_case_studies.md).
+- Evidence: [repair case studies and hand calculations](../../results/kyoto-v2-dev-four-v4-01/analysis/repair_case_studies.md).
 - Next decision requires discussion: targeted hard-limit feedback for B/C versus a larger deterministic constraint-assistance intervention. No additional prompt revision, solver, filtering, or rerun performed.
 
 
@@ -170,7 +172,7 @@ Byte-identical copies of Kyoto v2 development inputs are staged under its `dev/`
 - B/001 changes across all three repetitions: v4 cost 22 with forbidden temple → v5 cost 27 with hard limit satisfied but over budget. B hard-limit failures decrease 6→3 jobs, over-budget failures increase 3→6. B/009 still breaks a hard limit and travel gap.
 - 45/48 final plans and reports match v4 exactly. Rechecked all 48 v5 reports and group repair-feedback lists against archived inputs: all match. Repetition outputs remain identical within each scenario/condition; no independent-scenario or significance claim.
 - Usage: 294 physical requests; known input/output tokens 1,409,388 / 60,708. No monetary cost inferred.
-- Evidence: [v5 summary](results/kyoto-v2-dev-four-v5-01/analysis/summary.md), [comparison CSV](results/kyoto-v2-dev-four-v5-01/analysis/v4_vs_v5.csv), [interpretation](results/kyoto-v2-dev-four-v5-01/analysis/v4_vs_v5_notes.md), [recheck](results/kyoto-v2-dev-four-v5-01/analysis/recheck.json).
+- Evidence: [v5 summary](../../results/kyoto-v2-dev-four-v5-01/analysis/summary.md), [comparison CSV](../../results/kyoto-v2-dev-four-v5-01/analysis/v4_vs_v5.csv), [interpretation](../../results/kyoto-v2-dev-four-v5-01/analysis/v4_vs_v5_notes.md), [recheck](../../results/kyoto-v2-dev-four-v5-01/analysis/recheck.json).
 - Conclusion: more specific hard-limit feedback changes a failure mode without improving task success on this selected development sample. Preserve the negative result. Recommend pausing further paid prompt tweaks and discussing final system scope/version, independent manual review, held-out design, and analysis completion before final testing. No further architecture change or run authorised by this log entry.
 
 
@@ -199,7 +201,7 @@ Byte-identical copies of Kyoto v2 development inputs are staged under its `dev/`
 - Case 001: all conditions fail (A cost 28, B cost 26, C0/C2 three activities). Case 009: A/B/C0 pass at cost 23; C2 fails activity minimum. Every final hard limit passes.
 - Same eight repetition-1 identities from v5: one success then versus three now; gains are A/B on 009. This is not an independent final sample or significance claim. The smoke job order differs from the larger v5 schedule.
 - All eight final reports and group repair feedback match recomputation from saved inputs. Every captured prompt catalogue uses the intended same 15 IDs. The checker still uses the full original dataset.
-- Evidence: [smoke interpretation](results/kyoto-v2-v6-smoke-01/analysis/pilot_notes.md), [summary](results/kyoto-v2-v6-smoke-01/analysis/summary.md), [matched repetition-1 comparison](results/kyoto-v2-v6-smoke-01/analysis/v5_vs_v6_smoke.csv), [recheck](results/kyoto-v2-v6-smoke-01/analysis/recheck.json).
+- Evidence: [smoke interpretation](../../results/kyoto-v2-v6-smoke-01/analysis/pilot_notes.md), [summary](../../results/kyoto-v2-v6-smoke-01/analysis/summary.md), [matched repetition-1 comparison](../../results/kyoto-v2-v6-smoke-01/analysis/v5_vs_v6_smoke.csv), [recheck](../../results/kyoto-v2-v6-smoke-01/analysis/recheck.json).
 - Interpretation: hard-limit filtering shows a limited gain on 009 but is not a general feasibility solution. Next discussion: replacement-cost assistance for B/C versus freezing the bounded methods. No added assistance, solver, or larger v6 rerun was performed.
 
 
@@ -228,7 +230,7 @@ Byte-identical copies of Kyoto v2 development inputs are staged under its `dev/`
 - V7 usage: 41 physical requests; known input/output tokens 140,872 / 8,934. B requests 2/1 for 001/009; C0 5/7; C2 9/17. No monetary cost inferred.
 - Saved prompt/response inspection: B/001 uses offered p14 replacing p19 (28→23). C0/C2/001 first reduce 30→26 without a one-edit solution, then use offered p07 replacing p19 (26→23). This supports candidate use, not claims about internal reasoning. B/009 passes without repair. The decisive live repairs exercise replacements, not the addition feature.
 - All six final reports and group repair-feedback lists match recomputation from saved inputs; each prompt uses the same intended 15-place eligible catalogue. Independent teammate manual review remains pending.
-- Evidence: [pilot interpretation](results/kyoto-v2-v7-smoke-01/analysis/pilot_notes.md), [summary](results/kyoto-v2-v7-smoke-01/analysis/summary.md), [matched v6/v7 table](results/kyoto-v2-v7-smoke-01/analysis/v6_vs_v7.csv), [option-use observations](results/kyoto-v2-v7-smoke-01/analysis/repair_option_observations.json), [recheck](results/kyoto-v2-v7-smoke-01/analysis/recheck.json).
+- Evidence: [pilot interpretation](../../results/kyoto-v2-v7-smoke-01/analysis/pilot_notes.md), [summary](../../results/kyoto-v2-v7-smoke-01/analysis/summary.md), [matched v6/v7 table](../../results/kyoto-v2-v7-smoke-01/analysis/v6_vs_v7.csv), [option-use observations](../../results/kyoto-v2-v7-smoke-01/analysis/repair_option_observations.json), [recheck](../../results/kyoto-v2-v7-smoke-01/analysis/recheck.json).
 - No post-run prompt/code/data changes. Next decision: broader prespecified development coverage before choosing a final version and freezing untouched final evaluation; do not generalise six familiar-case successes to all trips.
 
 
@@ -251,7 +253,7 @@ Selection reasons/hashes: `data/eval_selections/v7-broader-v1/selection.json`. B
 - Mean delivered minimum satisfaction: A 0.125; B/C0 0.5833; C2 0.5. Mean requests/job: A 1; B 2.25; C0 5.75; C2 12.75.
 - Usage: 87 physical requests; known input/output tokens 356,157 / 18,244. No monetary cost inferred.
 - All sixteen final reports and group repair-feedback lists match recomputation using archived inputs. Independent teammate manual review remains pending.
-- Evidence: [interpretation](results/kyoto-v2-v7-broader-01/analysis/pilot_notes.md), [summary](results/kyoto-v2-v7-broader-01/analysis/summary.md), [per-case CSV](results/kyoto-v2-v7-broader-01/analysis/per_scenario.csv), [recheck](results/kyoto-v2-v7-broader-01/analysis/recheck.json).
+- Evidence: [interpretation](../../results/kyoto-v2-v7-broader-01/analysis/pilot_notes.md), [summary](../../results/kyoto-v2-v7-broader-01/analysis/summary.md), [per-case CSV](../../results/kyoto-v2-v7-broader-01/analysis/per_scenario.csv), [recheck](../../results/kyoto-v2-v7-broader-01/analysis/recheck.json).
 - These scenario IDs were not previously run, but share related development templates. One generation each is descriptive, not final held-out evidence or a stability estimate. Do not pool with earlier versions or synthetic cases.
 - Interpretation: B/C0 succeed broadly in this selected sample with different resource use. A→B now measures the whole checker-guided cost-assisted repair harness, not checking alone. Extra C negotiation does not improve every case.
 - Recommend pausing method changes and treating v7 as a final candidate pending independent review, checkpoint commit, completion of analysis/repetition decisions, and new held-out freeze. No freeze or further experiment automatically performed.

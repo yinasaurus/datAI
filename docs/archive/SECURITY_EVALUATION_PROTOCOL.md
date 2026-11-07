@@ -1,3 +1,5 @@
+> Historical development record. Pending-approval statements below describe the state when written. The frozen evaluations are complete; use the final protocols linked in [the archive index](README.md).
+
 # Security evaluation v1 — separate approval required
 
 This experiment is separate from the frozen 240-job planning evaluation at `46bf8d1e3c65ea8144e339eeb0f02d1577fae6d1` (method v7 / prompt v8). Do not change planning architectures, prompts, checker, scenarios or saved planning results. No paid/model-driven security runs have been authorised or executed for this package. Commit the reviewed security infrastructure before measured experiments and use `--require-clean`.

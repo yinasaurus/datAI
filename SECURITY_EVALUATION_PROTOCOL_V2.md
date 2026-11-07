@@ -1,4 +1,6 @@
-# Security measurement protocol v2 — approval pending
+# Security measurement protocol v2 — frozen protocol
+
+> Current status: Completed: 36/36 held-out generations, 18 matched pairs at commit `0cd756b988f599897dc3b19d3652594587a1be44`. The original procedure below is retained as the preregistered design. Its pre-run pending/approval language is historical. No rerun or tuning is authorised.
 
 V2 changes measurement and baseline design only. V1 protocol, guard implementations, original attacks, model prompt, cap 30, v1 results and the frozen planning evaluation remain unchanged. No paid/model-driven v2 experiment or held-out attack replay is authorised yet. This document does not revise the interpretation or files of the original v1 batches; those remain historical evidence under commit ee4bb869ef5afc50371375cd2c011306d38bcbb8.
 

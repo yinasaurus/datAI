@@ -389,13 +389,7 @@ calls/tokens/time; B versus C does not isolate architecture from extra computati
 
 ## Agreed evaluation protocol
 
-`EVALUATION_PROTOCOL.md` records the current agreed experiment and analysis rules.
-Use its explicit failure/denominator definitions and separate delivered quality
-from raw checker scores. The final study retains A/B/C and a C0/C2 ablation only,
-with three fresh generations, experiment caching disabled, operational failures
-reported separately, Kyoto paired analysis, and descriptive synthetic diagnostics.
-The protocol is not yet a frozen final experiment: held-out design/counts and
-runner instrumentation remain pending. Existing bot cache defaults are unchanged.
+[FINAL_EVALUATION_PROTOCOL.md](FINAL_EVALUATION_PROTOCOL.md) defines the completed frozen planning experiment; [SECURITY_EVALUATION_PROTOCOL_V2.md](SECURITY_EVALUATION_PROTOCOL_V2.md) defines the separate completed security experiment. The planning study uses A/B/C0/C2, three repetitions, disabled caching and family-aware paired comparisons. Delivery and raw utility remain distinct; operational failures are separate from planning failures. Historical rules and development decisions are retained in [docs/archive](docs/archive/README.md). No new experiments or tuning are authorised by these documents.
 
 
 ## Evaluation runner implementation
@@ -513,4 +507,4 @@ keyword retain the prior summary shape. Unknown/unparseable totals have no cost
 suggestions. A retains single-pass planning plus v6 shared eligibility. This is a
 B/C harness revision under version 7, with unchanged checker scores, schemas,
 data, model settings, and revision limits. A six-job B/C familiar-case development smoke passed all jobs; broader reliability
-and untouched final performance remain unmeasured. See EVALUATION_LOG.md.
+were unmeasured at that development checkpoint. The final frozen experiment is now complete; see the current README for final outcomes and the [archived log](docs/archive/EVALUATION_LOG.md) for development history.
