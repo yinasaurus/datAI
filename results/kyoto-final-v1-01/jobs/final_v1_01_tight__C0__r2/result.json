@@ -1,0 +1,172 @@
+{
+  "job_id": "final_v1_01_tight__C0__r2",
+  "scenario_id": "final_v1_01_tight",
+  "condition": "C0",
+  "repetition": 2,
+  "family_id": "final_family_01",
+  "expected_feasible": true,
+  "started_utc": "2026-11-03T05:40:12.849781+00:00",
+  "setup": "C",
+  "config": {
+    "model": "gemini-3.5-flash-lite",
+    "temperature": 0,
+    "seed": 42,
+    "cache": false,
+    "setup": "C",
+    "days": 1,
+    "min_activities_per_day": 2,
+    "max_revisions": 3,
+    "negotiation_rounds": 0,
+    "guardrails": "on",
+    "budget_cap": 3000,
+    "bot_name": "tripbot",
+    "cooldown_seconds": 20,
+    "day_start": "07:00",
+    "day_end": "23:00",
+    "breaking_point_threshold": 0.5,
+    "bootstrap_resamples": 1000,
+    "runs": 3,
+    "paths": {
+      "places": "/Users/eryn/Desktop/datAI/data/places.json",
+      "tags": "/Users/eryn/Desktop/datAI/data/tags.json",
+      "travel_times": "/Users/eryn/Desktop/datAI/data/travel_times.json",
+      "results": "results/runs.jsonl",
+      "llm_log": "/Users/eryn/Desktop/datAI/results/kyoto-final-v1-01/jobs/final_v1_01_tight__C0__r2/llm_log.jsonl",
+      "bot_state": "data/bot_state.json"
+    }
+  },
+  "prompt_version": "8",
+  "scenario_factors": {
+    "n_friends": 2,
+    "conflict": "mild",
+    "budget": "tight",
+    "split": "heldout"
+  },
+  "plan": {
+    "days": [
+      {
+        "day": 1,
+        "items": [
+          {
+            "place_id": "p01",
+            "start": "10:00",
+            "end": "10:45"
+          },
+          {
+            "place_id": "p14",
+            "start": "11:25",
+            "end": "12:55"
+          }
+        ]
+      }
+    ]
+  },
+  "report": {
+    "feasible": true,
+    "violations": [],
+    "hard_limit_satisfaction": 1.0,
+    "per_friend_satisfaction": {
+      "Friend_1": 1.0,
+      "Friend_2": 1.0
+    },
+    "fairness": {
+      "min": 1.0,
+      "gap": 0.0,
+      "jain": 1.0
+    },
+    "task_success": true
+  },
+  "trace": [
+    {
+      "step": "friend",
+      "attempt": 1,
+      "tokens_in": 4143,
+      "tokens_out": 119,
+      "seconds": 1.4656780420045834,
+      "cached": false,
+      "friend": "Friend_1",
+      "round": 0,
+      "parsed": true,
+      "prompt_version": "8",
+      "place_filter": {
+        "version": 1,
+        "input_place_count": 25,
+        "eligible_place_ids": [
+          "p01",
+          "p02",
+          "p03",
+          "p04",
+          "p05",
+          "p06",
+          "p07",
+          "p08",
+          "p09",
+          "p10",
+          "p11",
+          "p12",
+          "p13",
+          "p14",
+          "p15",
+          "p16",
+          "p17",
+          "p18",
+          "p19",
+          "p20",
+          "p21",
+          "p22",
+          "p23",
+          "p24",
+          "p25"
+        ],
+        "excluded": []
+      }
+    },
+    {
+      "step": "friend",
+      "attempt": 2,
+      "tokens_in": 4148,
+      "tokens_out": 74,
+      "seconds": 1.2525504579825792,
+      "cached": false,
+      "friend": "Friend_2",
+      "round": 0,
+      "parsed": true,
+      "prompt_version": "8"
+    },
+    {
+      "step": "mediator",
+      "attempt": 3,
+      "tokens_in": 4443,
+      "tokens_out": 119,
+      "seconds": 0.9243059169966727,
+      "cached": false,
+      "violations": [],
+      "prompt_version": "8"
+    }
+  ],
+  "task_success": true,
+  "delivered_minimum": 1.0,
+  "delivered_mean": 1.0,
+  "delivered_per_friend": {
+    "Friend_1": 1.0,
+    "Friend_2": 1.0
+  },
+  "calls_artifact": "jobs/final_v1_01_tight__C0__r2/calls.jsonl",
+  "verification_revisions": 0,
+  "model_call_seconds": 3.6425344169838354,
+  "planner_logical_calls": 3,
+  "status": "success",
+  "usage": {
+    "logical_calls": 3,
+    "physical_requests": 3,
+    "known_tokens_in": 12734,
+    "known_tokens_out": 312,
+    "tokens_in": 12734,
+    "tokens_out": 312,
+    "unknown_usage_requests": 0,
+    "request_seconds": 3.63844120799331,
+    "logical_call_seconds": 3.6468125830288045
+  },
+  "elapsed_seconds": 3.6498126249935012,
+  "ended_utc": "2026-11-03T05:40:16.499610+00:00"
+}

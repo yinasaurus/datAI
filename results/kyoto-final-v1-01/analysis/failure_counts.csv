@@ -1,0 +1,3 @@
+condition,type,affected_jobs,occurrences
+A,insufficient_activities,3,3
+A,over_budget,9,30
